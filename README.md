@@ -2,7 +2,7 @@
 
 **EiT 2026 Project | Sirk Norge | NTNU Experts in Teams**
 
-[![View Report]([https://img.shields.io/badge/View-Interactive_Report-blue?style=for-the-badge)](https://johnnvelo7.github.io/eit-2026-srm-analysis/](https://www.eitsrm.no/))
+[![View Report]([https://img.shields.io/badge/View-Interactive_Report-blue?style=for-the-badge)]((https://www.eitsrm.no/))
 [![Data](https://img.shields.io/badge/Companies-105-green?style=flat-square)](data/raw/companies_by_nace.json)
 [![NACE Codes](https://img.shields.io/badge/NACE_Codes-23-orange?style=flat-square)](data/processed/companies_list.csv)
 
