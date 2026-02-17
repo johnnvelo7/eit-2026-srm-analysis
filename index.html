@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secondary Raw Materials Analysis - EiT 2026 | Norwegian Industry</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+            integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g"
+            crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -544,6 +546,22 @@
     </div>
 
     <script>
+        // Security helpers
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        function isSafeUrl(url) {
+            try {
+                const parsed = new URL(url);
+                return ['http:', 'https:'].includes(parsed.protocol);
+            } catch {
+                return false;
+            }
+        }
+
         // Company data with SRM mapping
         const companies = [
             {"name":"Heidelberg Materials Sement Norge AS","employees":394,"sector":"Construction Materials","nace":"23.51","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":1,"biogas":0,"digestate":0},"summary":"Heidelberg Materials operates Norway's pioneering CCS facility at Brevik producing net-zero cement. The company requires minimum 30% recycled content in their evoBuild circular product line and aims to offer circular alternatives for 50% of concrete products by 2030.","quantitative":"30% minimum recycled content in evoBuild products; Target: 50% of concrete products to have circular alternatives by 2030","annual_report":"https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf"},
@@ -587,7 +605,7 @@
             // Company name cell
             const nameCell = document.createElement('td');
             nameCell.className = 'company-cell';
-            nameCell.innerHTML = `<strong>${company.name}</strong><br><small style="color: #666;">${company.sector}</small>`;
+            nameCell.innerHTML = `<strong>${escapeHtml(company.name)}</strong><br><small style="color: #666;">${escapeHtml(company.sector)}</small>`;
             row.appendChild(nameCell);
 
             // SRM intensity cells
@@ -642,25 +660,25 @@
             });
 
             card.innerHTML = `
-                <h3>${company.name}</h3>
+                <h3>${escapeHtml(company.name)}</h3>
                 <div class="company-meta">
-                    <span class="meta-badge">${company.employees} employees</span>
-                    <span class="meta-badge sector">${company.sector}</span>
-                    <span class="meta-badge">NACE ${company.nace}</span>
+                    <span class="meta-badge">${escapeHtml(company.employees)} employees</span>
+                    <span class="meta-badge sector">${escapeHtml(company.sector)}</span>
+                    <span class="meta-badge">NACE ${escapeHtml(company.nace)}</span>
                 </div>
                 <div class="srm-tags">
-                    ${usedSRM.map(srm => `<span class="srm-tag">${srm}</span>`).join('')}
+                    ${usedSRM.map(srm => `<span class="srm-tag">${escapeHtml(srm)}</span>`).join('')}
                 </div>
                 <div class="company-summary">
-                    ${company.summary}
+                    ${escapeHtml(company.summary)}
                 </div>
                 ${company.quantitative ? `
                 <div class="quantitative-data">
-                    <strong>Quantitative Data:</strong> ${company.quantitative}
+                    <strong>Quantitative Data:</strong> ${escapeHtml(company.quantitative)}
                 </div>
                 ` : ''}
                 <div class="sources-link">
-                    ${company.annual_report ? `<a href="${company.annual_report}" target="_blank">📄 Annual Report</a>` : ''}
+                    ${company.annual_report && isSafeUrl(company.annual_report) ? `<a href="${escapeHtml(company.annual_report)}" target="_blank" rel="noopener noreferrer">📄 Annual Report</a>` : ''}
                 </div>
             `;
 
