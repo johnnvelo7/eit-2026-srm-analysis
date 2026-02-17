@@ -9,26 +9,26 @@
             crossorigin="anonymous"></script>
     <style>
         :root {
-            --bg-body:     #edf2f7;
+            --bg-body:     #f1f5f9;
             --bg-main:     #ffffff;
             --bg-elevated: #f8fafc;
-            --bg-surface:  #edf2f7;
+            --bg-surface:  #f1f5f9;
             --bg-hover:    #e2e8f0;
-            --border:      #cbd5e0;
-            --border-soft: #e2e8f0;
-            --text-primary:   #1a202c;
-            --text-secondary: #4a5568;
-            --text-muted:     #718096;
-            --accent-blue:   #00509e;
-            --accent-teal:   #2b9e94;
-            --accent-purple: #9f7aea;
-            --accent-green:  #276749;
-            --accent-amber:  #c05621;
-            --accent-pink:   #f687b3;
-            --intensity-0-bg:   #f7fafc; --intensity-0-fg: #a0aec0;
-            --intensity-1-bg:   #e6f7f5; --intensity-1-fg: #2b7a71;
-            --intensity-2-bg:   #d4edda; --intensity-2-fg: #276749;
-            --intensity-3-bg:   #9ae6b4; --intensity-3-fg: #1c4532;
+            --border:      #e2e8f0;
+            --border-soft: #f1f5f9;
+            --text-primary:   #0f172a;
+            --text-secondary: #475569;
+            --text-muted:     #94a3b8;
+            --accent-blue:   #2563eb;
+            --accent-teal:   #0891b2;
+            --accent-purple: #7c3aed;
+            --accent-green:  #059669;
+            --accent-amber:  #d97706;
+            --accent-pink:   #db2777;
+            --intensity-0-bg:   #f8fafc; --intensity-0-fg: #94a3b8;
+            --intensity-1-bg:   #d1fae5; --intensity-1-fg: #065f46;
+            --intensity-2-bg:   #6ee7b7; --intensity-2-fg: #064e3b;
+            --intensity-3-bg:   #059669; --intensity-3-fg: #ffffff;
         }
 
         * {
@@ -202,11 +202,11 @@
         .intensity-0 { background: var(--intensity-0-bg); color: var(--intensity-0-fg); }
         .intensity-1 { background: var(--intensity-1-bg); color: var(--intensity-1-fg); }
         .intensity-2 { background: var(--intensity-2-bg); color: var(--intensity-2-fg); }
-        .intensity-3 { background: var(--intensity-3-bg); color: var(--intensity-3-fg); box-shadow: 0 0 8px rgba(104,211,145,0.3); }
+        .intensity-3 { background: var(--intensity-3-bg); color: var(--intensity-3-fg); box-shadow: 0 0 8px rgba(5,150,105,0.35); }
 
         .matrix-cell:hover {
             transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(79,209,197,0.3);
+            box-shadow: 0 4px 12px rgba(37,99,235,0.25);
             z-index: 100;
         }
 
@@ -228,8 +228,8 @@
         }
 
         .company-card:hover {
-            box-shadow: 0 8px 24px rgba(79,209,197,0.1);
-            border-color: var(--accent-teal);
+            box-shadow: 0 8px 24px rgba(37,99,235,0.12);
+            border-color: var(--accent-blue);
             transform: translateY(-4px);
         }
 
@@ -247,9 +247,9 @@
         }
 
         .meta-badge {
-            background: rgba(0,80,158,0.08);
+            background: rgba(37,99,235,0.08);
             color: var(--accent-blue);
-            border: 1px solid rgba(0,80,158,0.25);
+            border: 1px solid rgba(37,99,235,0.22);
             padding: 4px 12px;
             border-radius: 15px;
             font-size: 0.82em;
@@ -257,9 +257,9 @@
         }
 
         .meta-badge.sector {
-            background: rgba(0,80,158,0.06);
-            color: var(--accent-blue);
-            border-color: rgba(0,80,158,0.2);
+            background: rgba(8,145,178,0.08);
+            color: var(--accent-teal);
+            border-color: rgba(8,145,178,0.22);
         }
 
         .srm-tags {
@@ -268,13 +268,13 @@
 
         .srm-tag {
             display: inline-block;
-            background: rgba(104,211,145,0.1);
+            background: rgba(5,150,105,0.08);
             color: var(--accent-green);
             padding: 4px 10px;
             margin: 3px;
             border-radius: 5px;
             font-size: 0.82em;
-            border: 1px solid rgba(104,211,145,0.25);
+            border: 1px solid rgba(5,150,105,0.22);
         }
 
         .company-summary {
@@ -284,7 +284,7 @@
         }
 
         .quantitative-data {
-            background: rgba(246,173,85,0.08);
+            background: rgba(217,119,6,0.07);
             border-left: 3px solid var(--accent-amber);
             padding: 10px 15px;
             margin: 15px 0;
@@ -326,23 +326,25 @@
         .stat-card {
             background: var(--bg-elevated);
             border: 1px solid var(--border);
-            border-top: 3px solid var(--accent-teal);
+            border-top: 3px solid var(--accent-blue);
             color: var(--text-primary);
             padding: 25px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: border-top-color 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
         }
 
         .stat-card:hover {
-            border-top-color: var(--accent-blue);
+            border-top-color: var(--accent-teal);
+            box-shadow: 0 8px 24px rgba(37,99,235,0.1);
+            transform: translateY(-2px);
         }
 
         .stat-card h3 {
             font-size: 3em;
             margin-bottom: 8px;
-            color: var(--accent-teal);
+            color: var(--accent-blue);
             font-weight: 700;
         }
 
@@ -806,8 +808,8 @@
                 datasets: [{
                     label: 'Average SRM Usage Intensity',
                     data: Object.values(sectorData).map(d => d.avgIntensity),
-                    backgroundColor: 'rgba(79,209,197,0.7)',
-                    borderColor: '#4fd1c5',
+                    backgroundColor: 'rgba(37,99,235,0.75)',
+                    borderColor: '#2563eb',
                     borderWidth: 2,
                     borderRadius: 5
                 }]
@@ -849,10 +851,10 @@
                 datasets: [{
                     data: srmCounts,
                     backgroundColor: [
-                        '#63b3ed', '#9f7aea', '#f687b3', '#4fd1c5',
-                        '#68d391', '#fc8181', '#f6ad55'
+                        '#2563eb', '#0891b2', '#059669', '#d97706',
+                        '#7c3aed', '#db2777', '#0f766e'
                     ],
-                    borderColor: '#0d1117',
+                    borderColor: '#ffffff',
                     borderWidth: 3
                 }]
             },
