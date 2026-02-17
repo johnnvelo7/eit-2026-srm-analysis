@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secondary Raw Materials Analysis - EiT 2026 | Norwegian Industry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
             integrity="sha384-e6nUZLBkQ86NJ6TVVKAeSaK8jWa3NhkYWZFomE39AvDbQWeie9PlQqM3pmYW5d1g"
             crossorigin="anonymous"></script>
@@ -38,7 +41,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
             font-size: 17px;
             background: var(--bg-body);
             padding: 20px;
@@ -532,7 +535,7 @@
 <body>
     <div class="container">
         <header>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙 Dark mode</button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Dark mode</button>
             <h1>Secondary Raw Materials Analysis</h1>
             <p>Mapping the Circular Economy in Norwegian Industry</p>
             <p class="subtitle">EiT 2026 Project - Sirk Norge | NTNU Experts in Teams</p>
@@ -983,7 +986,7 @@
 
         function updateToggleLabel(theme) {
             document.getElementById('themeToggle').textContent =
-                theme === 'dark' ? '☀️ Light mode' : '🌙 Dark mode';
+                theme === 'dark' ? 'Light mode' : 'Dark mode';
         }
 
         // Apply saved preference on load
