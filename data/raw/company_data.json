@@ -1,0 +1,229 @@
+{
+  "companies": [
+    {
+      "name": "Heidelberg Materials Sement Norge AS",
+      "org_number": "934949145",
+      "nace_code": "23.51",
+      "nace_description": "Manufacture of cement",
+      "revenue": 2643637000,
+      "employees": 197,
+      "location": "Brevik, Porsgrunn kommune",
+      "founded": 1983,
+      "sustainability_info": "Company changed name from Norcem to Heidelberg Materials Sement Norge AS in 2023 as part of global rebranding. Multiple production facilities including Sementfabrikk Dalen in Brevik and operations in Kjøpsvik."
+    },
+    {
+      "name": "Heidelberg Materials Betong Norge AS (NorBetong)",
+      "org_number": "934468740",
+      "nace_code": "23.63",
+      "nace_description": "Manufacture of ready-mixed concrete",
+      "revenue": 90297000,
+      "employees": 82,
+      "location": "Oslo",
+      "founded": 1995,
+      "sustainability_info": "Part of Heidelberg Materials Group. Operates multiple ready-mixed concrete plants across Norway. Equity ratio of 83% indicates strong financial position."
+    },
+    {
+      "name": "Ølen Betong AS",
+      "org_number": "953685124",
+      "nace_code": "23.63",
+      "nace_description": "Manufacture of ready-mixed concrete",
+      "revenue": null,
+      "employees": 240,
+      "location": "Ølensvåg, Vindafjord kommune",
+      "founded": 1989,
+      "sustainability_info": "Part of Nordic Concrete Group (NCG). The group operates 67 concrete plants in Norway and is the largest concrete producer in the country."
+    },
+    {
+      "name": "Celsa Steel Service AS",
+      "org_number": "980345106",
+      "nace_code": "24.10",
+      "nace_description": "Manufacture of basic iron and steel",
+      "revenue": 1117065000,
+      "employees": 216,
+      "location": "Oslo",
+      "founded": 1998,
+      "sustainability_info": "Sells and processes reinforcement products and services to the Norwegian construction industry. Has divisions across Norway including Tromsø, Trondheim, Ålesund, Bergen, Kristiansand and Drammen."
+    },
+    {
+      "name": "Celsa Armeringsstål AS (7 Steel Nordic Manufacturing)",
+      "org_number": "953591421",
+      "nace_code": "24.10",
+      "nace_description": "Manufacture of basic iron and steel",
+      "revenue": null,
+      "employees": 357,
+      "location": "Mo i Rana",
+      "founded": null,
+      "sustainability_info": "Recently changed name to 7 Steel Nordic Manufacturing AS. Production capacity of approximately 1,000,000 tons in the steelworks and 550,000 tons in the rolling mill. Working on climate goals and green steel initiatives."
+    },
+    {
+      "name": "Eramet Norway AS",
+      "org_number": "980518647",
+      "nace_code": "24.10",
+      "nace_description": "Manufacture of basic iron and steel (ferroalloys)",
+      "revenue": 5600000000,
+      "employees": 532,
+      "location": "Porsgrunn",
+      "founded": null,
+      "sustainability_info": "World-leading producer of refined manganese alloys with three smelters in Porsgrunn, Sauda and Kvinesdal, plus R&D department in Trondheim. Involved in EU research projects for energy efficient ferroalloy production."
+    },
+    {
+      "name": "Ferroglobe Mangan Norge AS",
+      "org_number": "957779808",
+      "nace_code": "24.10",
+      "nace_description": "Manufacture of basic iron and steel (ferroalloys)",
+      "revenue": null,
+      "employees": null,
+      "location": "Mo i Rana",
+      "founded": null,
+      "sustainability_info": "Part of Ferroglobe since 2018. Manganese ferroalloy producer located in Mo Industripark. Involved in research projects for energy efficient manganese ferroalloys production."
+    },
+    {
+      "name": "Elkem ASA",
+      "org_number": "911382008",
+      "nace_code": "24.10",
+      "nace_description": "Manufacture of basic iron and steel (silicon and ferrosilicon)",
+      "revenue": 7600000000,
+      "employees": 1542,
+      "location": "Oslo (headquarters)",
+      "founded": 1904,
+      "sustainability_info": "International chemical company producing silicones, silicon, alloys for the foundry industry, carbon and microsilica. Listed on Oslo Stock Exchange. Operates multiple production plants in Norway including Bjølvefossen, Salten, Rana, and Bremanger."
+    },
+    {
+      "name": "Norsk Hydro ASA",
+      "org_number": "914778271",
+      "nace_code": "24.42",
+      "nace_description": "Aluminium production",
+      "revenue": 159377000000,
+      "employees": 530,
+      "location": "Oslo",
+      "founded": null,
+      "sustainability_info": "One of the largest aluminium companies worldwide. Part of a group with 21 companies. Global operations with focus on sustainable aluminium production."
+    },
+    {
+      "name": "Alcoa Norway AS",
+      "org_number": "928825345",
+      "nace_code": "24.42",
+      "nace_description": "Aluminium production",
+      "revenue": 7000000000,
+      "employees": 1242,
+      "location": "Oslo (headquarters)",
+      "founded": null,
+      "sustainability_info": "Production facilities in Mosjøen (807 employees) and Lista (436 employees). Produces primary aluminium with focus on energy efficiency and environmental performance."
+    },
+    {
+      "name": "Elopak AS",
+      "org_number": "811413682",
+      "nace_code": "22.22",
+      "nace_description": "Manufacture of plastic packing goods",
+      "revenue": null,
+      "employees": 202,
+      "location": "Spikkestad",
+      "founded": null,
+      "sustainability_info": "Manufactures packaging solutions including carton-based liquid packaging. Revenue of 447 million euro in 2017 with focus on sustainable packaging solutions."
+    },
+    {
+      "name": "Plasto AS",
+      "org_number": "916831519",
+      "nace_code": "22.22",
+      "nace_description": "Manufacture of plastic packing goods",
+      "revenue": 60000000,
+      "employees": 32,
+      "location": "Åndalsnes",
+      "founded": null,
+      "sustainability_info": "Invested heavily in automation with more robots than employees in production. Manufactures plastic packaging and containers for various industries."
+    },
+    {
+      "name": "Moelven Industrier ASA",
+      "org_number": "914404045",
+      "nace_code": "16.21",
+      "nace_description": "Manufacture of wood-based panels",
+      "revenue": 12900000000,
+      "employees": 3300,
+      "location": "Moelv",
+      "founded": null,
+      "sustainability_info": "Scandinavian industrial group producing sustainable wood-based products and solutions for construction industry. Owned by forest owner associations (Glommen Mjøsen Skog SA 78.84%, Viken Skog SA 20.80%, Allskog SA 0.08%)."
+    },
+    {
+      "name": "Bergene Holm AS",
+      "org_number": null,
+      "nace_code": "16.21",
+      "nace_description": "Manufacture of wood-based panels",
+      "revenue": null,
+      "employees": null,
+      "location": "Larvik",
+      "founded": 1946,
+      "sustainability_info": "Traditional family business producing wood products since 1946. Manufactures structural timber, formwork, cladding, decking and related wood products. Focus on sustainable Norwegian forestry and wood processing."
+    },
+    {
+      "name": "Yara International ASA",
+      "org_number": "986228608",
+      "nace_code": "20.15",
+      "nace_description": "Manufacture of fertilizers",
+      "revenue": 15500000000,
+      "employees": 530,
+      "location": "Oslo",
+      "founded": 1905,
+      "sustainability_info": "Norwegian chemical company producing nitrogen-based mineral fertilizers. Global operations with 18,000 employees in more than 60 countries. Major production plants in Porsgrunn, Norway. Working on green hydrogen demonstration plant with Linde Engineering to reduce CO2 in fertilizer production."
+    },
+    {
+      "name": "Statkraft AS",
+      "org_number": "987059699",
+      "nace_code": "35.11",
+      "nace_description": "Production of electricity",
+      "revenue": null,
+      "employees": 983,
+      "location": "Oslo",
+      "founded": 2004,
+      "sustainability_info": "Europe's largest generator of renewable energy and Norway's largest energy producer. Fully owned by Norwegian state. Direct ownership in over 100 hydropower plants and ten wind farms in Norway. Annual production of 70 TWh. Focus on renewable energy and sustainability."
+    },
+    {
+      "name": "Hafslund Eco Vannkraft AS",
+      "org_number": "976894677",
+      "nace_code": "35.11",
+      "nace_description": "Production of electricity",
+      "revenue": null,
+      "employees": 459,
+      "location": "Oslo",
+      "founded": null,
+      "sustainability_info": "Norway's second largest hydropower company. Annual normal power production of approximately 18 TWh (13% of total Norwegian hydropower production). Wholly or partly owns 81 hydropower plants in Innlandet, Oslo, Viken and Vestland. 100% owned by City of Oslo."
+    },
+    {
+      "name": "Agder Energi AS (Å Energi)",
+      "org_number": "937032497",
+      "nace_code": "35.11",
+      "nace_description": "Production of electricity",
+      "revenue": null,
+      "employees": null,
+      "location": "Kristiansand",
+      "founded": null,
+      "sustainability_info": "Fourth largest producer and distributor of electricity in Norway, third largest electricity supplier. Merged with Glitre Energi in February 2023 to form Å Energi. Owned by 30 municipalities in the region (54.5%) and Statkraft Industrial Holding AS (45.5%)."
+    },
+    {
+      "name": "Lyse AS",
+      "org_number": null,
+      "nace_code": "35.11",
+      "nace_description": "Production of electricity",
+      "revenue": null,
+      "employees": null,
+      "location": "Stavanger",
+      "founded": null,
+      "sustainability_info": "Norwegian group with yearly normal production of 9.5 TWh of hydroelectric power. Develops and maintains power grid in 14 municipalities. Also delivers fiber optic broadband (Altibox), natural gas distribution, and district heating. Owned by municipalities in Rogaland region, primarily Stavanger (45.74%) and Sandnes (19.53%)."
+    }
+  ],
+  "metadata": {
+    "collection_date": "2026-02-11",
+    "source": "proff.no and various public sources",
+    "total_companies": 19,
+    "nace_codes_covered": [
+      "23.51 - Manufacture of cement",
+      "23.63 - Manufacture of ready-mixed concrete",
+      "24.10 - Manufacture of basic iron and steel",
+      "24.42 - Aluminium production",
+      "22.22 - Manufacture of plastic packing goods",
+      "16.21 - Manufacture of wood-based panels",
+      "20.15 - Manufacture of fertilizers",
+      "35.11 - Production of electricity"
+    ],
+    "notes": "Revenue figures are in Norwegian Kroner (NOK) unless otherwise specified. Some data fields are null where specific information was not available from public sources. All companies are related to secondary raw materials or industries relevant to circular economy and sustainability."
+  }
+}

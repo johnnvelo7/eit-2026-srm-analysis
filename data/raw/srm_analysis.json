@@ -1,0 +1,101 @@
+{
+  "secondary_raw_materials": {
+    "categories": [
+      {
+        "id": "srm_1",
+        "name": "Recycled Construction Materials",
+        "subcategories": [
+          "Recycled aggregate",
+          "Reclaimed asphalt pavement (RAP)"
+        ],
+        "waste_stream": "Construction & Demolition",
+        "description": "Crushed concrete, brick, asphalt from demolished buildings and roads"
+      },
+      {
+        "id": "srm_2",
+        "name": "Metal Scrap",
+        "subcategories": [
+          "Steel scrap",
+          "Recycled steel scrap",
+          "Aluminum scrap",
+          "Copper scrap",
+          "General metal scrap"
+        ],
+        "waste_stream": "Metal Waste",
+        "description": "Ferrous and non-ferrous metal waste from manufacturing and end-of-life products"
+      },
+      {
+        "id": "srm_3",
+        "name": "Recycled Plastics",
+        "subcategories": [
+          "Recycled polymer pellets",
+          "Sorted plastic waste"
+        ],
+        "waste_stream": "Plastic Waste",
+        "description": "Post-consumer and post-industrial plastic waste processed into pellets or sorted fractions"
+      },
+      {
+        "id": "srm_4",
+        "name": "Wood-based Materials",
+        "subcategories": [
+          "Wood chips / fiber",
+          "Recovered timber"
+        ],
+        "waste_stream": "Wood Waste",
+        "description": "Wood waste from construction, demolition, and manufacturing"
+      },
+      {
+        "id": "srm_5",
+        "name": "Biomass Fuel",
+        "subcategories": [
+          "Biomass fuel"
+        ],
+        "waste_stream": "Wood Waste",
+        "description": "Wood and organic waste used for energy production"
+      },
+      {
+        "id": "srm_6",
+        "name": "Biogas",
+        "subcategories": [
+          "Biogas"
+        ],
+        "waste_stream": "Sludge / Organic Waste",
+        "description": "Methane-rich gas from anaerobic digestion of organic waste"
+      },
+      {
+        "id": "srm_7",
+        "name": "Digestate & Bio-fertilizers",
+        "subcategories": [
+          "Digestate (biofertilizer)",
+          "Digestate"
+        ],
+        "waste_stream": "Sludge / Organic Waste",
+        "description": "Nutrient-rich residue from biogas production used as fertilizer"
+      }
+    ]
+  },
+  "srm_to_industry_mapping": [
+    {"srm": "Recycled aggregate", "nace_codes": ["23.51", "23.63", "23.61", "42.11", "42.99"], "industries": ["Cement production", "Ready-mix concrete production", "Precast concrete manufacturing", "Road construction", "Civil engineering"]},
+    {"srm": "Reclaimed asphalt pavement (RAP)", "nace_codes": ["23.99"], "industries": ["Asphalt production"]},
+    {"srm": "Steel scrap", "nace_codes": ["24.10"], "industries": ["Steel production (EAF)"]},
+    {"srm": "Aluminum scrap", "nace_codes": ["24.42"], "industries": ["Aluminum production"]},
+    {"srm": "Copper scrap", "nace_codes": ["24.45"], "industries": ["Other non-ferrous metal production"]},
+    {"srm": "Metal scrap", "nace_codes": ["24.51", "24.52", "24.53", "24.54"], "industries": ["Iron casting", "Steel casting", "Light metal casting", "Non-ferrous casting"]},
+    {"srm": "Recycled polymer pellets", "nace_codes": ["22.22", "22.29"], "industries": ["Plastic packaging manufacturing", "Other plastic products"]},
+    {"srm": "Sorted plastic waste", "nace_codes": ["38.32"], "industries": ["Material recovery"]},
+    {"srm": "Wood chips / fiber", "nace_codes": ["16.21"], "industries": ["Wood-based panel manufacturing"]},
+    {"srm": "Recovered timber", "nace_codes": ["16.10"], "industries": ["Sawmilling and wood processing"]},
+    {"srm": "Biomass fuel", "nace_codes": ["35.11", "35.30"], "industries": ["Electricity production", "District heating"]},
+    {"srm": "Biogas", "nace_codes": ["35.11", "35.21"], "industries": ["Electricity production", "Gas production"]},
+    {"srm": "Digestate", "nace_codes": ["20.15", "01.11"], "industries": ["Fertilizer production", "Agriculture"]}
+  ],
+  "nace_codes_to_scrape": [
+    "23.51", "23.63", "23.61", "23.99",
+    "42.11", "42.99",
+    "24.10", "24.42", "24.45", "24.51", "24.52", "24.53", "24.54",
+    "22.22", "22.29", "38.32",
+    "16.21", "16.10",
+    "35.11", "35.30", "35.21",
+    "20.15", "01.11"
+  ]
+}

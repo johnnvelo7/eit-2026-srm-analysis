@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Project specific
+archive/
+ignore_old_files/
+*.bak
+debug_*.html
+screenshot_*.png
+test_*.html
+sample_*.html
+
+# Sensitive data (if any)
+*.env
+.env.local
+credentials.json
+secrets.json
+
+# SSH keys
+github
+github.pub
+
+# Temporary files
+*.tmp
+*.temp

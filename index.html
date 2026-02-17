@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondary Raw Materials Analysis - EiT 2026 | Norwegian Industry</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1em;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .section {
+            padding: 40px 50px;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Matrix/Heatmap Styles */
+        .matrix-container {
+            overflow-x: auto;
+            margin: 30px 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 2px;
+            background: white;
+        }
+
+        .matrix-table th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9em;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .matrix-table th.company-name {
+            background: #2c5364;
+            text-align: left;
+            min-width: 250px;
+            max-width: 250px;
+        }
+
+        .matrix-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .matrix-table td.company-cell {
+            text-align: left;
+            font-weight: 600;
+            background: #f8f9fa;
+            position: sticky;
+            left: 0;
+            z-index: 5;
+        }
+
+        .matrix-cell {
+            width: 80px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .intensity-0 { background: #f0f0f0; color: #999; }
+        .intensity-1 { background: #d4edda; color: #155724; }
+        .intensity-2 { background: #28a745; color: white; }
+        .intensity-3 { background: #1e7e34; color: white; }
+
+        .matrix-cell:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        /* Company Cards */
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .company-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        .company-card h3 {
+            color: #1e3c72;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .company-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .meta-badge.sector {
+            background: #764ba2;
+        }
+
+        .srm-tags {
+            margin: 15px 0;
+        }
+
+        .srm-tag {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            border: 1px solid #81c784;
+        }
+
+        .company-summary {
+            color: #555;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+
+        .quantitative-data {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .quantitative-data strong {
+            color: #856404;
+        }
+
+        .sources-link {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .sources-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .sources-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        /* Charts */
+        .chart-container {
+            margin: 30px 0;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        .chart-wrapper.tall {
+            height: 600px;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 40px;
+            height: 25px;
+            border-radius: 4px;
+        }
+
+        footer {
+            background: #0f2027;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .category-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .category-title {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .srm-list {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .srm-list li {
+            padding: 5px 0;
+        }
+
+        .srm-list li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Secondary Raw Materials Analysis</h1>
+            <p>Mapping the Circular Economy in Norwegian Industry</p>
+            <p class="subtitle">EiT 2026 Project - Sirk Norge | NTNU Experts in Teams</p>
+            <p class="subtitle">Research Date: February 11, 2026</p>
+        </header>
+
+        <div class="section">
+            <h2 class="section-title">Executive Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>20</h3>
+                    <p>Companies Analyzed</p>
+                </div>
+                <div class="stat-card">
+                    <h3>7</h3>
+                    <p>SRM Categories</p>
+                </div>
+                <div class="stat-card">
+                    <h3>105</h3>
+                    <p>Total Companies Mapped</p>
+                </div>
+                <div class="stat-card">
+                    <h3>23</h3>
+                    <p>NACE Codes Covered</p>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <h3 class="section-subtitle">Key Findings</h3>
+                <ul style="list-style-position: inside; color: #555;">
+                    <li><strong>Construction sector:</strong> 30-100% recycled aggregate content, pioneering CCS technology</li>
+                    <li><strong>Aluminum sector:</strong> 75-100% recycled content in premium products, 95% energy savings</li>
+                    <li><strong>Steel sector:</strong> 770,000 tonnes/year scrap recycling with 100% renewable energy</li>
+                    <li><strong>Biogas sector:</strong> 350,000+ tonnes organic waste to energy conversion annually</li>
+                    <li><strong>Plastics (EPS):</strong> Closed-loop 100% recyclable systems</li>
+                    <li><strong>Wood sector:</strong> MNOK 250 investment targeting 1M tonnes demolition timber</li>
+                    <li><strong>Most companies:</strong> Published 2024 sustainability reports (CSRD/ESRS compliant)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f8f9fa;">
+            <h2 class="section-title">Secondary Raw Material Categories</h2>
+            <p class="section-subtitle">7 key categories mapped to Norwegian industrial sectors</p>
+
+            <div class="category-section">
+                <h3 class="category-title">1. Recycled Construction Materials</h3>
+                <p class="category-description">Crushed concrete, brick, asphalt from demolished buildings and roads</p>
+                <ul class="srm-list">
+                    <li>Recycled aggregate</li>
+                    <li>Reclaimed asphalt pavement (RAP)</li>
+                </ul>
+            </div>
+
+            <div class="category-section">
+                <h3 class="category-title">2. Metal Scrap</h3>
+                <p class="category-description">Ferrous and non-ferrous metal waste from manufacturing and end-of-life products</p>
+                <ul class="srm-list">
+                    <li>Steel scrap</li>
+                    <li>Aluminum scrap</li>
+                    <li>Copper scrap</li>
+                    <li>Nickel/Cobalt scrap</li>
+                    <li>General metal scrap</li>
+                </ul>
+            </div>
+
+            <div class="category-section">
+                <h3 class="category-title">3. Recycled Plastics</h3>
+                <p class="category-description">Post-consumer and post-industrial plastic waste processed into pellets or sorted fractions</p>
+                <ul class="srm-list">
+                    <li>Recycled polymer pellets</li>
+                    <li>Sorted plastic waste (especially EPS)</li>
+                </ul>
+            </div>
+
+            <div class="category-section">
+                <h3 class="category-title">4. Wood-based Materials</h3>
+                <p class="category-description">Wood waste from construction, demolition, and manufacturing</p>
+                <ul class="srm-list">
+                    <li>Wood chips / fiber</li>
+                    <li>Recovered timber from demolitions</li>
+                </ul>
+            </div>
+
+            <div class="category-section">
+                <h3 class="category-title">5. Biomass Fuel</h3>
+                <p class="category-description">Wood and organic waste used for energy production</p>
+                <ul class="srm-list">
+                    <li>Biomass pellets</li>
+                    <li>Bio-oils</li>
+                    <li>Biogenic waste fraction</li>
+                </ul>
+            </div>
+
+            <div class="category-section">
+                <h3 class="category-title">6. Biogas</h3>
+                <p class="category-description">Methane-rich gas from anaerobic digestion of organic waste</p>
+                <ul class="srm-list">
+                    <li>Biogas from organic waste</li>
+                    <li>Biogas from manure</li>
+                    <li>Municipal waste biogas</li>
+                </ul>
+            </div>
+
+            <div class="category-section">
+                <h3 class="category-title">7. Digestate & Bio-fertilizers</h3>
+                <p class="category-description">Nutrient-rich residue from biogas production used as fertilizer</p>
+                <ul class="srm-list">
+                    <li>Digestate from biogas plants</li>
+                    <li>Bio-fertilizers</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Company-to-SRM Matrix & Heatmap</h2>
+            <p class="section-subtitle">Which secondary raw materials are used by each company? (Intensity: Low → Medium → High → Very High)</p>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color intensity-0"></div>
+                    <span>Not Used</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color intensity-1"></div>
+                    <span>Low Use</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color intensity-2"></div>
+                    <span>Medium-High Use</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color intensity-3"></div>
+                    <span>Primary/Core Material</span>
+                </div>
+            </div>
+
+            <div class="matrix-container">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th class="company-name">Company</th>
+                            <th>Recycled<br>Construction<br>Materials</th>
+                            <th>Metal<br>Scrap</th>
+                            <th>Recycled<br>Plastics</th>
+                            <th>Wood-based<br>Materials</th>
+                            <th>Biomass<br>Fuel</th>
+                            <th>Biogas</th>
+                            <th>Digestate &<br>Bio-fertilizers</th>
+                        </tr>
+                    </thead>
+                    <tbody id="matrixBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section" style="background: #f8f9fa;">
+            <h2 class="section-title">Company Profiles: SRM Usage Summaries</h2>
+            <p class="section-subtitle">Detailed analysis of 20 leading Norwegian companies</p>
+            <div class="companies-grid" id="companiesGrid"></div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Data Visualizations</h2>
+
+            <div class="chart-container">
+                <h3>SRM Usage by Sector</h3>
+                <div class="chart-wrapper">
+                    <canvas id="sectorChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>SRM Category Distribution Across Companies</h3>
+                <div class="chart-wrapper">
+                    <canvas id="srmDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h3>EiT 2026 Project: Secondary Raw Materials in Norwegian Industry</h3>
+            <p style="margin-top: 15px;">Sirk Norge | NTNU Experts in Teams | Data collected February 11, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Sources: Company annual reports, sustainability reports, Proff.no, Brønnøysundregistrene</p>
+        </footer>
+    </div>
+
+    <script>
+        // Company data with SRM mapping
+        const companies = [
+            {"name":"Heidelberg Materials Sement Norge AS","employees":394,"sector":"Construction Materials","nace":"23.51","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":1,"biogas":0,"digestate":0},"summary":"Heidelberg Materials operates Norway's pioneering CCS facility at Brevik producing net-zero cement. The company requires minimum 30% recycled content in their evoBuild circular product line and aims to offer circular alternatives for 50% of concrete products by 2030.","quantitative":"30% minimum recycled content in evoBuild products; Target: 50% of concrete products to have circular alternatives by 2030","annual_report":"https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf"},
+            {"name":"Ølen Betong AS","employees":241,"sector":"Construction Materials","nace":"23.63","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Ølen Betong is a leader in using recycled aggregates from tunnel excavations, replacing 75-100% of natural sand in shotcrete production with processed rock material. Research partner in RECONC project developing CO2-binding recycled aggregates.","quantitative":"75-100% replacement of natural sand with artificial sand from tunnel excavation rock","annual_report":"https://www.olenbetong.no"},
+            {"name":"Heidelberg Materials Prefab Norge AS","employees":364,"sector":"Construction Materials","nace":"23.61","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Leading supplier of precast concrete structural systems, leveraging parent company's circular economy initiatives including 30% minimum recycled content requirements and evoZero net-zero concrete from Brevik CCS facility.","quantitative":"30% minimum recycled content in circular products; 50% target by 2030","annual_report":"https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf"},
+            {"name":"Veidekke Industri AS","employees":1100,"sector":"Road Construction","nace":"08.11","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Pioneer in asphalt recycling with Norway's first plant capable of producing quality asphalt from 100% RAP using parallel drum technology. WAM Foam technology reduces production temperatures to 115°C.","quantitative":"100% RAP capability; WAM Foam production at 115°C","annual_report":"https://mb.cision.com/Main/17348/4122653/3337734.pdf"},
+            {"name":"Skanska Norge AS","employees":2822,"sector":"Road Construction","nace":"42.11","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Implements advanced asphalt recycling with products containing up to 70% recycled content. Recycling initiatives reduce CO2 emissions by up to 50% compared to virgin asphalt production.","quantitative":"Up to 70% recycled asphalt content; 50% CO2 reduction","annual_report":"https://group.skanska.com/49490b/siteassets/investors/reports-publications/annual-reports/2024/annual-and-sustainability-report-2024.pdf"},
+            {"name":"Mesta AS","employees":1599,"sector":"Road Construction","nace":"42.11","srm_intensity":{"construction":2,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Participates in Norway's sustainable road construction initiatives, leveraging new N200 regulatory framework enabling increased use of recycled materials and industrial by-products.","quantitative":"National target: 50% reduction in road construction emissions by 2030","annual_report":"https://www.mesta.no"},
+            {"name":"Elkem ASA","employees":1556,"sector":"Steel & Ferroalloys","nace":"24.45","srm_intensity":{"construction":0,"metal":2,"plastic":0,"wood":0,"biomass":2,"biogas":0,"digestate":0},"summary":"Produces BRIQSIL enabling increased steel scrap recycling, transitioning to bio-based carbon (targeting 50% from current 20%) in silicon smelting. Received NOK 33 million from Innovation Norway for recycled materials development.","quantitative":"Bio-based carbon target: 20% → 50%; Silicone recycling rates >50%","annual_report":"https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/25/642121_Elkem_ASA_Integrated_Annual_Report_2024.pdf"},
+            {"name":"Eramet Norway AS","employees":665,"sector":"Steel & Ferroalloys","nace":"24.45","srm_intensity":{"construction":0,"metal":2,"plastic":0,"wood":0,"biomass":2,"biogas":0,"digestate":0},"summary":"Operates ferroalloy plants in Porsgrunn and Kvinesdal with strong focus on biocarbon adoption. In 2024, recovered 700 GWh of energy from furnace gases, targeting 43% CO2 reduction by 2030.","quantitative":"700 GWh energy recovery in 2024; Target: 43% CO2 reduction by 2030","annual_report":"https://www.eramet.com/wp-content/uploads/2025/06/2025-04-25-Eramet-2024-Integrated-Report-EN.pdf"},
+            {"name":"7 Steel Nordic Manufacturing AS","employees":402,"sector":"Steel Production","nace":"24.10","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates Norway's leading electric arc furnace at Mo i Rana, recycling 770,000 tonnes of steel scrap annually using 100% renewable hydropower. Second-largest Nordic recycler producing reinforcing steel entirely from recycled scrap.","quantitative":"770,000 tonnes steel scrap/year; 100% EAF with renewable hydropower","annual_report":"https://7-steelnordic.com"},
+            {"name":"Hydro Aluminium AS","employees":3944,"sector":"Aluminum Production","nace":"24.42","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Global leader in aluminum recycling, processing 451,000 tonnes of post-consumer scrap in 2024 with ambitious targets to reach 850,000-1.2 million tonnes by 2030. Norwegian facilities at Årdal and Høyanger integrate recycling with primary production.","quantitative":"451,000 tonnes post-consumer scrap (2024); Target: 850k-1.2M tonnes by 2030; Årdal: 25,000 t/year capacity","annual_report":"https://www.hydro.com/en/global/media/news/2025/annual-report-2024-accelerating-the-green-aluminium-transition/"},
+            {"name":"Alcoa Norway AS","employees":1251,"sector":"Aluminum Production","nace":"24.42","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates pioneering renewable-powered aluminum recycling facility at Mosjøen, processing 20,000 tonnes annually of scrap using 100% renewable electricity. Avoids 4,400 tonnes CO2 annually.","quantitative":"20,000 tonnes/year capacity; 4,400 tonnes CO2 avoided annually; EcoDura: 50%+ recycled content","annual_report":"https://www.alcoa.com"},
+            {"name":"Speira AS","employees":754,"sector":"Aluminum Production","nace":"24.42","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates aluminum recycling facilities at Eidsvåg and Raudsand, part of 650,000-tonne annual recycling capacity. Invested in new slag press technology at Karmøy, achieving 95% energy savings versus primary aluminum.","quantitative":"650,000 tonnes recycled annually (group); 95% energy savings vs primary production","annual_report":"https://speira.foleon.com/recycling-services/recycling-services-sustainability-report/"},
+            {"name":"Glencore Nikkelverk AS","employees":580,"sector":"Non-ferrous Metals","nace":"24.45","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Western world's largest nickel refinery and major recycler of secondary nickel, cobalt, and copper materials. With 30+ years recycling experience, processes battery materials and scrap producing 4,600 tonnes recycled nickel annually.","quantitative":"20,000 tonnes recyclables: 4,600t nickel, 2,000t cobalt, 800t copper; 30+ years history","annual_report":"https://www.nikkelverk.no/en/sustainability"},
+            {"name":"BEWI Packaging Norway AS","employees":207,"sector":"Plastics","nace":"22.22","srm_intensity":{"construction":0,"metal":0,"plastic":3,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates 13 facilities significantly expanding recycled content in 2024. Fredrikstad recycling facility enables closed-loop EPS recycling, collecting and reprocessing 100% recyclable expanded polystyrene into new insulation products.","quantitative":"13 facilities in Norway; 100% recyclable EPS; Closed-loop recycling","annual_report":"https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/27/642352_BEWI_Annual_report_2024.pdf"},
+            {"name":"Norsk Gjenvinning AS","employees":737,"sector":"Waste Management","nace":"38.32","srm_intensity":{"construction":1,"metal":1,"plastic":2,"wood":1,"biomass":0,"biogas":0,"digestate":0},"summary":"Major waste management company handling approximately 2 million tonnes annually with 57% recovery rate. 77% EU Taxonomy-aligned, provides critical circular raw materials to 40,000+ customers supporting Norway's circular economy transition.","quantitative":"~2 million tonnes/year; 57% recovery rate; 77% EU Taxonomy-aligned","annual_report":"https://media.crystallize.com/ng-nordic/25/6/17/4/ngnordic_ar2024_060625-1.pdf"},
+            {"name":"Forestia AS","employees":215,"sector":"Wood Products","nace":"16.21","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":3,"biomass":0,"biogas":0,"digestate":0},"summary":"Pioneering circular economy for wood with MNOK 250 investment in technologies to transform demolition timber into industrial chipboard feedstock. Addresses Norway's 1 million tonnes annual demolition timber waste enabling 246,000 tonnes CO2eq sequestration.","quantitative":"MNOK 250 investment; Target: 1M tonnes demolition timber; 246,000t CO2eq sequestration","annual_report":"https://forestia.com/sustainability/"},
+            {"name":"Hafslund Celsio AS","employees":256,"sector":"District Heating","nace":"35.30","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":3,"biogas":0,"digestate":0},"summary":"Operates Norway's largest waste-to-energy plant at Klemetsrud, converting 350,000 tonnes of municipal waste annually into 1.9 TWh district heating for 200,000 Oslo residents. 50% biogenic emissions, implementing CCS for climate-positive operation.","quantitative":"1.9 TWh heating; 350,000 tonnes waste/year; 50% biogenic CO2; 200,000 residents served","annual_report":"https://aarsrapport2023.hafslund.no/en/"},
+            {"name":"BIR Ressurs AS","employees":52,"sector":"Biogas Production","nace":"35.21","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":3,"digestate":2},"summary":"Developing Bergen biogas plant (operational 2026) processing 15,000 tonnes biowaste and 40,000 tonnes cattle slurry annually into biomethane. Serves 400,000 inhabitants, pursuing circular vision of upcycling food waste with carbon capture.","quantitative":"15,000 t/year biowaste; 40,000 t/year slurry; Service: 400,000 inhabitants","annual_report":"https://bir.no/om-bir/about-bir-english/"},
+            {"name":"ST1 Biokraft AS","employees":16,"sector":"Biogas Production","nace":"35.21","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":3,"digestate":2},"summary":"Operates five biogas production facilities across Norway and Sweden, targeting 3 TWh biomethane production by 2030 for heavy-duty transport and industry. Using manure and organic waste, achieves over 100% emissions reduction.","quantitative":"5 facilities; Target: 3 TWh production, 6 TWh sales by 2030; >100% emissions reduction","annual_report":"https://st1biokraft.com"},
+            {"name":"Yara Norge AS","employees":794,"sector":"Fertilizers","nace":"20.15","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":1},"summary":"Focuses on sustainable fertilizer production with emphasis on low-emission ammonia and verified carbon footprint reduction. 2024 strategy prioritizes green solutions, precision farming, and circular approaches to crop nutrition.","quantitative":"Focus on low-emission ammonia; Verified carbon footprint reduction","annual_report":"https://www.yara.com/investor-relations/latest-annual-report/"}
+        ];
+
+        // SRM Categories
+        const srmCategories = [
+            "Recycled Construction Materials",
+            "Metal Scrap",
+            "Recycled Plastics",
+            "Wood-based Materials",
+            "Biomass Fuel",
+            "Biogas",
+            "Digestate & Bio-fertilizers"
+        ];
+
+        // Populate Matrix
+        const matrixBody = document.getElementById('matrixBody');
+        companies.forEach(company => {
+            const row = document.createElement('tr');
+
+            // Company name cell
+            const nameCell = document.createElement('td');
+            nameCell.className = 'company-cell';
+            nameCell.innerHTML = `<strong>${company.name}</strong><br><small style="color: #666;">${company.sector}</small>`;
+            row.appendChild(nameCell);
+
+            // SRM intensity cells
+            const intensities = [
+                company.srm_intensity.construction,
+                company.srm_intensity.metal,
+                company.srm_intensity.plastic,
+                company.srm_intensity.wood,
+                company.srm_intensity.biomass,
+                company.srm_intensity.biogas,
+                company.srm_intensity.digestate
+            ];
+
+            intensities.forEach((intensity, idx) => {
+                const cell = document.createElement('td');
+                const cellDiv = document.createElement('div');
+                cellDiv.className = `matrix-cell intensity-${intensity}`;
+
+                if (intensity === 0) {
+                    cellDiv.textContent = '—';
+                } else if (intensity === 1) {
+                    cellDiv.textContent = 'Low';
+                } else if (intensity === 2) {
+                    cellDiv.textContent = 'Med-High';
+                } else if (intensity === 3) {
+                    cellDiv.textContent = 'Core';
+                }
+
+                cellDiv.title = `${company.name} - ${srmCategories[idx]}: ${cellDiv.textContent}`;
+                cell.appendChild(cellDiv);
+                row.appendChild(cell);
+            });
+
+            matrixBody.appendChild(row);
+        });
+
+        // Populate Company Cards
+        const companiesGrid = document.getElementById('companiesGrid');
+        companies.forEach(company => {
+            const card = document.createElement('div');
+            card.className = 'company-card';
+
+            // Determine which SRM types are used
+            const usedSRM = [];
+            const srmKeys = ['construction', 'metal', 'plastic', 'wood', 'biomass', 'biogas', 'digestate'];
+            const srmNames = srmCategories;
+
+            srmKeys.forEach((key, idx) => {
+                if (company.srm_intensity[key] > 0) {
+                    usedSRM.push(srmNames[idx]);
+                }
+            });
+
+            card.innerHTML = `
+                <h3>${company.name}</h3>
+                <div class="company-meta">
+                    <span class="meta-badge">${company.employees} employees</span>
+                    <span class="meta-badge sector">${company.sector}</span>
+                    <span class="meta-badge">NACE ${company.nace}</span>
+                </div>
+                <div class="srm-tags">
+                    ${usedSRM.map(srm => `<span class="srm-tag">${srm}</span>`).join('')}
+                </div>
+                <div class="company-summary">
+                    ${company.summary}
+                </div>
+                ${company.quantitative ? `
+                <div class="quantitative-data">
+                    <strong>Quantitative Data:</strong> ${company.quantitative}
+                </div>
+                ` : ''}
+                <div class="sources-link">
+                    ${company.annual_report ? `<a href="${company.annual_report}" target="_blank">📄 Annual Report</a>` : ''}
+                </div>
+            `;
+
+            companiesGrid.appendChild(card);
+        });
+
+        // Chart 1: SRM Usage by Sector
+        const sectorData = {};
+        companies.forEach(c => {
+            if (!sectorData[c.sector]) {
+                sectorData[c.sector] = { count: 0, avgIntensity: 0 };
+            }
+            sectorData[c.sector].count++;
+
+            // Calculate average SRM usage intensity
+            const total = Object.values(c.srm_intensity).reduce((a, b) => a + b, 0);
+            sectorData[c.sector].avgIntensity += total;
+        });
+
+        Object.keys(sectorData).forEach(sector => {
+            sectorData[sector].avgIntensity /= sectorData[sector].count;
+        });
+
+        const ctx1 = document.getElementById('sectorChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(sectorData),
+                datasets: [{
+                    label: 'Average SRM Usage Intensity',
+                    data: Object.values(sectorData).map(d => d.avgIntensity),
+                    backgroundColor: '#667eea',
+                    borderColor: '#764ba2',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Average SRM Usage Intensity'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: SRM Distribution
+        const srmCounts = [0, 0, 0, 0, 0, 0, 0];
+        companies.forEach(c => {
+            const keys = ['construction', 'metal', 'plastic', 'wood', 'biomass', 'biogas', 'digestate'];
+            keys.forEach((key, idx) => {
+                if (c.srm_intensity[key] > 0) {
+                    srmCounts[idx]++;
+                }
+            });
+        });
+
+        const ctx2 = document.getElementById('srmDistributionChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: srmCategories,
+                datasets: [{
+                    data: srmCounts,
+                    backgroundColor: [
+                        '#667eea', '#764ba2', '#f093fb', '#4facfe',
+                        '#43e97b', '#fa709a', '#fee140'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            font: { size: 12 },
+                            padding: 15
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Number of Companies Using Each SRM Category',
+                        font: { size: 14 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

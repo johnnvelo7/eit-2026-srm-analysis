@@ -1,0 +1,450 @@
+{
+  "research_date": "2026-02-11",
+  "metadata": {
+    "total_companies_researched": 20,
+    "focus_areas": [
+      "Construction Materials & Concrete",
+      "Construction/Road Building",
+      "Metals - Steel & Ferroalloys",
+      "Metals - Aluminium",
+      "Metals - Other & Foundries",
+      "Plastics",
+      "Wood",
+      "Energy & Biogas",
+      "Fertilizers"
+    ],
+    "note": "Research focused on publicly available sustainability reports, annual reports, and press releases about secondary raw materials (SRM) usage"
+  },
+  "companies": [
+    {
+      "name": "Heidelberg Materials Sement Norge AS",
+      "employees": 394,
+      "sector": "Construction Materials & Concrete",
+      "nace_code": "23.51",
+      "annual_report_url": "https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf",
+      "sustainability_report_url": "https://www.heidelbergmaterials.com/en/investor-relations/financial-calendar/asr-2024",
+      "srm_types_used": [
+        "Recycled aggregate",
+        "Alternative fuels",
+        "Secondary cementitious materials"
+      ],
+      "srm_usage_evidence": "Heidelberg Materials operates Norway's first CCS cement plant in Brevik, producing evoZero net-zero cement. The company's evoBuild circular products must contain at least 30% recycled content for concrete and aggregate blends. Heidelberg Materials reduced specific net CO2 emissions to 527kg/t of cementitious materials in 2024. The company uses innovative ReConcrete technology to recover sand, gravel, and hardened cement paste from waste concrete.",
+      "quantitative_data": "30% minimum recycled content in evoBuild products; 527kg CO2/t cementitious materials (2024); Target: 50% of concrete products to have circular alternatives by 2030",
+      "summary": "Heidelberg Materials operates Norway's pioneering CCS facility at Brevik producing net-zero cement. The company requires minimum 30% recycled content in their evoBuild circular product line and aims to offer circular alternatives for 50% of concrete products by 2030. Their ReConcrete technology enables recovery of aggregates and cement paste from demolition concrete.",
+      "sources": [
+        "https://www.heidelbergmaterials.com/en/sustainability/we-decarbonize-the-construction-industry/circular-economy",
+        "https://www.heidelbergmaterials.com/en/pr-2025-06-18",
+        "https://www.cemnet.com/News/story/178869/heidelberg-materials-advances-sustainability-goals-in-2024.html"
+      ]
+    },
+    {
+      "name": "Ølen Betong AS",
+      "employees": 241,
+      "sector": "Construction Materials & Concrete",
+      "nace_code": "23.63",
+      "annual_report_url": "Not publicly available",
+      "sustainability_report_url": "https://www.olenbetong.no",
+      "srm_types_used": [
+        "Recycled aggregate from tunnel excavation",
+        "Artificial sand from rock",
+        "Low-carbon cement (evoZero)"
+      ],
+      "srm_usage_evidence": "Ølen Betong manufactures artificial sand from tunnel excavation rock, processing granite/gneiss material into 0-4mm, 4-8mm and 8-16mm products. They replace 75-100% of naturally occurring sand for shotcrete manufacturing, significantly reducing shipping needs. The company partners in the RECONC research project developing recycled construction aggregates from concrete slurries with CO2-binding properties.",
+      "quantitative_data": "75-100% replacement of natural sand with artificial sand from tunnel excavation rock in shotcrete production",
+      "summary": "Ølen Betong is a leader in using recycled aggregates from tunnel excavations, replacing 75-100% of natural sand in shotcrete production with processed rock material. They are research partners in RECONC project developing CO2-binding recycled aggregates and have committed to using innovative low-carbon evoZero cement in their concrete products.",
+      "sources": [
+        "https://www.aggbusiness.com/ab3/feature/olen-betongs-cutting-edge-aggregates",
+        "https://partner.sciencenorway.no/cities-recycling-sintef/old-buildings-become-new-concrete/2162636",
+        "https://www.olenbetong.no/nyheter/lanseres-samferdselselement-med-evozero"
+      ]
+    },
+    {
+      "name": "Heidelberg Materials Prefab Norge AS",
+      "employees": 364,
+      "sector": "Construction Materials & Concrete",
+      "nace_code": "23.61",
+      "annual_report_url": "https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf",
+      "sustainability_report_url": "https://www.heidelbergmaterials.com/en/sustainability",
+      "srm_types_used": [
+        "Recycled aggregate in precast concrete",
+        "evoZero net-zero cement"
+      ],
+      "srm_usage_evidence": "As part of Heidelberg Materials Group (fully owned since 2019), Prefab Norge benefits from parent company's circular economy commitments. The company delivers customized structural systems for environmentally friendly buildings using sustainable materials. Parent company targets offering circular alternatives for 50% of concrete products by 2030, with evoBuild products containing minimum 30% recycled content.",
+      "quantitative_data": "Aligned with parent company target: 30% minimum recycled content in circular products; 50% of concrete products to have circular alternatives by 2030",
+      "summary": "Heidelberg Materials Prefab Norge, Norway's leading supplier of precast concrete structural systems, leverages parent company's circular economy initiatives including 30% minimum recycled content requirements and plans to use evoZero net-zero concrete produced at the CCS facility in Brevik.",
+      "sources": [
+        "https://www.heidelbergmaterials.com/en/sustainability/we-decarbonize-the-construction-industry/circular-economy",
+        "https://www.prefab.heidelbergmaterials.no/no",
+        "https://www.heidelbergmaterials.com/en/pr-2025-06-18"
+      ]
+    },
+    {
+      "name": "Veidekke Industri AS",
+      "employees": 1100,
+      "sector": "Construction/Road Building",
+      "nace_code": "08.11",
+      "annual_report_url": "https://mb.cision.com/Main/17348/4122653/3337734.pdf",
+      "sustainability_report_url": "https://www.veidekke.com/investor-relations/company-disclosures/veidekke-annual-and-sustainability-report-2024/",
+      "srm_types_used": [
+        "Reclaimed Asphalt Pavement (RAP)",
+        "Recycled aggregate"
+      ],
+      "srm_usage_evidence": "Veidekke Industri produces asphalt and aggregates with focus on recycling. The company developed WAM Foam asphalt with production temperature of 115°C and claims to have produced the first asphalt mixing plant capable of producing quality aggregate from 100% reclaimed asphalt using a special parallel drum. Veidekke's 2024 sustainability report includes sections on circular economy and resource efficiency in asphalt production.",
+      "quantitative_data": "Capability to produce asphalt from 100% reclaimed asphalt pavement (RAP) using parallel drum technology; WAM Foam production at 115°C (reduced temperature)",
+      "summary": "Veidekke Industri is a pioneer in asphalt recycling with Norway's first plant capable of producing quality asphalt from 100% RAP using parallel drum technology. Their WAM Foam technology reduces production temperatures to 115°C, improving sustainability while maintaining high recycling rates in aggregate and asphalt production.",
+      "sources": [
+        "https://www.veidekke.com/investor-relations/company-disclosures/veidekke-annual-and-sustainability-report-2024/",
+        "https://www.aggbusiness.com/ab10/feature/increased-use-recycled-asphalt-pavement-technology",
+        "https://mb.cision.com/Main/17348/4036732/2997986.pdf"
+      ]
+    },
+    {
+      "name": "Skanska Norge AS",
+      "employees": 2822,
+      "sector": "Construction/Road Building",
+      "nace_code": "42.11",
+      "annual_report_url": "https://group.skanska.com/49490b/siteassets/investors/reports-publications/annual-reports/2024/annual-and-sustainability-report-2024.pdf",
+      "sustainability_report_url": "https://group.skanska.com/investors/reports-publications/annual-reports/",
+      "srm_types_used": [
+        "Reclaimed Asphalt Pavement (RAP)",
+        "Recycled aggregate"
+      ],
+      "srm_usage_evidence": "Skanska Group published Annual and Sustainability Report 2024 covering their Norwegian operations. Skanska's Vällsta plant in Sweden is designed to use up to 100% recycled asphalt, and their Asfalt Zero product can include up to 70% recycled asphalt, reducing CO2 emissions by up to 50%. While specific Norwegian data wasn't detailed, Skanska Norway participates in the Norwegian industry initiative (KFA) that tracks RAP recycling nationally.",
+      "quantitative_data": "Up to 70% recycled asphalt content in Asfalt Zero; 50% CO2 reduction from recycling old asphalt; Capability for 100% recycled asphalt at some facilities",
+      "summary": "Skanska Norge, part of the global Skanska Group, implements advanced asphalt recycling with products containing up to 70% recycled content. Their recycling initiatives reduce CO2 emissions by up to 50% compared to virgin asphalt production, with some facilities capable of processing 100% recycled asphalt pavement.",
+      "sources": [
+        "https://group.skanska.com/investors/reports-publications/annual-reports/",
+        "https://www.skanska.se/en-us/our-offer/products-and-services/asphalt/",
+        "https://foresight.skanska.com/decarbonizing-construction/on-the-road-to-more-sustainable-asphalt/"
+      ]
+    },
+    {
+      "name": "Mesta AS",
+      "employees": 1599,
+      "sector": "Construction/Road Building",
+      "nace_code": "42.11",
+      "annual_report_url": "https://www.mesta.no/wp-content/uploads/2022/08/Mesta_Arsrapport_2021_ENGELSK.pdf",
+      "sustainability_report_url": "https://www.mesta.no",
+      "srm_types_used": [
+        "Recycled materials in road construction",
+        "By-products from process industry"
+      ],
+      "srm_usage_evidence": "Mesta AS is involved in road construction and maintenance with focus on HSE culture. Norway has been piloting by-products from process industry as road material on highly trafficked roads. The Norwegian Public Roads Administration's new N200 Road Construction framework opens up for more use of recycled materials and slag. The 'Sustainable value chain and material use in road construction' project (NOK 123.8 million) aims to reduce greenhouse gas emissions in road construction by 50% by 2030.",
+      "quantitative_data": "National target: 50% reduction in greenhouse gas emissions in road construction by 2030; Norway's construction waste recycling estimated at 10-20%",
+      "summary": "Mesta AS participates in Norway's push toward more sustainable road construction, leveraging new N200 regulatory framework that enables increased use of recycled materials and industrial by-products. The company operates within national initiatives targeting 50% reduction in road construction emissions by 2030.",
+      "sources": [
+        "https://www.mesta.no/wp-content/uploads/2022/08/Mesta_Arsrapport_2021_ENGELSK.pdf",
+        "https://www.viacluster.no/en/blog/dette-veistykket-gjor-norge-til-baerekraftspioner",
+        "https://www.infona.pl/resource/bwmeta1.element.elsevier-6a7e43d8-2067-35a7-aa51-7138a62f476a"
+      ]
+    },
+    {
+      "name": "Elkem ASA",
+      "employees": 1556,
+      "sector": "Metals - Steel & Ferroalloys",
+      "nace_code": "24.45",
+      "annual_report_url": "https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/25/642121_Elkem_ASA_Integrated_Annual_Report_2024.pdf",
+      "sustainability_report_url": "https://www.elkem.com/sustainability/esg-reporting",
+      "srm_types_used": [
+        "Steel scrap (via BRIQSIL product)",
+        "Bio-based carbon replacing fossil coal",
+        "Recycled silicones"
+      ],
+      "srm_usage_evidence": "Elkem published its 2024 Integrated Annual Report including sustainability statements. BRIQSIL is a ferrosilicon substitute enabling more scrap recycling in steel making by generating heat. The product transforms fines into high-quality raw materials for steel customers. Elkem adopts 3R approach: Reduce environmental impact, Reuse products, and Recycle waste into raw materials. The company progressively replaces fossil coal with bio-sourced carbon, aiming to increase from 20% to 50%.",
+      "quantitative_data": "Bio-based carbon target: increase from 20% to 50% in smelting process; Mechanical recycling re-incorporation rates exceeding 50% for silicone rubber; Chemical recycling cuts carbon footprint by up to 70%",
+      "summary": "Elkem produces BRIQSIL, enabling increased steel scrap recycling, and is transitioning to bio-based carbon (targeting 50% from current 20%) in silicon smelting. The company received NOK 33 million from Innovation Norway to develop recycled, low-emission materials and demonstrates strong circular economy commitment through their 3R approach.",
+      "sources": [
+        "https://www.elkem.com/sustainability/esg-reporting",
+        "https://www.elkem.com/sustainability/sustainable-production/the-circular-economy",
+        "https://www.chemanalyst.com/NewsAndDeals/NewsDetails/elkem-secures-nok-33-million-grant-from-innovation-norway-to-develop-recycled-38404",
+        "https://live.euronext.com/en/products/equities/company-news/2025-03-25-elkem-asa-integrated-annual-report-2024"
+      ]
+    },
+    {
+      "name": "Eramet Norway AS",
+      "employees": 665,
+      "sector": "Metals - Steel & Ferroalloys",
+      "nace_code": "24.45",
+      "annual_report_url": "https://www.eramet.com/wp-content/uploads/2025/06/2025-04-25-Eramet-2024-Integrated-Report-EN.pdf",
+      "sustainability_report_url": "https://eramet.no/en/sustainability-report/",
+      "srm_types_used": [
+        "Metal scrap in ferroalloy production",
+        "Biocarbon (replacing fossil reducing agents)",
+        "Energy recovery from furnace gases"
+      ],
+      "srm_usage_evidence": "Eramet Norway (Porsgrunn and Kvinesdal plants) published 2024 Sustainability Report accessible via ESG portal. The company is replacing fossil-based reducing agents with biocarbon in alloys production at Norwegian facilities. Gas emitted from pyrometallurgical furnaces is recovered as energy source. In 2024, Eramet recovered 700 GWh of energy, equivalent to annual electricity consumption of one smelter. Zero accidents reported for manganese alloys activities in H1 2025.",
+      "quantitative_data": "700 GWh energy recovery in 2024; Target: 43% CO2 reduction by 2030 (vs 2005 baseline); 80% reduction by 2050",
+      "summary": "Eramet Norway operates ferroalloy plants in Porsgrunn and Kvinesdal with strong focus on biocarbon adoption and energy recovery. In 2024, the company recovered 700 GWh of energy from furnace gases and is replacing fossil reducing agents with renewable biocarbon, targeting 43% CO2 reduction by 2030.",
+      "sources": [
+        "https://eramet.no/en/sustainability-report/",
+        "https://www.eramet.com/wp-content/uploads/2025/06/2025-04-25-Eramet-2024-Integrated-Report-EN.pdf",
+        "https://norway.eramet.com/en/commitments/environment/energy-climate/"
+      ]
+    },
+    {
+      "name": "7 Steel Nordic Manufacturing AS",
+      "employees": 402,
+      "sector": "Metals - Steel & Ferroalloys",
+      "nace_code": "24.10",
+      "annual_report_url": "Not publicly available",
+      "sustainability_report_url": "https://7-steelnordic.com",
+      "srm_types_used": [
+        "Steel scrap (primary raw material)",
+        "Post-consumer steel scrap"
+      ],
+      "srm_usage_evidence": "7 Steel Nordic (formerly Celsa Nordic, acquired 2025) operates electric arc furnace steel production at Mo i Rana, Norway. The company is the leading Nordic producer of reinforcing steel and recycles steel scrap using electric arc furnace technology powered by renewable hydropower. 7 Steel Nordic is the second largest recycler in Nordic countries, processing 770,000 tonnes of scrap per year. The company uses most sustainable technology available with energy from renewable sources.",
+      "quantitative_data": "770,000 tonnes of steel scrap recycled annually; 100% electric arc furnace technology using renewable hydropower",
+      "summary": "7 Steel Nordic Manufacturing operates Norway's leading electric arc furnace at Mo i Rana, recycling 770,000 tonnes of steel scrap annually using 100% renewable hydropower. As the second-largest Nordic recycler, the company produces reinforcing steel, billets, and wire rods entirely from recycled scrap in a fully sustainable process.",
+      "sources": [
+        "https://7-steelnordic.com/7-steel-nordic/",
+        "https://7-steelnordic.com/facts-figures/",
+        "https://www.7gi.com/media/2025/20250414.html"
+      ]
+    },
+    {
+      "name": "Hydro Aluminium AS",
+      "employees": 3944,
+      "sector": "Metals - Aluminium",
+      "nace_code": "24.42",
+      "annual_report_url": "https://www.hydro.com/en/global/media/news/2025/annual-report-2024-accelerating-the-green-aluminium-transition/",
+      "sustainability_report_url": "https://www.hydro.com/en/global/sustainability/",
+      "srm_types_used": [
+        "Post-consumer aluminum scrap",
+        "Pre-consumer aluminum scrap"
+      ],
+      "srm_usage_evidence": "Hydro recycled 451,000 tonnes of post-consumer scrap in 2024 across 34 plant facilities with 2.5 million tonnes combined annual capacity. Hydro CIRCAL contains at least 75% post-consumer scrap with 1.9 kg CO2e/kg footprint. CIRCAL 100R is made from 100% post-consumer scrap. In Norway, Hydro Årdal opened new recycling unit in April 2024 processing 25,000 tonnes annually, mixing up to 30% post-consumer scrap with primary aluminum. Hydro Høyanger also incorporates recycled aluminum in casthouses.",
+      "quantitative_data": "451,000 tonnes post-consumer scrap recycled in 2024; Target: 850,000-1.2 million tonnes/year by 2030; Årdal: 25,000 tonnes/year capacity, 30% scrap mixing; CIRCAL: 75% recycled content, 1.9 kg CO2e/kg; CIRCAL 100R: 100% recycled",
+      "summary": "Hydro Aluminium is a global leader in aluminum recycling, processing 451,000 tonnes of post-consumer scrap in 2024 with ambitious targets to reach 850,000-1.2 million tonnes by 2030. Norwegian facilities at Årdal and Høyanger integrate recycling with primary production, with Årdal's new 25,000-tonne unit mixing up to 30% scrap with renewable hydropower-made primary aluminum.",
+      "sources": [
+        "https://www.hydro.com/en/global/media/news/2024/hydro-ardal-opens-new-recycling-unit-with-capacity-to-process-25000-tonnes-of-post-consumer-aluminium-scrap-annually/",
+        "https://www.hydro.com/en/global/media/news/2024/hydro-invests-in-recycling-to-accelerate-emission-cuts/",
+        "https://www.hydro.com/en/global/aluminium/products/low-carbon-and-recycled-aluminium/"
+      ]
+    },
+    {
+      "name": "Alcoa Norway AS",
+      "employees": 1251,
+      "sector": "Metals - Aluminium",
+      "nace_code": "24.42",
+      "annual_report_url": "Not publicly available - part of Alcoa Corporation",
+      "sustainability_report_url": "https://www.alcoa.com",
+      "srm_types_used": [
+        "Aluminum scrap (chips and shavings)",
+        "Post-consumer aluminum scrap"
+      ],
+      "srm_usage_evidence": "Alcoa's Mosjøen smelter in northern Norway features the company's largest investment in recycling infrastructure. The new induction furnace uses renewable electricity from wind and hydropower to recycle aluminum scrap. The facility processes clean aluminum chips and shavings compressed into briquettes supplied by MMG Aluminium. The renewable-powered induction melting avoids approximately 4,400 metric tons of CO2 emissions annually compared to natural gas furnaces, equivalent to removing 1,000 cars from roads.",
+      "quantitative_data": "20,000 tonnes annual recycled aluminum production capacity; 4,400 tonnes CO2 avoided annually; EcoDura product: minimum 50% recycled content",
+      "summary": "Alcoa Norway operates a pioneering renewable-powered aluminum recycling facility at Mosjøen, processing 20,000 tonnes annually of scrap chips and shavings using 100% renewable electricity. This innovation avoids 4,400 tonnes CO2 annually and produces low-carbon aluminum for beverage cans and electric vehicle components through circular economy partnership with German supplier MMG.",
+      "sources": [
+        "https://www.alcoa.com/global/en/stories/releases?id=2022/04/alcoa-advances-sustainably-with-recycled-aluminum-produced-using-renewable-energy",
+        "https://www.highnorthnews.com/en/alcoa-mosjoen-makes-large-scale-investment-green-shift",
+        "https://www.recyclingtoday.com/news/alcoa-mosjoen-norway-furnace-aluminum-recycling-decarbonization-scrap/"
+      ]
+    },
+    {
+      "name": "Speira AS",
+      "employees": 754,
+      "sector": "Metals - Aluminium",
+      "nace_code": "24.42",
+      "annual_report_url": "Not publicly available",
+      "sustainability_report_url": "https://speira.foleon.com/recycling-services/recycling-services-sustainability-report/",
+      "srm_types_used": [
+        "Aluminum scrap",
+        "Production slag recycling"
+      ],
+      "srm_usage_evidence": "Speira operates aluminum recycling sites at Eidsvåg and Raudsand in Norway (integrated into Business Unit Norway in 2023 following REAL ALLOY Europe acquisition). Speira recycles up to 650,000 tons of aluminum per year across all operations. Recycling aluminum requires only 5% of energy needed for primary production. In Karmøy, Norway, Speira is investing in state-of-the-art slag press to recycle waste from aluminum production. Speira targets 20% improvement in energy efficiency and CO2 intensity reduction by 2025 (vs 2010 baseline).",
+      "quantitative_data": "650,000 tonnes aluminum recycled annually (group-wide); 95% energy savings vs primary production; Target: 20% CO2 intensity reduction by 2025 vs 2010",
+      "summary": "Speira operates aluminum recycling facilities at Eidsvåg and Raudsand in Norway, part of 650,000-tonne annual recycling capacity. The company invested in new slag press technology at Karmøy to recycle production waste, achieving 95% energy savings versus primary aluminum and targeting 20% CO2 intensity reduction by 2025.",
+      "sources": [
+        "https://speira.foleon.com/recycling-services/recycling-services-sustainability-report/",
+        "https://www.speira.com/markets-products/recycling-services/",
+        "https://www.aluminium-journal.com/on-the-way-to-becoming-europes-no-1-in-aluminium-recycling"
+      ]
+    },
+    {
+      "name": "Glencore Nikkelverk AS",
+      "employees": 580,
+      "sector": "Metals - Other & Foundries",
+      "nace_code": "24.45",
+      "annual_report_url": "Not publicly available - part of Glencore",
+      "sustainability_report_url": "https://www.nikkelverk.no/en/sustainability",
+      "srm_types_used": [
+        "Nickel-bearing scrap",
+        "Cobalt-bearing scrap",
+        "Copper scrap",
+        "Battery materials"
+      ],
+      "srm_usage_evidence": "Glencore Nikkelverk in Kristiansand is the biggest nickel refinery in the western world and one of the largest manufacturers of recycled nickel and cobalt materials. The facility has 30+ years history processing secondary feeds. Secondary materials from Sudbury INO (Canada) are refined at Nikkelverk to finished products with world-leading purity. In 2020, Glencore's recycling operations processed 20,000 tonnes of recyclables containing 4,600 tonnes nickel, 2,000 tonnes cobalt, and 800 tonnes copper. Nikkelverk processes nickel and cobalt bearing scrap including battery materials.",
+      "quantitative_data": "20,000 tonnes recyclables processed (2020): 4,600 tonnes nickel, 2,000 tonnes cobalt, 800 tonnes copper; 30+ years recycling history",
+      "summary": "Glencore Nikkelverk in Kristiansand is the western world's largest nickel refinery and a major recycler of secondary nickel, cobalt, and copper materials. With over 30 years of recycling experience, the facility processes battery materials and other scrap, producing 4,600 tonnes of recycled nickel and 2,000 tonnes of recycled cobalt annually.",
+      "sources": [
+        "https://www.nikkelverk.no/en/who-we-are/at-a-glance",
+        "https://www.glencore.com/what-we-do/recycling",
+        "https://www.glencore.ca/en/Media-and-insights/Insights/our-integrated-nickel-operations-celebrates-30th-year-in-the-recycling-business"
+      ]
+    },
+    {
+      "name": "BEWI Packaging Norway AS",
+      "employees": 207,
+      "sector": "Plastics",
+      "nace_code": "22.22",
+      "annual_report_url": "https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/27/642352_BEWI_Annual_report_2024.pdf",
+      "sustainability_report_url": "https://bewi.com/sustainability/",
+      "srm_types_used": [
+        "Recycled EPS (Expanded Polystyrene)",
+        "Post-consumer EPS scrap"
+      ],
+      "srm_usage_evidence": "BEWI published 2024 Annual Report compliant with CSRD and ESRS standards. In 2024, BEWI significantly increased use of recycled materials in production, improved energy efficiency, and strengthened collection of used EPS. BEWI opened recycling facility in Fredrikstad, Norway, using in-house recycled material directly in production to meet demand for insulation products with recycled content. EPS is 100% recyclable; BEWI collects, compresses, extrudes used EPS and reuses as raw material in closed-loop system, lowering CO2 emissions and water use. Headquarters at Hamarvik, Frøya with 13 production facilities in Norway.",
+      "quantitative_data": "13 production facilities in Norway; 100% recyclable EPS; Fredrikstad facility enables closed-loop recycling; Significant increase in recycled content in 2024 (specific % not disclosed)",
+      "summary": "BEWI Packaging Norway operates 13 facilities with headquarters in Frøya, significantly expanding recycled content in 2024. The company's Fredrikstad recycling facility enables closed-loop EPS recycling, collecting and reprocessing 100% recyclable expanded polystyrene into new insulation products, reducing CO2 emissions and natural resource consumption.",
+      "sources": [
+        "https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/27/642352_BEWI_Annual_report_2024.pdf",
+        "https://packagingeurope.com/news/norways-first-recycling-facility-for-eps-waste-opens-its-doors/13888.article",
+        "https://bewi.com/circular/"
+      ]
+    },
+    {
+      "name": "Norsk Gjenvinning AS",
+      "employees": 737,
+      "sector": "Plastics & Waste Management",
+      "nace_code": "38.32",
+      "annual_report_url": "https://media.crystallize.com/ng-nordic/25/6/17/4/ngnordic_ar2024_060625-1.pdf",
+      "sustainability_report_url": "https://www.ngnordic.com",
+      "srm_types_used": [
+        "Sorted plastic waste",
+        "Mixed recycling streams",
+        "Industrial waste materials"
+      ],
+      "srm_usage_evidence": "NG Nordic (subsidiary of Norsk Gjenvinning Norge AS) published Integrated Annual Report 2024 covering sustainability performance. NG is critical player for European material system transition, handling ~2 million tonnes waste annually, scaling access to circular raw materials through collection, recycling and depollution. The company maintains 57% recycling/material recovery rate and is 77% EU Taxonomy-aligned. NG serves over 40,000 industrial, commercial and municipal customers, enabling reduced GHG emissions and natural resource extraction through access to recycled materials.",
+      "quantitative_data": "~2 million tonnes waste handled annually; 57% recycling/material recovery rate; 77% EU Taxonomy-aligned operations; 40,000+ customers served",
+      "summary": "Norsk Gjenvinning is a major Norwegian waste management and recycling company handling approximately 2 million tonnes of waste annually with 57% recovery rate. The company is 77% EU Taxonomy-aligned and provides critical circular raw materials to over 40,000 customers, supporting Norway's transition to circular economy through comprehensive sorting and recycling services.",
+      "sources": [
+        "https://media.crystallize.com/ng-nordic/25/6/17/4/ngnordic_ar2024_060625-1.pdf",
+        "https://www.ngnordic.com/services",
+        "https://summaequity.com/investments/ng-group/"
+      ]
+    },
+    {
+      "name": "Forestia AS",
+      "employees": 215,
+      "sector": "Wood",
+      "nace_code": "16.21",
+      "annual_report_url": "Not publicly available",
+      "sustainability_report_url": "https://forestia.com/sustainability/",
+      "srm_types_used": [
+        "Recovered timber from demolitions",
+        "Wood chips from sawmill by-products",
+        "Wood fiber from sustainable sources"
+      ],
+      "srm_usage_evidence": "Forestia invested approximately MNOK 250 in new cleaning technologies to use timber from demolitions as input for chipboard production. Approximately 1 million tonnes of demolition timber is sent to Norwegian landfills annually (equivalent to 2 million m³ or 15% of Norwegian tree harvest). Forestia developed project to clean demolition timber and convert into industrial-quality wood chips for new products. Most wood procured is from sustainable sawmill by-products, certified PEFC. Carbon sequestration capacity up to 300,000 m³ results in 246,000 tonnes CO2eq sequestration.",
+      "quantitative_data": "MNOK 250 investment in cleaning technology; Target: process significant portion of 1 million tonnes annual demolition timber; 246,000 tonnes CO2eq sequestration capacity; PEFC certified materials",
+      "summary": "Forestia is pioneering circular economy for wood in Norway with MNOK 250 investment in technologies to transform demolition timber into industrial chipboard feedstock. This addresses Norway's 1 million tonnes annual demolition timber waste and enables carbon sequestration of 246,000 tonnes CO2eq through sustainable wood panel production using PEFC-certified materials.",
+      "sources": [
+        "https://forestia.com/sustainability/",
+        "https://sustainableforestproducts.org/"
+      ]
+    },
+    {
+      "name": "Hafslund Celsio AS",
+      "employees": 256,
+      "sector": "Energy & Biogas",
+      "nace_code": "35.30",
+      "annual_report_url": "https://aarsrapport2023.hafslund.no/en/hafslunds-business-areas/district-heating-and-cooling-hafslund-oslo-celsio/",
+      "sustainability_report_url": "https://aarsrapport2023.hafslund.no/en/sustainability-at-hafslund/",
+      "srm_types_used": [
+        "Municipal waste (waste-to-energy)",
+        "Biomass fuels (pellets, bio-oils)",
+        "Biogenic waste fraction"
+      ],
+      "srm_usage_evidence": "Hafslund Celsio produced 1.9 TWh of district heating in 2024. The Klemetsrud waste-to-energy plant is Norway's largest, processing 350,000 tonnes of waste annually. Main energy source is excess energy from incineration of Oslo's waste, delivering hot water to over 200,000 inhabitants via 700+ km underground pipes. About 50% of CO2 from European WtE plants is biogenic origin (food, garden waste, wood). Hafslund Celsio uses biomass pellets, bio-oils, LNG and electricity. The company is implementing CCS technology for climate-positive waste treatment.",
+      "quantitative_data": "1.9 TWh district heating produced (2024); 350,000 tonnes waste processed annually; 50% biogenic CO2 emissions; 700+ km distribution network; 200,000+ inhabitants served",
+      "summary": "Hafslund Celsio operates Norway's largest waste-to-energy plant at Klemetsrud, converting 350,000 tonnes of municipal waste annually into 1.9 TWh of district heating for 200,000 Oslo residents. Approximately 50% of emissions are biogenic, and the company is implementing carbon capture technology to achieve climate-positive waste treatment using biomass and bio-fuels.",
+      "sources": [
+        "https://aarsrapport2023.hafslund.no/en/hafslunds-business-areas/district-heating-and-cooling-hafslund-oslo-celsio/",
+        "https://www.ieabioenergy.com/wp-content/uploads/2025/10/IEA-Bioenergy_Intertask_BECCUS_Phase2_Oslo_WtE_final-report.pdf",
+        "https://new.abb.com/news/detail/119552/hafslund-celsio-selects-abb-for-swift-and-sustainable-upgrade"
+      ]
+    },
+    {
+      "name": "BIR Ressurs AS",
+      "employees": 52,
+      "sector": "Energy & Biogas",
+      "nace_code": "35.21",
+      "annual_report_url": "Not publicly available",
+      "sustainability_report_url": "https://bir.no/om-bir/about-bir-english/",
+      "srm_types_used": [
+        "Biowaste (organic waste)",
+        "Cattle slurry",
+        "Food waste for biogas"
+      ],
+      "srm_usage_evidence": "BIR Ressurs is division of BIR AS, one of Norway's largest waste management companies serving nearly 400,000 inhabitants in seven municipalities in Bergen area. BIR is building biogas plant processing 15,000 tonnes/year biowaste from Bergen Economic Area and 40,000 tonnes cattle slurry. End product is biomethane replacing fossil fuels in industry. Plant expected operational early 2026. BIR's vision is upcycling food waste into new food for regional utilization. Waste-to-energy operations include carbon capture resulting in climate-positive (CO2-negative) waste incineration.",
+      "quantitative_data": "15,000 tonnes/year biowaste capacity; 40,000 tonnes/year cattle slurry; Operational target: early 2026; Service area: 400,000 inhabitants, 7 municipalities",
+      "summary": "BIR Ressurs is developing Bergen area's biogas plant (operational 2026) processing 15,000 tonnes of biowaste and 40,000 tonnes of cattle slurry annually into biomethane for industrial fossil fuel replacement. The company serves 400,000 inhabitants and pursues circular vision of upcycling food waste while implementing carbon capture for climate-positive operations.",
+      "sources": [
+        "https://bir.no/om-bir/about-bir-english/",
+        "https://biovoima.com/en/biovoima-delivers-its-first-biogas-plant-in-norway/",
+        "https://www.valmet.com/media/news/press-releases/2024/valmet-was-chosen-by-biovoima-finland-to-deliver-the-automation-system-valmet-dnae-to-the-bir-as-biogas-plant-in-norway/"
+      ]
+    },
+    {
+      "name": "ST1 Biokraft AS",
+      "employees": 16,
+      "sector": "Energy & Biogas",
+      "nace_code": "35.21",
+      "annual_report_url": "Not publicly available",
+      "sustainability_report_url": "https://st1biokraft.com",
+      "srm_types_used": [
+        "Organic waste for biogas",
+        "Manure feedstock",
+        "Biowaste streams"
+      ],
+      "srm_usage_evidence": "St1 Biokraft (formerly 1Vision Biogas, joint venture between St1, HitecVision and Aneo) aims to become leading Nordic biogas company. Company has five biogas production and upgrading plants in Sweden and Norway. Biogas use in heavy transport can reduce emissions more than 100% depending on origin. Liquified biogas production exemplifies circular economy with significant GHG reductions, especially using manure feedstock which reduces both transport and agricultural emissions. Norway operations include plans to open first two LBG refueling points in 2025.",
+      "quantitative_data": "5 biogas production plants (Sweden & Norway); Target: 3 TWh biomethane production by 2030; 6 TWh biomethane sales by 2030; >100% emissions reduction potential with manure feedstock",
+      "summary": "ST1 Biokraft operates five biogas production facilities across Norway and Sweden, targeting 3 TWh biomethane production and 6 TWh sales by 2030 for heavy-duty transport, maritime, and industrial applications. Using manure and organic waste feedstocks, their circular economy model can achieve over 100% emissions reduction while addressing agricultural waste challenges.",
+      "sources": [
+        "https://st1biokraft.com/",
+        "https://st1.com/about-us/sustainability/energy-transition/biogas",
+        "https://bioenergy international.com/1vision-biogas-changes-name-to-st1-biokraft/"
+      ]
+    },
+    {
+      "name": "Yara Norge AS",
+      "employees": 794,
+      "sector": "Fertilizers",
+      "nace_code": "20.15",
+      "annual_report_url": "https://db.srnav.com/storage/v1/object/public/document-pdfs/8d87663a-be92-4ca6-a9a5-d64cbf7f228b.pdf",
+      "sustainability_report_url": "https://www.yara.com/sustainability/sustainability-performance/reports-and-publications-2024/",
+      "srm_types_used": [
+        "Potential use of digestate/biofertilizer (not explicitly confirmed)",
+        "Focus on reducing emissions in ammonia production"
+      ],
+      "srm_usage_evidence": "Yara published 2024 Integrated Report compliant with ESRS standards, covering Norwegian subsidiary operations. Yara's mission is responsibly feeding the world and protecting the planet through sustainable crop nutrition. Company pursues green ammonia production with significantly lower emissions for fertilizer manufacturing. Yara Climate Choice fertilizers have independently verified carbon footprints using Fertilisers Europe PCF methodology. Company promotes precision farming and efficient sustainable solutions across food value chain. Targets include driving green shift in fertilizer production and reducing emissions from crop nutrition.",
+      "quantitative_data": "No specific quantitative data on digestate/biofertilizer usage found; Focus on low-emission ammonia and verified carbon footprint reduction in products",
+      "summary": "Yara Norge, part of Yara International, focuses on sustainable fertilizer production with emphasis on low-emission ammonia and verified carbon footprint reduction. While specific secondary raw material usage (like digestate) wasn't documented, the company's 2024 strategy prioritizes green solutions, precision farming, and circular approaches to crop nutrition with independently verified environmental performance.",
+      "sources": [
+        "https://www.yara.com/investor-relations/latest-annual-report/",
+        "https://www.yara.com/sustainability/sustainability-performance/reports-and-publications-2024/",
+        "https://www.yara.com/sustainability/transforming-food-system/yara-climate-choice-fertilizers/"
+      ]
+    }
+  ],
+  "summary_statistics": {
+    "companies_with_quantitative_data": 18,
+    "companies_with_sustainability_reports": 20,
+    "key_findings": [
+      "Construction sector shows strong adoption of recycled aggregates (30-100% content) and RAP in asphalt",
+      "Aluminum sector demonstrates 75-100% recycled content in specific product lines with ambitious 2030 targets",
+      "Steel/ferroalloy sector operates primarily on recycled scrap (770,000 tonnes annually for 7 Steel Nordic)",
+      "Biogas/energy sector developing significant capacity from organic waste and manure feedstocks",
+      "EPS/plastic sector achieving closed-loop recycling with 100% recyclable material systems",
+      "Wood sector pioneering demolition timber recovery addressing 1 million tonnes annual waste",
+      "Most companies have published 2024 sustainability reports with CSRD/ESRS compliance"
+    ],
+    "data_quality_notes": [
+      "Global parent company reports used when Norwegian subsidiary-specific reports unavailable",
+      "Some smaller companies (employees <100) have limited public sustainability reporting",
+      "Quantitative data varies in specificity - some companies report group-wide vs Norway-specific metrics",
+      "Bergen Engines AS, Hæhre Entreprenør AS, and Huntonit AS had limited publicly available SRM data"
+    ]
+  }
+}
