@@ -2,7 +2,7 @@
 
 **EiT 2026 Project | Sirk Norge | NTNU Experts in Teams**
 
-[![View Report]([https://img.shields.io/badge/View-Interactive_Report-blue?style=for-the-badge)]((https://www.eitsrm.no/))
+[![View Report](https://img.shields.io/badge/View-Interactive_Report-blue?style=for-the-badge)](https://www.eitsrm.no/)
 [![Data](https://img.shields.io/badge/Companies-105-green?style=flat-square)](data/raw/companies_by_nace.json)
 [![NACE Codes](https://img.shields.io/badge/NACE_Codes-23-orange?style=flat-square)](data/processed/companies_list.csv)
 
@@ -23,7 +23,7 @@ This project maps **secondary raw materials (SRM)** usage across Norwegian indus
 
 ## 🌐 Interactive Report
 
-**[View the Interactive Report →](https://johnnvelo7.github.io/eit-2026-srm-analysis/)**
+**[View the Interactive Report →](https://www.eitsrm.no/)**
 
 The report includes:
 - 📊 Company-to-SRM Matrix/Heatmap
@@ -249,7 +249,7 @@ For questions about the data or methodology, please open an issue or contact the
 
 ## 🔗 Links
 
-- [Interactive Report](https://johnnvelo7.github.io/eit-2026-srm-analysis/)
+- [Interactive Report](https://www.eitsrm.no/)
 - [Sirk Norge](https://www.sirknorge.no/)
 - [NTNU EiT](https://www.ntnu.edu/eit)
 - [Brønnøysundregistrene](https://www.brreg.no/)
