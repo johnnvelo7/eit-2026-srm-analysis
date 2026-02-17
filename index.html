@@ -447,11 +447,92 @@
             color: var(--accent-teal);
             font-weight: bold;
         }
+
+        /* ── Theme Toggle Button ── */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #e8eaed;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.88em;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        /* ── Light Mode Overrides ── */
+        [data-theme="light"] {
+            --bg-body:     #f1f5f9;
+            --bg-main:     #ffffff;
+            --bg-elevated: #f8fafc;
+            --bg-surface:  #f1f5f9;
+            --bg-hover:    #e2e8f0;
+            --border:      #e2e8f0;
+            --border-soft: #f1f5f9;
+            --text-primary:   #0f172a;
+            --text-secondary: #475569;
+            --text-muted:     #94a3b8;
+            --accent-blue:   #2563eb;
+            --accent-teal:   #0891b2;
+            --accent-purple: #7c3aed;
+            --accent-green:  #059669;
+            --accent-amber:  #d97706;
+            --accent-pink:   #db2777;
+            --intensity-0-bg: #f8fafc; --intensity-0-fg: #94a3b8;
+            --intensity-1-bg: #d1fae5; --intensity-1-fg: #065f46;
+            --intensity-2-bg: #6ee7b7; --intensity-2-fg: #064e3b;
+            --intensity-3-bg: #059669; --intensity-3-fg: #ffffff;
+        }
+        [data-theme="light"] .container {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        [data-theme="light"] header {
+            background: linear-gradient(160deg, #003d7a 0%, #00509e 60%, #1a73c8 100%);
+        }
+        [data-theme="light"] header h1   { color: #ffffff; }
+        [data-theme="light"] header p    { color: rgba(255,255,255,0.85); }
+        [data-theme="light"] .subtitle   { color: rgba(255,255,255,0.65); }
+        [data-theme="light"] footer {
+            background: #00509e;
+            color: rgba(255,255,255,0.8);
+        }
+        [data-theme="light"] footer h3 { color: #ffffff; }
+        [data-theme="light"] .company-card      { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        [data-theme="light"] .company-card:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.12); }
+        [data-theme="light"] .stat-card          { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        [data-theme="light"] .stat-card:hover    { box-shadow: 0 8px 24px rgba(37,99,235,0.1); }
+        [data-theme="light"] .meta-badge         { background: rgba(37,99,235,0.08);  border-color: rgba(37,99,235,0.22); }
+        [data-theme="light"] .meta-badge.sector  { background: rgba(8,145,178,0.08);  border-color: rgba(8,145,178,0.22); color: var(--accent-teal); }
+        [data-theme="light"] .srm-tag            { background: rgba(5,150,105,0.08);  border-color: rgba(5,150,105,0.22); }
+        [data-theme="light"] .quantitative-data  { background: rgba(217,119,6,0.07); }
+        [data-theme="light"] .intensity-3        { box-shadow: 0 0 8px rgba(5,150,105,0.35); }
+        [data-theme="light"] .matrix-cell:hover  { box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.35);
+            color: #ffffff;
+        }
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(255,255,255,0.28);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙 Dark mode</button>
             <h1>Secondary Raw Materials Analysis</h1>
             <p>Mapping the Circular Economy in Norwegian Industry</p>
             <p class="subtitle">EiT 2026 Project - Sirk Norge | NTNU Experts in Teams</p>
@@ -801,7 +882,7 @@
         });
 
         const ctx1 = document.getElementById('sectorChart').getContext('2d');
-        new Chart(ctx1, {
+        const sectorChart = new Chart(ctx1, {
             type: 'bar',
             data: {
                 labels: Object.keys(sectorData),
@@ -844,7 +925,7 @@
         });
 
         const ctx2 = document.getElementById('srmDistributionChart').getContext('2d');
-        new Chart(ctx2, {
+        const srmDistChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
                 labels: srmCategories,
@@ -876,6 +957,48 @@
                     }
                 }
             }
+        });
+
+        // ── Theme Toggle ──────────────────────────────────────────────────────
+        const chartThemes = {
+            dark: {
+                bar:   { bg: 'rgba(138,180,248,0.75)', border: '#8ab4f8' },
+                donut: { colors: ['#8ab4f8','#78d9ec','#81c995','#fdd663','#c58af9','#f28b82','#f29900'], border: '#292a2d' }
+            },
+            light: {
+                bar:   { bg: 'rgba(37,99,235,0.75)', border: '#2563eb' },
+                donut: { colors: ['#2563eb','#0891b2','#059669','#d97706','#7c3aed','#db2777','#0f766e'], border: '#ffffff' }
+            }
+        };
+
+        function updateChartColors(theme) {
+            const c = chartThemes[theme];
+            sectorChart.data.datasets[0].backgroundColor = c.bar.bg;
+            sectorChart.data.datasets[0].borderColor     = c.bar.border;
+            sectorChart.update();
+            srmDistChart.data.datasets[0].backgroundColor = c.donut.colors;
+            srmDistChart.data.datasets[0].borderColor     = c.donut.border;
+            srmDistChart.update();
+        }
+
+        function updateToggleLabel(theme) {
+            document.getElementById('themeToggle').textContent =
+                theme === 'dark' ? '☀️ Light mode' : '🌙 Dark mode';
+        }
+
+        // Apply saved preference on load
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateToggleLabel(savedTheme);
+        if (savedTheme !== 'dark') updateChartColors(savedTheme);
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next    = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggleLabel(next);
+            updateChartColors(next);
         });
     </script>
 </body>
