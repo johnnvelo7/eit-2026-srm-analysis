@@ -28,6 +28,7 @@
             --accent-green:  #81c995;
             --accent-amber:  #fdd663;
             --accent-pink:   #f28b82;
+            --intensity-nd-bg:  #2a2a2e; --intensity-nd-fg: #4a4a50;
             --intensity-0-bg:   #35363a; --intensity-0-fg: #5f6368;
             --intensity-1-bg:   #0d3b22; --intensity-1-fg: #81c995;
             --intensity-2-bg:   #1a5c35; --intensity-2-fg: #a8d5b5;
@@ -224,6 +225,7 @@
         .matrix-table td.company-cell { white-space: nowrap; padding: 8px 12px; }
         .matrix-cell { text-align: center; padding: 6px 4px; border-radius: 4px; font-size: 0.85em; font-weight: 600; transition: all 0.2s; cursor: default; }
         .matrix-cell:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+        .intensity-nd { background: var(--intensity-nd-bg); color: var(--intensity-nd-fg); font-style: italic; opacity: 0.6; }
         .intensity-0 { background: var(--intensity-0-bg); color: var(--intensity-0-fg); }
         .intensity-1 { background: var(--intensity-1-bg); color: var(--intensity-1-fg); }
         .intensity-2 { background: var(--intensity-2-bg); color: var(--intensity-2-fg); }
@@ -279,6 +281,53 @@
         }
         footer h3 { color: #e8eaed; }
 
+        /* How-to guide */
+        .guide-banner {
+            background: #fff7ed;
+            border-left: 5px solid #ea580c;
+            border-bottom: 2px solid #fed7aa;
+            margin: 20px 50px 0;
+            border-radius: 10px;
+            padding: 0;
+            overflow: hidden;
+        }
+        [data-theme="dark"] .guide-banner {
+            background: rgba(251,146,60,0.07);
+            border-left-color: #fb923c;
+            border-bottom-color: rgba(251,146,60,0.15);
+        }
+        .guide-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            background: none;
+            border: none;
+            color: #c2410c;
+            font-size: 1.15em;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.01em;
+        }
+        [data-theme="dark"] .guide-toggle { color: #fb923c; }
+        .guide-toggle:hover { background: rgba(234,88,12,0.06); }
+        .guide-toggle .arrow { transition: transform 0.2s; }
+        .guide-banner.open .guide-toggle .arrow { transform: rotate(180deg); }
+        .guide-body {
+            display: none;
+            padding: 0 24px 24px;
+            color: var(--text-secondary);
+            font-size: 0.88em;
+            line-height: 1.75;
+        }
+        .guide-banner.open .guide-body { display: block; }
+        .guide-body h4 { color: var(--text-primary); font-size: 0.92em; margin: 14px 0 6px; }
+        .guide-body h4:first-child { margin-top: 0; }
+        .guide-body ul { padding-left: 1.4em; margin: 4px 0; }
+        .guide-body .guide-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; }
+
         /* Light Mode */
         [data-theme="light"] {
             --bg-body: #f1f5f9; --bg-main: #ffffff; --bg-elevated: #f8fafc;
@@ -287,6 +336,7 @@
             --text-muted: #94a3b8; --accent-blue: #2563eb; --accent-teal: #0891b2;
             --accent-purple: #7c3aed; --accent-green: #059669; --accent-amber: #d97706;
             --accent-pink: #db2777;
+            --intensity-nd-bg: #f0f0f2; --intensity-nd-fg: #c0c4cc;
             --intensity-0-bg: #f8fafc; --intensity-0-fg: #94a3b8;
             --intensity-1-bg: #d1fae5; --intensity-1-fg: #065f46;
             --intensity-2-bg: #6ee7b7; --intensity-2-fg: #064e3b;
@@ -337,6 +387,44 @@
             <p class="subtitle" id="generated-date">Research Date: February 25, 2026</p>
         </header>
 
+        <div class="guide-banner" id="guideBanner">
+            <button class="guide-toggle" onclick="document.getElementById('guideBanner').classList.toggle('open')">
+                <span>How to use this dashboard</span>
+                <span class="arrow">&#9660;</span>
+            </button>
+            <div class="guide-body">
+                <div class="guide-cols">
+                    <div>
+                        <h4>What is this?</h4>
+                        <p>This dashboard maps <strong>Secondary Raw Material (SRM)</strong> usage across Norwegian industrial companies. SRMs are recycled or recovered materials and energy sources fed back into production, a key indicator of circular economy activity.</p>
+                    </div>
+                    <div>
+                        <h4>Understanding the tiers</h4>
+                        <ul>
+                            <li><strong>T3 - Core:</strong> SRM use is a significant part of the company's operations</li>
+                            <li><strong>T2 - Meaningful:</strong> Documented, non-trivial SRM usage</li>
+                            <li><strong>T1 - Minor:</strong> Pilot projects or small-scale use</li>
+                            <li><strong>T0 - No evidence:</strong> Assessed, but no SRM use found</li>
+                            <li><strong>N/D - No data:</strong> Not yet assessed</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>MECE categories (A1-B3)</h4>
+                        <p>The 13 categories cover all material inputs (A1-A10: minerals, metals, plastics, paper, etc.) and energy inputs (B1-B3: solid fuel, biomass, biogas). Each company is scored per category.</p>
+                    </div>
+                    <div>
+                        <h4>How to navigate</h4>
+                        <ul>
+                            <li>Use the <strong>heatmap matrix</strong> below for a bird's-eye view of all companies vs. categories</li>
+                            <li>Use the <strong>search and filters</strong> to narrow down by name or tier</li>
+                            <li><strong>Company cards</strong> show detailed profiles with quantitative data and sources</li>
+                            <li>Visit <strong>Company Viewer</strong> for a sortable table or <strong>SRM Analytics</strong> for input-level breakdowns</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="section">
             <h2 class="section-title">Executive Summary</h2>
             <div class="stats-grid" id="statsGrid">
@@ -363,6 +451,7 @@
             <p class="section-subtitle">Tier-based heatmap: T0 (no evidence) to T3 (core/significant use)</p>
 
             <div class="legend">
+                <div class="legend-item"><div class="legend-color intensity-nd"></div><span>N/D - No data collected</span></div>
                 <div class="legend-item"><div class="legend-color intensity-0"></div><span>T0 - No evidence</span></div>
                 <div class="legend-item"><div class="legend-color intensity-1"></div><span>T1 - Minor/pilot</span></div>
                 <div class="legend-item"><div class="legend-color intensity-2"></div><span>T2 - Meaningful</span></div>
@@ -373,9 +462,11 @@
                 <input type="search" id="matrixSearch" placeholder="Search companies...">
                 <select id="matrixTierFilter">
                     <option value="">All tiers</option>
+                    <option value="data">With data only</option>
                     <option value="T3">T3 only</option>
                     <option value="T2">T2+</option>
                     <option value="T1">T1+</option>
+                    <option value="ND">No data only</option>
                 </select>
                 <span class="count" id="matrixCount"></span>
             </div>
@@ -396,10 +487,12 @@
                 <input type="search" id="companySearch" placeholder="Search companies, sectors, SRM types...">
                 <select id="companyTierFilter">
                     <option value="">All tiers</option>
+                    <option value="data">With data only</option>
                     <option value="T3">T3 - Core</option>
                     <option value="T2">T2 - Meaningful</option>
                     <option value="T1">T1 - Minor</option>
                     <option value="T0">T0 - No evidence</option>
+                    <option value="ND">N/D - No data collected</option>
                 </select>
                 <span class="count" id="companyCount"></span>
             </div>
@@ -502,6 +595,7 @@
                     catTiers,
                     catLabels,
                     inputs,
+                    hasData: inputs.length > 0,
                     gaps: assess.gaps_and_uncertainties || [],
                     evidence: entry.evidence || [],
                     sources: entry.sources || [],
@@ -569,7 +663,9 @@
 
                 let filtered = companies;
                 if (searchVal) filtered = filtered.filter(c => c.name.toLowerCase().includes(searchVal) || c.legalName.toLowerCase().includes(searchVal));
-                if (tierFilter === 'T3') filtered = filtered.filter(c => c.overallTier === 'T3');
+                if (tierFilter === 'data') filtered = filtered.filter(c => c.hasData);
+                else if (tierFilter === 'ND') filtered = filtered.filter(c => !c.hasData);
+                else if (tierFilter === 'T3') filtered = filtered.filter(c => c.overallTier === 'T3');
                 else if (tierFilter === 'T2') filtered = filtered.filter(c => TIER_NUM[c.overallTier] >= 2);
                 else if (tierFilter === 'T1') filtered = filtered.filter(c => TIER_NUM[c.overallTier] >= 1);
 
@@ -587,14 +683,19 @@
                 const tierLabel = { 0: '\u2014', 1: 'T1', 2: 'T2', 3: 'T3' };
                 document.getElementById('matrixBody').innerHTML = filtered.map(c => {
                     const cells = visibleCats.map(code => {
+                        if (!c.hasData) {
+                            return `<td><div class="matrix-cell intensity-nd" title="${escapeHtml(c.name)} - ${escapeHtml(MECE[code]?.name || code)}: No data collected">N/D</div></td>`;
+                        }
                         const t = c.catTiers[code] || 0;
                         const labels = (c.catLabels[code] || []).join(', ');
                         return `<td><div class="matrix-cell intensity-${t}" title="${escapeHtml(c.name)} - ${escapeHtml(MECE[code]?.name || code)}: ${tierLabel[t]}${labels ? '\n' + labels : ''}">${tierLabel[t]}</div></td>`;
                     }).join('');
                     const naceStr = c.naces.slice(0, 2).join(', ');
+                    const tierClass = c.hasData ? `intensity-${TIER_NUM[c.overallTier] || 0}` : 'intensity-nd';
+                    const tierText = c.hasData ? escapeHtml(c.overallTier) : 'N/D';
                     return `<tr>
                         <td class="company-cell"><strong>${escapeHtml(c.name)}</strong><br><small style="color:var(--text-secondary)">${escapeHtml(naceStr)}</small></td>
-                        <td><div class="matrix-cell intensity-${TIER_NUM[c.overallTier] || 0}" style="font-weight:700">${escapeHtml(c.overallTier)}</div></td>
+                        <td><div class="matrix-cell ${tierClass}" style="font-weight:700">${tierText}</div></td>
                         ${cells}
                     </tr>`;
                 }).join('');
@@ -619,7 +720,9 @@
                         Object.keys(c.catTiers).some(code => (MECE[code]?.name || '').toLowerCase().includes(searchVal))
                     );
                 }
-                if (tierFilter) filtered = filtered.filter(c => c.overallTier === tierFilter);
+                if (tierFilter === 'data') filtered = filtered.filter(c => c.hasData);
+                else if (tierFilter === 'ND') filtered = filtered.filter(c => !c.hasData);
+                else if (tierFilter) filtered = filtered.filter(c => c.overallTier === tierFilter);
 
                 document.getElementById('companyCount').textContent = `${filtered.length} / ${companies.length} companies`;
 
@@ -646,10 +749,13 @@
                     if (c.homepage && isSafeUrl(c.homepage)) links.push(`<a href="${escapeHtml(c.homepage)}" target="_blank" rel="noopener noreferrer">Website</a>`);
                     if (c.proff && isSafeUrl(c.proff)) links.push(`<a href="${escapeHtml(c.proff)}" target="_blank" rel="noopener noreferrer">Proff.no</a>`);
 
-                    return `<div class="company-card">
+                    const tierBadge = c.hasData
+                        ? `<span class="meta-badge tier tier-${escapeHtml(c.overallTier)}">${escapeHtml(c.overallTier)}</span>`
+                        : `<span class="meta-badge tier" style="background:var(--intensity-nd-bg);color:var(--intensity-nd-fg);border-color:var(--intensity-nd-fg);font-style:italic">N/D - No data</span>`;
+                    return `<div class="company-card"${!c.hasData ? ' style="opacity:0.65"' : ''}>
                         <h3>${escapeHtml(c.name)}</h3>
                         <div class="company-meta">
-                            <span class="meta-badge tier tier-${escapeHtml(c.overallTier)}">${escapeHtml(c.overallTier)}</span>
+                            ${tierBadge}
                             ${empStr ? `<span class="meta-badge">${escapeHtml(empStr)}</span>` : ''}
                             ${naceStr ? `<span class="meta-badge sector">${escapeHtml(naceStr)}</span>` : ''}
                         </div>
@@ -740,7 +846,7 @@
                 document.getElementById('themeToggle').textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
             }
 
-            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateToggleLabel(savedTheme);
             if (savedTheme !== 'dark') updateChartColors(savedTheme);

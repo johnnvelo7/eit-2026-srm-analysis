@@ -128,6 +128,7 @@
         font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em;
       }
       .tier-T0 { background: var(--bg-surface); color: var(--text-muted); }
+      .tier-ND { background: var(--bg-surface); color: var(--text-muted); font-style: italic; opacity: 0.6; }
       .tier-T1 { background: rgba(197,138,249,0.15); color: var(--accent-purple); }
       .tier-T2 { background: rgba(138,180,248,0.15); color: var(--accent-blue); }
       .tier-T3 { background: rgba(129,201,149,0.15); color: var(--accent-green); }
@@ -135,6 +136,7 @@
       [data-theme="light"] .tier-T2 { background: #dbeafe; color: #1d4ed8; }
       [data-theme="light"] .tier-T3 { background: #dcfce7; color: #166534; }
       [data-theme="light"] .tier-T0 { background: #f1f5f9; color: #64748b; }
+      [data-theme="light"] .tier-ND { background: #f0f0f2; color: #b0b4bc; }
 
       .srm-count {
         display: inline-flex; align-items: center; justify-content: center;
@@ -257,6 +259,34 @@
         cursor: pointer; font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;
       }
       .company-details[open] summary { margin-bottom: 6px; }
+
+      /* How-to guide */
+      .guide-banner {
+        background: linear-gradient(135deg, rgba(234,88,12,0.08), rgba(251,146,60,0.04));
+        border-bottom: 2px solid rgba(234,88,12,0.2); padding: 0;
+      }
+      [data-theme="dark"] .guide-banner {
+        background: linear-gradient(135deg, rgba(251,146,60,0.06), rgba(251,146,60,0.02));
+        border-bottom-color: rgba(251,146,60,0.2);
+      }
+      .guide-toggle {
+        width: 100%; display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 24px; background: none; border: none; color: #c2410c;
+        font-size: 1.05rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      }
+      [data-theme="dark"] .guide-toggle { color: #fb923c; }
+      .guide-toggle:hover { background: rgba(234,88,12,0.06); }
+      .guide-toggle .arrow { transition: transform 0.2s; }
+      .guide-banner.open .guide-toggle .arrow { transform: rotate(180deg); }
+      .guide-body {
+        display: none; padding: 0 24px 18px; color: var(--text-secondary);
+        font-size: 0.84rem; line-height: 1.7;
+      }
+      .guide-banner.open .guide-body { display: block; }
+      .guide-body h4 { color: var(--text-primary); font-size: 0.88rem; margin: 12px 0 4px; }
+      .guide-body h4:first-child { margin-top: 0; }
+      .guide-body ul { padding-left: 1.3em; margin: 4px 0; }
+      .guide-body .guide-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 14px; }
     </style>
   </head>
   <body>
@@ -272,6 +302,47 @@
       </div>
     </header>
 
+    <div class="guide-banner" id="guideBanner">
+      <button class="guide-toggle" onclick="document.getElementById('guideBanner').classList.toggle('open')">
+        <span>How to use the Company Viewer</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="guide-body">
+        <div class="guide-cols">
+          <div>
+            <h4>What is this page?</h4>
+            <p>A sortable, searchable table of all companies in the dataset. Each row shows company identity, NACE industry codes, size metrics, SRM tier, environmental permits, and the number of identified SRM inputs.</p>
+          </div>
+          <div>
+            <h4>How to use it</h4>
+            <ul>
+              <li><strong>Click any column header</strong> to sort ascending/descending</li>
+              <li><strong>Search</strong> by company name, org number, NACE code, or description</li>
+              <li><strong>Filter by tier</strong> (multi-select) or by permit status</li>
+              <li><strong>Click the SRM category chips</strong> at the top to filter by specific material/energy type</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Company detail panel</h4>
+            <ul>
+              <li><strong>Click any row</strong> to open a detail panel with the full assessment</li>
+              <li>The panel shows all SRM inputs with tier, quantities, evidence snippets, and linked sources</li>
+              <li>Evidence snippets link directly to the source document (with text highlight where supported)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Interpreting the data</h4>
+            <ul>
+              <li><strong>Tier</strong> reflects overall SRM significance for each company (T3 = core, T0 = none found)</li>
+              <li><strong>N/D</strong> means the company has not been assessed yet</li>
+              <li><strong>SRM Inputs</strong> count shows how many distinct SRM streams were identified</li>
+              <li><strong>Permits</strong> count shows Norske Utslipp environmental permits</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="stats-section">
       <div class="stats-title">Companies using each SRM category - click to filter</div>
       <div class="stats-grid" id="stats-grid"></div>
@@ -280,6 +351,7 @@
     <div class="toolbar">
       <input type="search" id="search" placeholder="Search by name, org number, NACE..." />
       <select id="tier-filter" multiple title="Select one or more tiers">
+        <option value="ND">N/D - No data collected</option>
         <option value="T0">T0 - No evidence</option>
         <option value="T1">T1 - Minor / Pilot</option>
         <option value="T2">T2 - Meaningful</option>
@@ -325,7 +397,7 @@
 
     <script>
       // Theme toggle
-      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
       function updateToggleLabel(t) { document.getElementById('themeToggle').textContent = t === 'dark' ? 'Light mode' : 'Dark mode'; }
       updateToggleLabel(savedTheme);
@@ -384,6 +456,7 @@
             return (virk + " " + links).trim();
           }).join(" ");
 
+          const hasData = inputs.length > 0;
           coll.insert({
             input_name: c.input_name || "",
             canonical_name: c.canonical_name || "",
@@ -393,6 +466,7 @@
             employees: c.employees?.value ?? enr.employees_csv ?? null,
             revenue: c.revenue?.value ?? enr.revenue_csv_nok ?? null,
             overall_tier: s.overall_tier || "T0",
+            has_data: hasData,
             srm_count: inputs.length,
             permit_count: enr.norskeutslipp_permit_count ?? 0,
             srm_codes: [...new Set(inputs.map(i => i.mece_category_code).filter(Boolean))],
@@ -457,7 +531,11 @@
               r.parent_company.toLowerCase().includes(q) || r.permit_text.toLowerCase().includes(q)
             );
           }
-          if (filterTiers.size > 0) rows = rows.filter(r => filterTiers.has(r.overall_tier));
+          if (filterTiers.size > 0) rows = rows.filter(r => {
+            if (filterTiers.has("ND") && !r.has_data) return true;
+            if (r.has_data && filterTiers.has(r.overall_tier)) return true;
+            return false;
+          });
           if (filterSrm) rows = rows.filter(r => r.srm_codes.includes(filterSrm));
           if (filterPermits === "with") rows = rows.filter(r => (r.permit_count || 0) > 0);
           else if (filterPermits === "without") rows = rows.filter(r => (r.permit_count || 0) === 0);
@@ -489,7 +567,7 @@
             '<td><div class="nace-list">' + (r.nace_codes ? r.nace_codes.split(", ").map(n => '<span class="nace-chip">' + esc(n) + '</span>').join("") : "\u2014") + '</div></td>' +
             '<td class="num">' + fmtNum(r.employees) + '</td>' +
             '<td class="num">' + fmtNum(r.revenue, 1000000, 1) + '</td>' +
-            '<td><span class="tier tier-' + esc(r.overall_tier) + '">' + esc(r.overall_tier) + '</span></td>' +
+            '<td><span class="tier ' + (r.has_data ? 'tier-' + esc(r.overall_tier) : 'tier-ND') + '">' + (r.has_data ? esc(r.overall_tier) : 'N/D') + '</span></td>' +
             '<td style="text-align:center"><span class="srm-count ' + (r.permit_count === 0 ? 'zero' : '') + '">' + r.permit_count + '</span></td>' +
             '<td style="text-align:center"><span class="srm-count ' + (r.srm_count === 0 ? 'zero' : '') + '">' + r.srm_count + '</span></td>' +
             '</tr>'
@@ -576,8 +654,11 @@
               renderEvidence(inp.evidence_ids) + '</div>';
           }).join("") || '<p style="color:var(--text-muted);font-size:.85rem">No SRM inputs identified.</p>';
 
+          const detailHasData = inputs.length > 0;
+          const detailTierClass = detailHasData ? 'tier-' + esc(s.overall_tier) : 'tier-ND';
+          const detailTierText = detailHasData ? esc(s.overall_tier) : 'N/D - No data collected';
           document.getElementById("detail-content").innerHTML =
-            '<div style="margin-top:8px"><span class="tier tier-' + esc(s.overall_tier) + '" style="font-size:0.9rem">' + esc(s.overall_tier) + '</span></div>' +
+            '<div style="margin-top:8px"><span class="tier ' + detailTierClass + '" style="font-size:0.9rem">' + detailTierText + '</span></div>' +
             '<div class="detail-company">' + esc(c.input_name) + '</div>' +
             '<div class="detail-legal">' + esc(c.legal_name || "") + (c.org_number ? ' \u00b7 <span class="org">' + esc(c.org_number) + '</span>' : '') + '</div>' +
             '<div class="detail-section"><h3>Identity</h3>' +

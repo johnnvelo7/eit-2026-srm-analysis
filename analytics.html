@@ -102,6 +102,34 @@
         background: var(--bg-surface); color: var(--text-secondary);
         border-radius: 12px; padding: 2px 7px; font-size: 0.74rem;
       }
+
+      /* How-to guide */
+      .guide-banner {
+        background: linear-gradient(135deg, rgba(234,88,12,0.08), rgba(251,146,60,0.04));
+        border-bottom: 2px solid rgba(234,88,12,0.2); padding: 0;
+      }
+      [data-theme="dark"] .guide-banner {
+        background: linear-gradient(135deg, rgba(251,146,60,0.06), rgba(251,146,60,0.02));
+        border-bottom-color: rgba(251,146,60,0.2);
+      }
+      .guide-toggle {
+        width: 100%; display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 24px; background: none; border: none; color: #c2410c;
+        font-size: 1.05rem; font-weight: 700; cursor: pointer; font-family: inherit;
+      }
+      [data-theme="dark"] .guide-toggle { color: #fb923c; }
+      .guide-toggle:hover { background: rgba(234,88,12,0.06); }
+      .guide-toggle .arrow { transition: transform 0.2s; }
+      .guide-banner.open .guide-toggle .arrow { transform: rotate(180deg); }
+      .guide-body {
+        display: none; padding: 0 24px 18px; color: var(--text-secondary);
+        font-size: 0.84rem; line-height: 1.7;
+      }
+      .guide-banner.open .guide-body { display: block; }
+      .guide-body h4 { color: var(--text-primary); font-size: 0.88rem; margin: 12px 0 4px; }
+      .guide-body h4:first-child { margin-top: 0; }
+      .guide-body ul { padding-left: 1.3em; margin: 4px 0; }
+      .guide-body .guide-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 14px; }
     </style>
   </head>
   <body>
@@ -116,6 +144,44 @@
         <button id="themeToggle">Dark mode</button>
       </div>
     </header>
+
+    <div class="guide-banner" id="guideBanner">
+      <button class="guide-toggle" onclick="document.getElementById('guideBanner').classList.toggle('open')">
+        <span>How to use SRM Analytics</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="guide-body">
+        <div class="guide-cols">
+          <div>
+            <h4>What is this page?</h4>
+            <p>This page focuses on individual <strong>SRM input records</strong> rather than companies. Each record represents one specific secondary raw material stream identified at a company, with its tier, quantity, and unit of measurement.</p>
+          </div>
+          <div>
+            <h4>How to use it</h4>
+            <ul>
+              <li><strong>Search</strong> across input labels, company names, and category names</li>
+              <li><strong>Filter by tier</strong> to focus on significant (T3) or minor (T1) inputs</li>
+              <li><strong>Quantified filter</strong> shows only records with measured values, or those without</li>
+              <li><strong>Unit filter</strong> narrows down to a specific unit of measurement (tonnes, MWh, etc.)</li>
+              <li><strong>Click MECE category chips</strong> to filter by material/energy type</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Quantity Rollups</h4>
+            <p>The rollup table aggregates all quantified inputs by <strong>unit</strong> and <strong>period</strong> (e.g. per year). This gives a quick overview of total volumes. Note: only records with a numeric <code>main_quantity</code> are included in rollups.</p>
+          </div>
+          <div>
+            <h4>Interpreting the records</h4>
+            <ul>
+              <li><strong>Category (A1-B3):</strong> The MECE classification of the material or energy input</li>
+              <li><strong>Tier:</strong> How significant this specific input is (T1 = minor, T3 = core)</li>
+              <li><strong>Main quantity:</strong> The measured volume/weight where available</li>
+              <li><strong>"No data collected"</strong> stat shows companies not yet assessed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="stats-wrap">
       <div class="stats-grid" id="stats-grid"></div>
@@ -169,7 +235,7 @@
 
     <script>
       // Theme toggle
-      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
       function updateToggleLabel(t) { document.getElementById('themeToggle').textContent = t === 'dark' ? 'Light mode' : 'Dark mode'; }
       updateToggleLabel(savedTheme);
@@ -212,10 +278,12 @@
         };
 
         const flat = [];
+        let noDataCount = 0;
         for (const entry of data.companies || []) {
           const company = entry.company || {};
           const assessment = entry.srm_assessment || {};
           const inputs = assessment.srm_inputs || [];
+          if (inputs.length === 0) { noDataCount++; }
           for (const input of inputs) {
             const mainUnit = input.main_quantity && typeof input.main_quantity.value === "number" ? input.main_quantity.unit || "" : "";
             flat.push({
@@ -268,7 +336,7 @@
         function renderStats(rows) {
           const companiesWithInput = new Set(rows.map(r => r.company_name).filter(Boolean));
           const quantified = rows.filter(r => r.has_quantity).length;
-          const cards = [["Input records", rows.length], ["Companies with inputs", companiesWithInput.size], ["Quantified records", quantified]];
+          const cards = [["Input records", rows.length], ["Companies with inputs", companiesWithInput.size], ["Quantified records", quantified], ["No data collected", noDataCount]];
           document.getElementById("stats-grid").innerHTML = cards.map(([label, val]) =>
             '<div class="stat-card"><div class="stat-label">' + esc(label) + '</div><div class="stat-value">' + fmtNum(val) + '</div></div>'
           ).join("");
