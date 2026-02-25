@@ -55,6 +55,25 @@ secrets.json
 github
 github.pub
 
+# Tool configs
+.codex/
+.claude/
+
+# Scripts & pipeline (not needed for website)
+scripts/
+requirements.txt
+
+# AI logs, prompts, and duplicate viewers
+**/events.jsonl
+**/prompt.md
+**/prompts/
+data/new files/viewer/
+data/new files/EiT - Creating value from waste/viewer/
+data/new files/EiT - Creating value from waste/cli.py
+data/new files/EiT - Creating value from waste/pdf_mcp.py
+data/new files/EiT - Creating value from waste/Presentation feedback.md
+**/norskeutslipp_list/scrape.py
+
 # Temporary files
 *.tmp
 *.temp

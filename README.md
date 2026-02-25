@@ -1,260 +1,175 @@
-# 🔄 Secondary Raw Materials in Norwegian Industry
+# Secondary Raw Materials in Norwegian Industry
 
-**EiT 2026 Project | Sirk Norge | NTNU Experts in Teams**
+**EiT 2026 | Sirk Norge | NTNU Experts in Teams**
 
-[![View Report](https://img.shields.io/badge/View-Interactive_Report-blue?style=for-the-badge)](https://www.eitsrm.no/)
-[![Data](https://img.shields.io/badge/Companies-105-green?style=flat-square)](data/raw/companies_by_nace.json)
-[![NACE Codes](https://img.shields.io/badge/NACE_Codes-23-orange?style=flat-square)](data/processed/companies_list.csv)
-
----
-
-## 📊 Project Overview
-
-This project maps **secondary raw materials (SRM)** usage across Norwegian industrial companies to understand circular economy practices and identify opportunities for increased recycling and material recovery.
-
-**Key Findings:**
-- 🏭 **105 companies** analyzed across 23 NACE industry codes
-- ♻️ **7 SRM categories** identified and mapped
-- 📈 **770,000 tonnes/year** steel scrap recycling (7 Steel Nordic)
-- 🔋 **451,000 tonnes/year** aluminum scrap (Hydro Aluminium, target 1.2M by 2030)
-- ⚡ **350,000 tonnes/year** waste-to-energy conversion (Hafslund Celsio)
+[![Live Site](https://img.shields.io/badge/Live-eitsrm.no-2563eb?style=for-the-badge)](https://www.eitsrm.no/)
+[![Companies](https://img.shields.io/badge/Companies-109-059669?style=flat-square)](aggregated.json)
+[![Categories](https://img.shields.io/badge/SRM_Categories-13-0891b2?style=flat-square)](aggregated.json)
+[![License: MIT](https://img.shields.io/badge/License-MIT-d97706?style=flat-square)](LICENSE)
 
 ---
 
-## 🌐 Interactive Report
+## About
 
-**[View the Interactive Report →](https://www.eitsrm.no/)**
+This project maps **secondary raw material (SRM)** usage across **109 Norwegian industrial companies** to understand circular economy activity. SRMs are recycled or recovered materials and energy sources used as inputs in industrial production - such as metal scrap, recycled plastics, biomass fuels, and biogas.
 
-The report includes:
-- 📊 Company-to-SRM Matrix/Heatmap
-- 🏢 Detailed Company Profiles with SRM Usage
-- 📈 Data Visualizations & Charts
-- 🔗 Source Links to Annual Reports
+The analysis was conducted as part of the **Experts in Teams (EiT) 2026** course at NTNU, in collaboration with **Sirk Norge**.
 
 ---
 
-## 🗂️ Data Structure
+## Live Website
 
-### Secondary Raw Material Categories
+**[https://www.eitsrm.no/](https://www.eitsrm.no/)**
 
-1. **Recycled Construction Materials**
-   - Recycled aggregate, Reclaimed asphalt pavement (RAP)
+The website consists of three pages:
 
-2. **Metal Scrap**
-   - Steel, aluminum, copper, nickel/cobalt scrap
+| Page | Description |
+|------|-------------|
+| **Dashboard** (`index.html`) | Overview with heatmap matrix, company cards, charts, and key findings |
+| **Company Viewer** (`viewer.html`) | Sortable, searchable table with click-to-expand detail panels |
+| **SRM Analytics** (`analytics.html`) | Input-level analysis with quantity rollups and category filters |
 
-3. **Recycled Plastics**
-   - Polymer pellets, EPS (Expanded Polystyrene)
-
-4. **Wood-based Materials**
-   - Wood chips, recovered timber
-
-5. **Biomass Fuel**
-   - Pellets, bio-oils, biogenic waste
-
-6. **Biogas**
-   - From organic waste, manure, food waste
-
-7. **Digestate & Bio-fertilizers**
-   - Biogas production residue
-
-### Industries Covered (NACE Codes)
-
-| Sector | NACE Codes | Companies |
-|--------|-----------|-----------|
-| Construction Materials | 23.51, 23.63, 23.61, 23.99 | 19 |
-| Road Construction | 42.11, 42.99 | 10 |
-| Metals | 24.10, 24.42, 24.45, 24.51-54 | 30 |
-| Plastics & Recovery | 22.22, 22.29, 38.32 | 10 |
-| Wood | 16.21, 16.10 | 7 |
-| Energy | 35.11, 35.30, 35.21 | 18 |
-| Fertilizers & Agriculture | 20.15, 01.11 | 11 |
+Each page has a **"How to use"** guide at the top explaining how to interpret the data.
 
 ---
 
-## 🚀 Quick Start
+## SRM Classification (MECE)
 
-### View the Report Locally
+Companies are assessed against **13 mutually exclusive categories** covering material and energy inputs:
+
+### Material Inputs (A1-A10)
+| Code | Category | Examples |
+|------|----------|----------|
+| A1 | Mineral & Construction Materials | Recycled aggregates, reclaimed asphalt |
+| A2 | Industrial Mineral By-Products | Slag, fly ash, silica fume |
+| A3 | Metals Scrap | Steel scrap, aluminium scrap |
+| A4 | Reprocessed Plastics | Recycled polymer pellets, regranulate |
+| A5 | Glass & Ceramics | Cullet, recycled refractory material |
+| A6 | Paper & Cardboard Fibres | Recovered paper, recycled pulp |
+| A7 | Textiles & Fibres | Recovered textile fibres |
+| A8 | Rubber & Tyres | Crumb rubber, devulcanised rubber |
+| A9 | Bio-Based Residues (Material) | Wood chips, sawdust, digestate |
+| A10 | Chemical & Liquid Feedstocks | Recovered solvents, recycled oils |
+
+### Energy Inputs (B1-B3)
+| Code | Category | Examples |
+|------|----------|----------|
+| B1 | SRF / RDF | Solid recovered fuel, refuse-derived fuel |
+| B2 | Biomass Fuels | Wood pellets, bio-oil |
+| B3 | Biogas | Biogas, biomethane |
+
+---
+
+## Tier System
+
+Each company receives an overall tier and per-category tier:
+
+| Tier | Meaning | Description |
+|------|---------|-------------|
+| **T3** | Core / Significant | SRM use is a major part of operations |
+| **T2** | Meaningful | Documented, non-trivial SRM usage |
+| **T1** | Minor / Pilot | Small-scale or pilot-stage use |
+| **T0** | No evidence | Assessed, but no SRM use found |
+| **N/D** | No data | Not yet assessed |
+
+---
+
+## Running Locally
+
+No build step required. Clone and open in a browser:
 
 ```bash
-# Clone the repository
 git clone https://github.com/johnnvelo7/eit-2026-srm-analysis.git
 cd eit-2026-srm-analysis
 
-# Open the report in your browser
-firefox index.html
-# or
-open index.html  # macOS
+# Open in your browser
+open index.html        # macOS
+xdg-open index.html    # Linux
+start index.html       # Windows
 ```
 
-### Run the Analysis Pipeline
+Or serve with any static file server:
 
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run complete pipeline
-bash scripts/run_complete_pipeline.sh
+python3 -m http.server 8000
+# Then visit http://localhost:8000
 ```
 
-Or step-by-step:
-
-```bash
-# 1. Scrape companies from Brønnøysundregistrene
-python scripts/1_scrape_companies.py
-
-# 2. Research SRM usage (requires AI/manual research)
-python scripts/2_research_srm_usage.py
-
-# 3. Generate HTML report
-python scripts/3_generate_report.py
-```
+All data is included in `aggregated.json` - no external API calls or dependencies needed.
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 eit-2026-srm-analysis/
-├── index.html                  # Main interactive report
+├── index.html              # Dashboard - main page
+├── viewer.html             # Company Viewer - sortable table
+├── analytics.html          # SRM Analytics - input-level data
+├── aggregated.json         # Dataset (109 companies, all SRM assessments)
 ├── data/
-│   ├── raw/                    # JSON data files
-│   │   ├── companies_by_nace.json
-│   │   └── srm_company_research.json
-│   └── processed/              # CSV exports
-│       └── companies_list.csv
-├── scripts/                    # Python automation
-│   ├── 1_scrape_companies.py
-│   ├── 2_research_srm_usage.py
-│   ├── 3_generate_report.py
-│   └── run_complete_pipeline.sh
-├── docs/                       # Documentation
-│   └── methodology.md
-└── README.md                   # This file
+│   ├── raw/                # Raw data from APIs and research
+│   ├── processed/          # Processed CSVs (company lists, NACE codes)
+│   └── new files/          # Per-company assessment outputs
+├── docs/
+│   └── METHODOLOGY.md      # Research methodology
+├── LICENSE                 # MIT License
+└── README.md               # This file
 ```
 
 ---
 
-## 🔬 Methodology
+## Data Sources
 
-### Phase 1: Data Collection
-- **Source:** [Brønnøysundregistrene API](https://data.brreg.no)
-- **Method:** Automated scraping by NACE code
-- **Coverage:** Top 3-5 companies per sector by employee count
-
-### Phase 2: SRM Research
-- **Sources:** Annual reports, sustainability reports (CSRD/ESRS compliant)
-- **Method:** AI-assisted analysis with manual verification
-- **Focus:** Quantitative data on recycled material usage
-
-### Phase 3: Visualization
-- **Technology:** Interactive HTML with Chart.js
-- **Features:** Matrix heatmap, company profiles, data charts
+| Source | Usage |
+|--------|-------|
+| [Bronnoysundregistrene](https://data.brreg.no) | Company registry, org numbers, NACE codes |
+| [Proff.no](https://www.proff.no) | Revenue, employees, company details |
+| [Norske Utslipp](https://www.norskeutslipp.no) | Environmental permits |
+| Company sustainability reports | SRM usage evidence, quantities |
+| Company annual reports | Financial and operational data |
+| EPDs (Environmental Product Declarations) | Material composition data |
 
 ---
 
-## 🏆 Top SRM Users
+## Methodology
 
-| Company | Sector | SRM Volume/Year | Type |
-|---------|--------|-----------------|------|
-| **7 Steel Nordic** | Steel | 770,000 tonnes | Steel scrap |
-| **Hydro Aluminium** | Aluminum | 451,000 tonnes | Aluminum scrap |
-| **Hafslund Celsio** | Energy | 350,000 tonnes | Waste-to-energy |
-| **Alcoa Norway** | Aluminum | 20,000 tonnes | Aluminum scrap |
-| **Glencore Nikkelverk** | Nickel/Cobalt | 20,000 tonnes | Battery materials |
+1. **Company identification** - Scraped from Bronnoysundregistrene by relevant NACE codes
+2. **Data enrichment** - Cross-referenced with Proff.no, Norske Utslipp, and company websites
+3. **SRM assessment** - AI-assisted analysis of sustainability reports, annual reports, and EPDs with manual verification
+4. **Classification** - Each SRM input categorized into the 13 MECE categories and assigned a tier (T0-T3)
+5. **Aggregation** - All assessments compiled into `aggregated.json` for the web interface
 
----
-
-## 📊 Key Statistics
-
-- **Construction Sector:** 30-100% recycled aggregate content
-- **Aluminum Sector:** 75-100% recycled content in premium products, 95% energy savings
-- **Steel Sector:** 100% EAF production with renewable energy
-- **Biogas Sector:** >100% emissions reduction potential
-- **Plastics (EPS):** Closed-loop 100% recyclable systems
+See [docs/METHODOLOGY.md](docs/METHODOLOGY.md) for full details.
 
 ---
 
-## 🔄 Recreating the Analysis
+## License
 
-### Add More Companies
+This project is released under the **MIT License**. See [LICENSE](LICENSE) for details.
 
-Edit `scripts/1_scrape_companies.py`:
-
-```python
-NACE_CODES = [
-    "23.51",  # Existing codes
-    "25.50",  # Add new NACE codes here
-]
-```
-
-### Expand Research
-
-```bash
-# Research new sectors
-# Use AI/manual research to populate srm_company_research.json
-
-# Regenerate report
-python scripts/3_generate_report.py
-```
+**Data attribution:**
+- Company registry data: Bronnoysundregistrene (Norwegian Business Register)
+- Annual/sustainability reports: Property of respective companies
+- Analysis and visualizations: EiT 2026 Team for Sirk Norge
 
 ---
 
-## 📚 Data Sources
-
-- [Brønnøysundregistrene](https://data.brreg.no) - Company registry
-- [Proff.no](https://www.proff.no) - Company information
-- [Norske Utslipp](https://www.norskeutslipp.no) - Emission permits
-- [SSB NACE Codes](https://www.ssb.no/klass/klassifikasjoner/6) - Industry classification
-- Company annual reports (2023-2024)
-- Company sustainability reports (CSRD/ESRS compliant)
-
----
-
-## 🤝 Contributing
-
-This is an academic project for EiT 2026. Contributions for data accuracy and additional companies are welcome!
-
-1. Fork the repository
-2. Add data to `data/raw/srm_company_research.json`
-3. Regenerate report with `python scripts/3_generate_report.py`
-4. Submit a pull request
-
----
-
-## 📄 License
-
-This project is for academic use (EiT 2026 - NTNU). Data sources are publicly available.
-
-**Attribution:**
-- Data: Brønnøysundregistrene, company annual reports
-- Project: Sirk Norge & NTNU EiT 2026
-- Analysis: EiT Team 2026
-
----
-
-## 👥 Team
+## Team
 
 **EiT 2026 Team** - NTNU Experts in Teams
 **Project Sponsor:** Sirk Norge
-**Course:** EiT, NTNU Spring 2026
+**Course:** Experts in Teams (EiT), NTNU Spring 2026
 
 ---
 
-## 📧 Contact
+## Links
 
-For questions about the data or methodology, please open an issue or contact the EiT team through NTNU.
-
----
-
-## 🔗 Links
-
-- [Interactive Report](https://www.eitsrm.no/)
+- [Live Website](https://www.eitsrm.no/)
 - [Sirk Norge](https://www.sirknorge.no/)
 - [NTNU EiT](https://www.ntnu.edu/eit)
-- [Brønnøysundregistrene](https://www.brreg.no/)
+- [Bronnoysundregistrene](https://www.brreg.no/)
 
 ---
 
-**Last Updated:** February 11, 2026
-**Version:** 1.0
+*Last updated: February 25, 2026*

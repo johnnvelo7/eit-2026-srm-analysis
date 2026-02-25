@@ -2,164 +2,100 @@
 
 ## Research Approach
 
-### 1. Data Collection (Automated)
+### 1. Company Identification
 
-**Source:** [Brønnøysundregistrene API](https://data.brreg.no/enhetsregisteret/api/enheter)
+**Source:** [Bronnoysundregistrene API](https://data.brreg.no/enhetsregisteret/api/enheter)
 
-**Method:**
-```python
-# For each NACE code
-GET https://data.brreg.no/enhetsregisteret/api/enheter?naeringskode={code}
+Companies were identified by querying the Norwegian Business Register for relevant NACE industry codes covering sectors where secondary raw material usage is expected (construction, metals, plastics, paper, energy, chemicals, etc.).
 
-# Returns:
-- Company name
-- Organization number
-- Employee count
-- Location
-- Registration date
-```
+**Selection criteria:**
+- Active Norwegian companies in relevant NACE codes
+- Prioritized by employee count and industry relevance
+- 109 companies selected across multiple sectors
 
-**Selection Criteria:**
-- Top 3-5 companies per NACE code
-- Sorted by employee count (revenue not available from API)
-- Active companies only
+### 2. Data Enrichment
 
-### 2. SRM Research (AI-Assisted)
+Each company was cross-referenced against multiple public sources:
 
-**Sources (Priority Order):**
-1. Company sustainability reports (2024, CSRD/ESRS compliant)
+| Source | Data Extracted |
+|--------|---------------|
+| Bronnoysundregistrene | Org number, NACE codes, registration |
+| Proff.no | Revenue, employee count, legal name |
+| Norske Utslipp | Environmental permits, emission data |
+| Company websites | Homepage URL, descriptions |
+
+### 3. SRM Assessment
+
+**Sources (priority order):**
+1. Company sustainability reports (2023-2024, CSRD/ESRS where available)
 2. Annual reports (2023-2024)
-3. Company websites (sustainability sections)
-4. Press releases and industry publications
+3. Environmental Product Declarations (EPDs)
+4. Company websites and press releases
+5. Industry publications
 
-**Data Extracted:**
-- SRM types used (categorized into 7 main categories)
-- Quantitative data (percentages, volumes, targets)
-- Evidence text (quotes/paraphrases from reports)
-- Source URLs for verification
+**Method:** AI-assisted analysis of source documents with manual verification. Each identified SRM input was:
+- Classified into one of 13 MECE categories (A1-A10 material, B1-B3 energy)
+- Assigned a tier (T0-T3) based on evidence strength and scale
+- Documented with evidence snippets linking back to source documents
+- Quantified where data was available (tonnes, MWh, percentages)
 
-**Quality Criteria:**
-- Prefer quantitative over qualitative data
-- Verify across multiple sources where possible
-- Include both current usage and future targets
-- Document data gaps transparently
+### 4. MECE Classification System
 
-### 3. Categorization
+**13 mutually exclusive, collectively exhaustive categories:**
 
-**7 SRM Categories:**
-1. Recycled Construction Materials
-2. Metal Scrap
-3. Recycled Plastics
-4. Wood-based Materials
-5. Biomass Fuel
-6. Biogas
-7. Digestate & Bio-fertilizers
+**Material Inputs (A1-A10):**
+- A1: Mineral & Construction Materials
+- A2: Industrial Mineral By-Products
+- A3: Metals - Ferrous & Non-Ferrous Scrap
+- A4: Plastics - Reprocessed Polymers
+- A5: Glass & Ceramics
+- A6: Paper & Cardboard Fibres
+- A7: Textiles & Fibres
+- A8: Rubber & Tyres
+- A9: Bio-Based Material Residues (non-energy)
+- A10: Chemical & Liquid Feedstocks
 
-**Intensity Levels:**
-- **0 (None):** No evidence of usage
-- **1 (Low):** Mentioned but no quantitative data
-- **2 (Medium-High):** Significant usage with some data
-- **3 (Core):** Primary raw material with detailed data
+**Energy Inputs (B1-B3):**
+- B1: Solid Recovered Fuel (SRF/RDF)
+- B2: Biomass Fuels
+- B3: Biogas
 
-### 4. Data Validation
+### 5. Tier Assignment
+
+| Tier | Criteria |
+|------|----------|
+| T3 - Core | SRM is a primary/significant input with strong quantitative evidence |
+| T2 - Meaningful | Documented non-trivial usage with some quantitative data |
+| T1 - Minor | Mentioned in reports, pilot projects, or small-scale use |
+| T0 - No evidence | Company assessed but no SRM usage found in available sources |
+| N/D - No data | Company not yet assessed (included in dataset for completeness) |
+
+### 6. Data Validation
 
 **Cross-checking:**
-- Annual reports vs sustainability reports
-- Company claims vs industry publications
-- Parent company data vs subsidiary data
-- Historical trends vs future targets
-
-**Limitations:**
-- Revenue data not publicly available from Brreg
-- Some smaller companies have no public reports
-- Quantitative data varies in specificity
-- Some companies report group-wide vs Norway-specific data
+- Sustainability reports vs annual reports
+- Company claims vs environmental permits (Norske Utslipp)
+- Parent company data vs subsidiary-specific data
+- Multiple source documents per company where available
 
 ---
 
-## NACE Code Mapping
+## Limitations
 
-Based on the `mappings.csv` file provided by Sirk Norge:
-
-| Waste Stream | SRM | NACE Codes | Industries |
-|--------------|-----|------------|------------|
-| Construction & Demolition | Recycled aggregate | 23.51, 23.63, 23.61, 42.11, 42.99 | Cement, concrete, road construction |
-| Construction & Demolition | RAP | 23.99 | Asphalt production |
-| Metal Waste | Steel scrap | 24.10 | Steel production |
-| Metal Waste | Aluminum scrap | 24.42 | Aluminum production |
-| Plastic Waste | Recycled polymers | 22.22, 22.29 | Plastic manufacturing |
-| Wood Waste | Wood chips/fiber | 16.21, 16.10 | Wood panels, sawmills |
-| Organic Waste | Biogas | 35.11, 35.21 | Energy/gas production |
-| Organic Waste | Digestate | 20.15 | Fertilizer production |
-
----
-
-## Data Processing Pipeline
-
-```
-1. Scrape
-   ↓
-   companies_by_nace.json (105 companies)
-   ↓
-2. Research (AI-assisted)
-   ↓
-   srm_company_research.json (20 detailed profiles)
-   ↓
-3. Process
-   ↓
-   Calculate SRM intensity matrix
-   ↓
-4. Visualize
-   ↓
-   index.html (interactive report)
-```
-
----
-
-## Reproducibility
-
-All steps are documented and automated where possible:
-
-1. **Scraping:** Fully automated via Python script
-2. **Research:** AI-assisted with manual verification
-3. **Report Generation:** Fully automated via Python script
-
-**To reproduce:**
-```bash
-git clone [repository]
-pip install -r requirements.txt
-bash scripts/run_complete_pipeline.sh
-```
-
----
-
-## Limitations & Future Work
-
-### Current Limitations
-- Revenue data not available from public APIs
+- 43 of 109 companies have not yet been fully assessed (N/D status)
+- Revenue data availability varies
 - Smaller companies often lack public sustainability reports
-- SRM usage data varies in detail and specificity
-- Focus on top companies may miss innovative SMEs
+- Quantitative data specificity varies between companies
+- Some companies report group-wide figures rather than Norway-specific
+- AI-assisted analysis may miss nuances in source documents
 
-### Future Improvements
-- Direct company surveys for missing data
-- Integration with Norske Utslipp permit database
+## Future Work
+
+- Complete assessments for remaining N/D companies
+- Direct company surveys for missing quantitative data
 - Time-series analysis of SRM adoption trends
-- Economic analysis of SRM vs primary materials
+- Integration with additional data sources (EU databases, industry associations)
 
 ---
 
-## Data Quality Assessment
-
-| Metric | Coverage | Quality |
-|--------|----------|---------|
-| Company identification | 100% | ✓ Excellent |
-| Employee counts | 85% | ✓ Good |
-| NACE codes | 100% | ✓ Excellent |
-| SRM types | 90% | ✓ Good |
-| Quantitative data | 75% | ~ Fair |
-| Annual reports | 80% | ✓ Good |
-
----
-
-**Last Updated:** February 11, 2026
+*Last updated: February 25, 2026*
