@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Assessment Viewer - SRM Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lokijs@1.5.12/build/lokijs.min.js"></script>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg-body: #1f1f1f; --bg-main: #202124; --bg-elevated: #292a2d;
+        --bg-surface: #35363a; --bg-hover: #444746;
+        --border: #5f6368; --border-soft: #3c3c3c;
+        --text-primary: #e8eaed; --text-secondary: #9aa0a6; --text-muted: #5f6368;
+        --accent-blue: #8ab4f8; --accent-teal: #78d9ec; --accent-purple: #c58af9;
+        --accent-green: #81c995; --accent-amber: #fdd663; --accent-pink: #f28b82;
+        --header-bg: linear-gradient(160deg, #1a1a1a 0%, #202124 60%, #292a2d 100%);
+      }
+      [data-theme="light"] {
+        --bg-body: #f1f5f9; --bg-main: #ffffff; --bg-elevated: #f8fafc;
+        --bg-surface: #f1f5f9; --bg-hover: #e2e8f0;
+        --border: #e2e8f0; --border-soft: #f1f5f9;
+        --text-primary: #0f172a; --text-secondary: #475569; --text-muted: #94a3b8;
+        --accent-blue: #2563eb; --accent-teal: #0891b2; --accent-purple: #7c3aed;
+        --accent-green: #059669; --accent-amber: #d97706; --accent-pink: #db2777;
+        --header-bg: linear-gradient(160deg, #003d7a 0%, #00509e 60%, #1a73c8 100%);
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--bg-body);
+        color: var(--text-primary);
+        min-height: 100vh;
+      }
+
+      header {
+        background: var(--header-bg);
+        color: #e8eaed;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      header h1 { font-size: 1.25rem; font-weight: 600; }
+      header span { font-size: 0.85rem; opacity: 0.55; }
+      .header-nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+      .header-nav a, .header-nav button {
+        display: inline-block; color: #e2e8f0; text-decoration: none;
+        border: 1px solid rgba(226, 232, 240, 0.35); border-radius: 6px;
+        padding: 6px 10px; font-size: 0.8rem; background: transparent; cursor: pointer;
+        font-family: inherit;
+      }
+      .header-nav a:hover, .header-nav button:hover { background: rgba(255, 255, 255, 0.08); }
+
+      .stats-section { background: var(--bg-main); border-bottom: 1px solid var(--border); padding: 16px 24px; }
+      .stats-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 12px; }
+      .stats-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+      .stat-chip {
+        display: flex; align-items: center; gap: 6px; padding: 5px 10px;
+        border-radius: 20px; border: 1.5px solid var(--border);
+        background: var(--bg-surface); font-size: 0.78rem; cursor: pointer;
+        transition: all 0.12s; user-select: none; white-space: nowrap; color: var(--text-primary);
+      }
+      .stat-chip:hover { border-color: var(--accent-blue); background: var(--bg-hover); }
+      .stat-chip.active { border-color: var(--accent-blue); background: var(--bg-hover); color: var(--accent-blue); font-weight: 600; }
+      .stat-chip .code {
+        font-family: monospace; font-size: 0.72rem; background: var(--bg-hover);
+        color: var(--accent-blue); padding: 1px 5px; border-radius: 4px;
+      }
+      .stat-chip .badge {
+        background: var(--accent-blue); color: var(--bg-main); border-radius: 10px;
+        padding: 1px 6px; font-size: 0.7rem; font-weight: 700; min-width: 18px; text-align: center;
+      }
+      .stat-chip.zero { opacity: 0.45; cursor: default; }
+
+      .toolbar {
+        display: flex; align-items: center; gap: 12px; padding: 14px 24px;
+        background: var(--bg-main); border-bottom: 1px solid var(--border); flex-wrap: wrap;
+      }
+      .toolbar input[type="search"] {
+        flex: 1; min-width: 200px; padding: 7px 12px;
+        border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem;
+        background: var(--bg-surface); color: var(--text-primary); outline: none;
+        font-family: inherit;
+      }
+      .toolbar input[type="search"]:focus { border-color: var(--accent-blue); }
+      .toolbar select {
+        padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px;
+        font-size: 0.9rem; background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
+        font-family: inherit;
+      }
+      .toolbar select[multiple] { min-width: 170px; height: 92px; }
+      .toolbar .count { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+
+      .table-wrap { padding: 20px 24px; overflow-x: auto; }
+      table {
+        width: 100%; border-collapse: collapse; background: var(--bg-main);
+        border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+        font-size: 0.875rem;
+      }
+      thead th {
+        background: var(--bg-surface); color: var(--text-secondary); padding: 11px 14px;
+        text-align: left; font-weight: 500; cursor: pointer; user-select: none; white-space: nowrap;
+        border-bottom: 2px solid var(--border);
+      }
+      thead th:hover { background: var(--bg-hover); }
+      thead th .sort-arrow { margin-left: 5px; opacity: 0.45; font-size: 0.75rem; }
+      thead th.active .sort-arrow { opacity: 1; }
+      tbody tr { border-bottom: 1px solid var(--border-soft); transition: background 0.1s; }
+      tbody tr:last-child { border-bottom: none; }
+      tbody tr:hover { background: var(--bg-hover); }
+      td { padding: 10px 14px; vertical-align: top; }
+
+      .company-name { font-weight: 600; color: var(--accent-blue); }
+      .legal-name { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+      .org { font-size: 0.78rem; color: var(--text-muted); font-family: monospace; }
+      .nace-list { display: flex; flex-wrap: wrap; gap: 4px; }
+      .nace-chip {
+        background: var(--bg-hover); color: var(--accent-blue); padding: 2px 7px;
+        border-radius: 12px; font-size: 0.73rem; font-family: monospace;
+      }
+      .tier {
+        display: inline-block; padding: 3px 10px; border-radius: 20px;
+        font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em;
+      }
+      .tier-T0 { background: var(--bg-surface); color: var(--text-muted); }
+      .tier-T1 { background: rgba(197,138,249,0.15); color: var(--accent-purple); }
+      .tier-T2 { background: rgba(138,180,248,0.15); color: var(--accent-blue); }
+      .tier-T3 { background: rgba(129,201,149,0.15); color: var(--accent-green); }
+      [data-theme="light"] .tier-T1 { background: #fef9c3; color: #92400e; }
+      [data-theme="light"] .tier-T2 { background: #dbeafe; color: #1d4ed8; }
+      [data-theme="light"] .tier-T3 { background: #dcfce7; color: #166534; }
+      [data-theme="light"] .tier-T0 { background: #f1f5f9; color: #64748b; }
+
+      .srm-count {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 24px; height: 24px; border-radius: 50%;
+        background: var(--bg-hover); color: var(--accent-blue); font-size: 0.78rem; font-weight: 700;
+      }
+      .srm-count.zero { color: var(--text-muted); }
+      .num { font-variant-numeric: tabular-nums; text-align: right; }
+      .empty-state { text-align: center; padding: 60px 24px; color: var(--text-muted); }
+      .empty-state h2 { font-size: 1.1rem; margin-bottom: 8px; }
+      .error-banner {
+        margin: 24px; padding: 16px 20px; background: rgba(242,139,130,0.1);
+        border: 1px solid var(--accent-pink); border-radius: 8px;
+        color: var(--accent-pink); font-size: 0.9rem;
+      }
+
+      /* Detail modal */
+      .detail-panel {
+        position: fixed; top: 50%; left: 50%;
+        transform: translate(-50%, -44%) scale(0.97);
+        width: min(760px, 92vw); max-height: 85vh;
+        background: var(--bg-main); box-shadow: 0 8px 48px rgba(0,0,0,0.4);
+        border-radius: 14px; overflow-y: auto; z-index: 100;
+        padding: 28px 32px 32px; opacity: 0; pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        border: 1px solid var(--border);
+      }
+      .detail-panel.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+      .detail-close {
+        position: absolute; top: 14px; right: 16px; background: none;
+        border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);
+      }
+      .detail-company { font-size: 1.1rem; font-weight: 700; margin: 8px 0 4px; color: var(--text-primary); }
+      .detail-legal { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 16px; }
+      .detail-section { margin-top: 20px; }
+      .detail-section h3 {
+        font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+        color: var(--text-muted); margin-bottom: 8px;
+      }
+      .summary-text { font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); }
+
+      .srm-card {
+        border: 1px solid var(--border); border-radius: 8px; padding: 12px;
+        margin-bottom: 10px; font-size: 0.85rem; background: var(--bg-surface);
+      }
+      .srm-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+      .srm-card-label { font-weight: 600; color: var(--text-primary); }
+      .srm-card-body { color: var(--text-secondary); line-height: 1.5; }
+      .mece-chip {
+        background: var(--bg-hover); color: var(--accent-blue); padding: 2px 8px;
+        border-radius: 4px; font-size: 0.72rem; font-family: monospace;
+      }
+
+      .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+      .overlay.show { display: block; }
+
+      .cite-link {
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 0.68rem; font-weight: 700; padding: 0 4px; min-width: 16px; height: 16px;
+        border-radius: 3px; background: var(--bg-hover); color: var(--accent-blue);
+        text-decoration: none; vertical-align: middle; margin: 0 1px; line-height: 1;
+      }
+      .cite-link:hover { text-decoration: underline; }
+
+      .evidence-list { margin-top: 10px; display: flex; flex-direction: column; gap: 7px; }
+      .evidence-item {
+        border-left: 3px solid var(--accent-blue); padding: 6px 10px;
+        background: var(--bg-elevated); border-radius: 0 6px 6px 0; font-size: 0.8rem;
+      }
+      .evidence-snippet {
+        display: block; font-style: italic; color: var(--accent-blue);
+        background: var(--bg-hover); border-radius: 4px; padding: 3px 7px;
+        text-decoration: none; margin-bottom: 4px; line-height: 1.5; transition: background 0.12s;
+      }
+      .evidence-snippet:hover { text-decoration: underline; }
+      .evidence-snippet::before { content: "\201C"; margin-right: 1px; }
+      .evidence-snippet::after { content: "\201D"; margin-left: 1px; }
+      .evidence-claim { color: var(--text-secondary); line-height: 1.4; }
+      .evidence-hint { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+      .quantity-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+      .quantity-pill {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: rgba(129,201,149,0.1); border: 1px solid rgba(129,201,149,0.3);
+        color: var(--accent-green); border-radius: 20px; padding: 3px 10px;
+        font-size: 0.78rem; font-weight: 600;
+      }
+      .quantity-pill.share {
+        background: rgba(138,180,248,0.1); border-color: rgba(138,180,248,0.3); color: var(--accent-blue);
+      }
+      .quantity-pill .q-label { font-weight: 400; font-size: 0.72rem; opacity: 0.7; margin-left: 2px; }
+
+      .source-list { display: flex; flex-direction: column; gap: 6px; }
+      .source-item {
+        display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem;
+        padding: 7px 10px; background: var(--bg-surface); border: 1px solid var(--border);
+        border-radius: 7px;
+      }
+      .source-num {
+        min-width: 20px; height: 20px; border-radius: 50%;
+        background: var(--accent-blue); color: var(--bg-main); font-size: 0.68rem; font-weight: 700;
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+      }
+      .source-type {
+        display: inline-block; font-size: 0.68rem; padding: 1px 6px; border-radius: 10px;
+        background: var(--bg-hover); color: var(--accent-blue); font-family: monospace;
+        white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+      }
+      .source-body { flex: 1; min-width: 0; }
+      .source-title { font-weight: 600; color: var(--text-primary); }
+      .source-title a { color: var(--accent-blue); text-decoration: none; }
+      .source-title a:hover { text-decoration: underline; }
+      .source-meta { color: var(--text-muted); font-size: 0.72rem; margin-top: 2px; }
+
+      .company-details {
+        margin-top: 8px; border: 1px solid var(--border); border-radius: 8px;
+        background: var(--bg-surface); padding: 8px 10px;
+      }
+      .company-details summary {
+        cursor: pointer; font-size: 0.78rem; color: var(--text-secondary); font-weight: 600;
+      }
+      .company-details[open] summary { margin-bottom: 6px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>SRM Assessment Viewer</h1>
+        <span id="meta-info">Loading...</span>
+      </div>
+      <div class="header-nav">
+        <a href="./index.html">Dashboard</a>
+        <a href="./analytics.html">SRM Analytics</a>
+        <button id="themeToggle">Dark mode</button>
+      </div>
+    </header>
+
+    <div class="stats-section">
+      <div class="stats-title">Companies using each SRM category - click to filter</div>
+      <div class="stats-grid" id="stats-grid"></div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Search by name, org number, NACE..." />
+      <select id="tier-filter" multiple title="Select one or more tiers">
+        <option value="T0">T0 - No evidence</option>
+        <option value="T1">T1 - Minor / Pilot</option>
+        <option value="T2">T2 - Meaningful</option>
+        <option value="T3">T3 - Significant</option>
+      </select>
+      <select id="permits-filter">
+        <option value="">All permits</option>
+        <option value="with">Has permits</option>
+        <option value="without">No permits</option>
+      </select>
+      <span class="count" id="row-count"></span>
+    </div>
+
+    <div id="error-container"></div>
+
+    <div class="table-wrap">
+      <table id="main-table">
+        <thead>
+          <tr>
+            <th data-col="input_name">Company <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="org_number">Org nr <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="nace_codes">NACE <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="employees" class="num">Employees <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="revenue" class="num">Revenue (MNOK) <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="overall_tier">Tier <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="permit_count">Permits <span class="sort-arrow">&#8597;</span></th>
+            <th data-col="srm_count">SRM Inputs <span class="sort-arrow">&#8597;</span></th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display: none">
+        <h2>No companies match</h2>
+        <p>Try clearing the search or filter.</p>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="detail-panel" id="detail-panel">
+      <button class="detail-close" id="detail-close" title="Close">&#10005;</button>
+      <div id="detail-content"></div>
+    </div>
+
+    <script>
+      // Theme toggle
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      function updateToggleLabel(t) { document.getElementById('themeToggle').textContent = t === 'dark' ? 'Light mode' : 'Dark mode'; }
+      updateToggleLabel(savedTheme);
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateToggleLabel(next);
+      });
+
+      (async () => {
+        const SRM_CATEGORIES = {
+          A1:  { group: "A", name: "Mineral & Construction Materials", desc: "Recycled aggregates, crushed concrete, reclaimed asphalt pavement (RAP), excavation fill" },
+          A2:  { group: "A", name: "Industrial Mineral By-Products", desc: "Slag, fly ash, bottom ash, silica fume, gypsum from flue-gas desulfurisation" },
+          A3:  { group: "A", name: "Metals - Ferrous & Non-Ferrous Scrap", desc: "Steel scrap, aluminium scrap, copper scrap, cast-iron scrap fed to smelters/foundries" },
+          A4:  { group: "A", name: "Plastics - Reprocessed Polymers", desc: "Recycled polymer pellets, regranulate, post-consumer or post-industrial plastic waste" },
+          A5:  { group: "A", name: "Glass & Ceramics", desc: "Cullet (recycled glass), recycled ceramic or refractory material" },
+          A6:  { group: "A", name: "Paper & Cardboard Fibres", desc: "Recovered paper, recycled pulp, cardboard fibre used in paper or packaging production" },
+          A7:  { group: "A", name: "Textiles & Fibres", desc: "Recovered textile fibres, recycled yarn, post-consumer fabric used as input" },
+          A8:  { group: "A", name: "Rubber & Tyres", desc: "Ground rubber, crumb rubber from end-of-life tyres, devulcanised rubber" },
+          A9:  { group: "A", name: "Bio-Based Material Residues (non-energy)", desc: "Wood chips, sawdust, straw, digestate, organic residues used as material input" },
+          A10: { group: "A", name: "Chemical & Liquid Feedstocks", desc: "Recovered solvents, recycled oils, chemical by-products reused as process feedstock" },
+          B1:  { group: "B", name: "Solid Recovered Fuel (SRF / RDF)", desc: "Refuse-derived fuel or solid recovered fuel co-fired or used in kilns/boilers" },
+          B2:  { group: "B", name: "Biomass Fuels", desc: "Wood pellets, wood chips, bio-oil, recovered biomass used as energy input" },
+          B3:  { group: "B", name: "Biogas", desc: "Biogas or biomethane used as fuel or process energy (transport, heating, power)" },
+        };
+
+        let raw;
+        try {
+          const resp = await fetch("./aggregated.json");
+          if (!resp.ok) throw new Error("HTTP " + resp.status);
+          raw = await resp.json();
+        } catch (e) {
+          document.getElementById("error-container").innerHTML =
+            '<div class="error-banner"><strong>Could not load aggregated.json</strong><br>' + esc(e.message) + '</div>';
+          document.getElementById("meta-info").textContent = "Failed to load";
+          return;
+        }
+
+        const generated = raw.generated_at ? new Date(raw.generated_at).toLocaleString() : "unknown";
+        document.getElementById("meta-info").textContent = raw.total + " companies - generated " + generated;
+
+        const db = new loki("srm.db");
+        const coll = db.addCollection("companies");
+
+        for (const entry of raw.companies) {
+          const c = entry.company || {};
+          const s = entry.srm_assessment || {};
+          const inputs = s.srm_inputs || [];
+          const enr = entry.enrichment || {};
+          const permitGroups = enr.norskeutslipp_permits || [];
+          const permitText = permitGroups.map(group => {
+            const virk = group.virksomhet || "";
+            const links = (group.permits || []).map(p => (p.label || "") + " " + (p.url || "")).join(" ");
+            return (virk + " " + links).trim();
+          }).join(" ");
+
+          coll.insert({
+            input_name: c.input_name || "",
+            canonical_name: c.canonical_name || "",
+            legal_name: c.legal_name || "",
+            org_number: c.org_number || enr.org_number_csv || "",
+            nace_codes: (c.nace_codes || enr.nace_codes_csv || []).join(", "),
+            employees: c.employees?.value ?? enr.employees_csv ?? null,
+            revenue: c.revenue?.value ?? enr.revenue_csv_nok ?? null,
+            overall_tier: s.overall_tier || "T0",
+            srm_count: inputs.length,
+            permit_count: enr.norskeutslipp_permit_count ?? 0,
+            srm_codes: [...new Set(inputs.map(i => i.mece_category_code).filter(Boolean))],
+            description: enr.description || "",
+            address: enr.address || "",
+            parent_company: enr.parent_company || "",
+            permit_text: permitText,
+            _raw: entry,
+          });
+        }
+
+        let sortCol = "input_name", sortDir = 1;
+        let filterText = "", filterTiers = new Set(), filterSrm = "", filterPermits = "";
+
+        function esc(s) {
+          return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        function cite(text, srcMap) {
+          return esc(text).replace(/\[(\d+)\]/g, (_, n) => {
+            const src = srcMap[Number(n)];
+            if (!src) return "[" + n + "]";
+            const label = esc(src.title ? src.title : src.url);
+            return '<a class="cite-link" href="' + esc(src.url) + '" target="_blank" rel="noopener" title="[' + n + '] ' + label + '">' + n + '</a>';
+          });
+        }
+
+        function fmtNum(v, divisor, decimals) {
+          divisor = divisor || 1; decimals = decimals || 0;
+          if (v === null || v === undefined) return "\u2014";
+          return (v / divisor).toLocaleString("en-NO", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+        }
+
+        function renderStats() {
+          const all = coll.find();
+          const grid = document.getElementById("stats-grid");
+          grid.innerHTML = Object.entries(SRM_CATEGORIES).map(function([code, cat]) {
+            const count = all.filter(r => r.srm_codes.includes(code)).length;
+            const active = filterSrm === code ? " active" : "";
+            const zero = count === 0 && !active ? " zero" : "";
+            return '<div class="stat-chip' + active + zero + '" data-code="' + code + '" title="' + esc(cat.desc) + '">' +
+              '<span class="code">' + code + '</span>' +
+              '<span>' + esc(cat.name) + '</span>' +
+              '<span class="badge">' + count + '</span></div>';
+          }).join("");
+          grid.querySelectorAll(".stat-chip:not(.zero)").forEach(chip => {
+            chip.addEventListener("click", () => {
+              filterSrm = filterSrm === chip.dataset.code ? "" : chip.dataset.code;
+              renderStats(); renderTable();
+            });
+          });
+        }
+
+        function applyFiltersAndSort() {
+          let rows = coll.find();
+          if (filterText) {
+            const q = filterText.toLowerCase();
+            rows = rows.filter(r =>
+              r.input_name.toLowerCase().includes(q) || r.legal_name.toLowerCase().includes(q) ||
+              r.org_number.includes(q) || r.nace_codes.toLowerCase().includes(q) ||
+              r.description.toLowerCase().includes(q) || r.address.toLowerCase().includes(q) ||
+              r.parent_company.toLowerCase().includes(q) || r.permit_text.toLowerCase().includes(q)
+            );
+          }
+          if (filterTiers.size > 0) rows = rows.filter(r => filterTiers.has(r.overall_tier));
+          if (filterSrm) rows = rows.filter(r => r.srm_codes.includes(filterSrm));
+          if (filterPermits === "with") rows = rows.filter(r => (r.permit_count || 0) > 0);
+          else if (filterPermits === "without") rows = rows.filter(r => (r.permit_count || 0) === 0);
+          rows.sort((a, b) => {
+            let av = a[sortCol], bv = b[sortCol];
+            if (av == null) av = sortDir === 1 ? Infinity : -Infinity;
+            if (bv == null) bv = sortDir === 1 ? Infinity : -Infinity;
+            if (typeof av === "string") av = av.toLowerCase();
+            if (typeof bv === "string") bv = bv.toLowerCase();
+            return av < bv ? -sortDir : av > bv ? sortDir : 0;
+          });
+          return rows;
+        }
+
+        function renderTable() {
+          const rows = applyFiltersAndSort();
+          const tbody = document.getElementById("table-body");
+          const empty = document.getElementById("empty-state");
+          if (rows.length === 0) {
+            tbody.innerHTML = ""; empty.style.display = "";
+            document.getElementById("row-count").textContent = "0 results"; return;
+          }
+          empty.style.display = "none";
+          document.getElementById("row-count").textContent = rows.length + " / " + coll.count() + " companies";
+          tbody.innerHTML = rows.map(r => '<tr data-id="' + r.$loki + '" style="cursor:pointer">' +
+            '<td><div class="company-name" title="' + esc(r.description) + '">' + esc(r.legal_name || r.input_name) + '</div>' +
+            (r.parent_company ? '<div class="legal-name">\u21B3 ' + esc(r.parent_company) + '</div>' : '') + '</td>' +
+            '<td><span class="org">' + (esc(r.org_number) || "\u2014") + '</span></td>' +
+            '<td><div class="nace-list">' + (r.nace_codes ? r.nace_codes.split(", ").map(n => '<span class="nace-chip">' + esc(n) + '</span>').join("") : "\u2014") + '</div></td>' +
+            '<td class="num">' + fmtNum(r.employees) + '</td>' +
+            '<td class="num">' + fmtNum(r.revenue, 1000000, 1) + '</td>' +
+            '<td><span class="tier tier-' + esc(r.overall_tier) + '">' + esc(r.overall_tier) + '</span></td>' +
+            '<td style="text-align:center"><span class="srm-count ' + (r.permit_count === 0 ? 'zero' : '') + '">' + r.permit_count + '</span></td>' +
+            '<td style="text-align:center"><span class="srm-count ' + (r.srm_count === 0 ? 'zero' : '') + '">' + r.srm_count + '</span></td>' +
+            '</tr>'
+          ).join("");
+          tbody.querySelectorAll("tr[data-id]").forEach(tr => {
+            tr.addEventListener("click", () => {
+              const rec = coll.get(parseInt(tr.dataset.id, 10));
+              if (rec) openDetail(rec);
+            });
+          });
+        }
+
+        function row2(label, val) {
+          return '<tr><td style="padding:4px 10px 4px 0;color:var(--text-muted);white-space:nowrap;vertical-align:top">' + label + '</td><td style="padding:4px 0">' + val + '</td></tr>';
+        }
+
+        function openDetail(rec) {
+          const r = rec._raw;
+          const c = r.company || {}, s = r.srm_assessment || {};
+          const inputs = s.srm_inputs || [], enr = r.enrichment || {};
+          const srcMap = {};
+          for (const src of r.sources || []) srcMap[src.source_id] = { url: src.url, title: src.title };
+          const evidenceMap = {};
+          for (const ev of r.evidence || []) evidenceMap[ev.evidence_id] = ev;
+
+          function fmtQuantity(q) {
+            if (!q) return null;
+            const val = q.value != null ? q.value.toLocaleString("en-NO") : "?";
+            const unit = q.unit || "", year = q.year ? " (" + q.year + ")" : "";
+            const period = q.period && q.period !== "unknown" ? " / " + q.period.replace("per_", "") : "";
+            const basis = q.basis ? " \u00b7 " + q.basis.replace(/_/g, " ") : "";
+            const conf = q.confidence ? " \u00b7 " + q.confidence + " confidence" : "";
+            return val + " " + unit + period + year + basis + conf;
+          }
+
+          function renderEvidence(ids) {
+            if (!ids || ids.length === 0) return "";
+            const items = ids.map(id => evidenceMap[id]).filter(Boolean);
+            if (items.length === 0) return "";
+            return '<div class="evidence-list">' + items.map(ev => {
+              const src = srcMap[ev.source_id];
+              const baseUrl = src?.url ?? null;
+              const words = ev.evidence_snippet.trim().replace(/-/g, "%2D").split(/\s+/);
+              const textParam = words.length > 6
+                ? encodeURIComponent(words.slice(0, 3).join(" ")) + "," + encodeURIComponent(words.slice(-3).join(" "))
+                : encodeURIComponent(ev.evidence_snippet);
+              const fragment = "#:~:text=" + textParam;
+              const url = baseUrl ? baseUrl + fragment : null;
+              const snippetEl = url
+                ? '<a class="evidence-snippet" href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(ev.evidence_snippet) + '</a>'
+                : '<span class="evidence-snippet" style="cursor:default">' + esc(ev.evidence_snippet) + '</span>';
+              return '<div class="evidence-item">' + snippetEl +
+                '<div class="evidence-claim">' + esc(ev.claim) + '</div>' +
+                (ev.location_hint ? '<div class="evidence-hint">' + esc(ev.location_hint) + '</div>' : '') + '</div>';
+            }).join("") + '</div>';
+          }
+
+          const srmCards = inputs.map(inp => {
+            const pills = [];
+            const mq = fmtQuantity(inp.main_quantity);
+            if (mq) pills.push('<span class="quantity-pill">' + esc(mq) + '<span class="q-label">main qty</span></span>');
+            if (inp.other_quantities?.length) {
+              inp.other_quantities.forEach((oq, i) => {
+                const s = fmtQuantity(oq);
+                if (s) pills.push('<span class="quantity-pill">' + esc(s) + '<span class="q-label">qty ' + (i + 2) + '</span></span>');
+              });
+            }
+            if (inp.share) {
+              const sp = inp.share;
+              const shareStr = sp.value_percent + "% " + (sp.basis || "unknown").replace(/_/g, " ") + (sp.year ? " (" + sp.year + ")" : "") + " \u00b7 " + (sp.confidence || "\u2014") + " confidence";
+              pills.push('<span class="quantity-pill share">' + esc(shareStr) + '<span class="q-label">share</span></span>');
+            }
+            return '<div class="srm-card">' +
+              '<div class="srm-card-header">' +
+              '<span class="mece-chip" title="' + esc(SRM_CATEGORIES[inp.mece_category_code]?.desc ?? "") + '">' + esc(inp.mece_category_code) + '</span>' +
+              '<span class="tier tier-' + esc(inp.tier) + '">' + esc(inp.tier) + '</span>' +
+              '<span class="srm-card-label">' + esc(inp.label) + '</span></div>' +
+              '<div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:6px">' + esc(SRM_CATEGORIES[inp.mece_category_code]?.name ?? "") + '</div>' +
+              '<div class="srm-card-body">' +
+              (inp.material_examples?.length ? '<strong>Examples:</strong> ' + esc(inp.material_examples.join(", ")) + '<br>' : '') +
+              (inp.used_for ? '<strong>Used for:</strong> ' + cite(inp.used_for, srcMap) + '<br>' : '') +
+              (inp.tier_reasoning ? '<em>' + cite(inp.tier_reasoning, srcMap) + '</em>' : '') + '</div>' +
+              (pills.length ? '<div class="quantity-row">' + pills.join("") + '</div>' : '') +
+              renderEvidence(inp.evidence_ids) + '</div>';
+          }).join("") || '<p style="color:var(--text-muted);font-size:.85rem">No SRM inputs identified.</p>';
+
+          document.getElementById("detail-content").innerHTML =
+            '<div style="margin-top:8px"><span class="tier tier-' + esc(s.overall_tier) + '" style="font-size:0.9rem">' + esc(s.overall_tier) + '</span></div>' +
+            '<div class="detail-company">' + esc(c.input_name) + '</div>' +
+            '<div class="detail-legal">' + esc(c.legal_name || "") + (c.org_number ? ' \u00b7 <span class="org">' + esc(c.org_number) + '</span>' : '') + '</div>' +
+            '<div class="detail-section"><h3>Identity</h3>' +
+            '<table style="font-size:.83rem;border-collapse:collapse;width:100%">' +
+            row2("Homepage", (() => { const u = c.homepage_url || (enr && enr.website); return u ? '<a href="' + esc(u.startsWith("http") ? u : "https://" + u) + '" target="_blank" style="color:var(--accent-blue)">' + esc(u) + '</a>' : "\u2014"; })()) +
+            row2("Proff", (c.proff_url || (enr && enr.proff_url_csv)) ? '<a href="' + esc(c.proff_url || enr.proff_url_csv) + '" target="_blank" style="color:var(--accent-blue)">proff.no</a>' : "\u2014") +
+            row2("NACE", (c.nace_codes || []).map(n => '<span class="nace-chip">' + esc(n) + '</span>').join(" ") || "\u2014") +
+            row2("Employees", c.employees?.value != null ? c.employees.value.toLocaleString() + (c.employees?.year != null ? " (" + c.employees.year + ")" : "") : "\u2014") +
+            row2("Revenue", c.revenue?.value != null ? (c.revenue.value / 1e6).toFixed(1) + " MNOK" + (c.revenue?.year != null ? " (" + c.revenue.year + ")" : "") : "\u2014") +
+            '</table></div>' +
+            '<div class="detail-section"><h3>Overall summary</h3><p class="summary-text">' + cite(s.overall_summary || "\u2014", srcMap) + '</p></div>' +
+            '<div class="detail-section"><h3>SRM Inputs (' + inputs.length + ')</h3>' + srmCards + '</div>' +
+            (s.gaps_and_uncertainties?.length ? '<div class="detail-section"><h3>Gaps &amp; Uncertainties</h3><ul style="font-size:.83rem;color:var(--text-secondary);padding-left:1.2em;line-height:1.8">' + s.gaps_and_uncertainties.map(g => '<li>' + cite(g, srcMap) + '</li>').join("") + '</ul></div>' : '') +
+            (r.sources?.length ? '<div class="detail-section"><h3>Sources</h3><div class="source-list">' + r.sources.map(src => {
+              const meta = [src.publisher, src.year, src.file_type?.toUpperCase()].filter(Boolean).join(" \u00b7 ");
+              return '<div class="source-item"><span class="source-num">' + src.source_id + '</span>' +
+                '<span class="source-type">' + esc(src.type.replace(/_/g, "\u00a0")) + '</span>' +
+                '<div class="source-body"><div class="source-title">' +
+                (src.url ? '<a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(src.title || src.url) + '</a>' : esc(src.title || "\u2014")) +
+                '</div>' + (meta ? '<div class="source-meta">' + esc(meta) + '</div>' : '') + '</div></div>';
+            }).join("") + '</div></div>' : '');
+
+          document.getElementById("detail-panel").classList.add("open");
+          document.getElementById("overlay").classList.add("show");
+        }
+
+        function closeDetail() {
+          document.getElementById("detail-panel").classList.remove("open");
+          document.getElementById("overlay").classList.remove("show");
+        }
+        document.getElementById("detail-close").addEventListener("click", closeDetail);
+        document.getElementById("overlay").addEventListener("click", closeDetail);
+
+        document.querySelectorAll("thead th[data-col]").forEach(th => {
+          th.addEventListener("click", () => {
+            const col = th.dataset.col;
+            if (sortCol === col) sortDir *= -1;
+            else { sortCol = col; sortDir = 1; }
+            document.querySelectorAll("thead th").forEach(t => t.classList.remove("active"));
+            th.classList.add("active");
+            th.querySelector(".sort-arrow").textContent = sortDir === 1 ? "\u2191" : "\u2193";
+            renderTable();
+          });
+        });
+
+        document.getElementById("search").addEventListener("input", e => { filterText = e.target.value.trim(); renderTable(); });
+        document.getElementById("tier-filter").addEventListener("change", e => {
+          filterTiers = new Set(Array.from(e.target.selectedOptions).map(opt => opt.value).filter(Boolean));
+          renderTable();
+        });
+        document.getElementById("permits-filter").addEventListener("change", e => { filterPermits = e.target.value; renderTable(); });
+
+        renderStats();
+        renderTable();
+      })();
+    </script>
+  </body>
+</html>

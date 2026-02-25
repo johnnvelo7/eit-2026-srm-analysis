@@ -98,364 +98,36 @@
             margin-top: 10px;
         }
 
-        .section {
-            padding: 40px 50px;
-            background: var(--bg-main);
-        }
-
-        .section.alt {
-            background: var(--bg-elevated);
-        }
-
-        .section-title {
-            font-size: 2.6em;
-            color: var(--accent-blue);
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 15px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
-        }
-
-        .section-subtitle {
-            font-size: 1.2em;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        /* Matrix/Heatmap Styles */
-        .matrix-container {
-            overflow-x: auto;
-            margin: 30px 0;
-            background: var(--bg-elevated);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-        }
-
-        .matrix-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 3px;
-            background: transparent;
-        }
-
-        .matrix-table th {
-            background: var(--bg-surface);
-            color: var(--accent-blue);
-            padding: 15px 10px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.9em;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            border: 1px solid var(--border);
-        }
-
-        .matrix-table th.company-name {
-            background: var(--bg-hover);
-            color: var(--accent-teal);
-            text-align: left;
-            min-width: 250px;
-            max-width: 250px;
-        }
-
-        .matrix-table td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid var(--border-soft);
-            transition: all 0.3s ease;
-            background: var(--bg-elevated);
-        }
-
-        .matrix-table td.company-cell {
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-primary);
-            background: var(--bg-surface);
-            position: sticky;
-            left: 0;
-            z-index: 5;
-        }
-
-        .matrix-cell {
-            width: 80px;
-            height: 60px;
+        .header-actions {
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.85em;
-            letter-spacing: 0.02em;
-        }
-
-        .intensity-0 { background: var(--intensity-0-bg); color: var(--intensity-0-fg); }
-        .intensity-1 { background: var(--intensity-1-bg); color: var(--intensity-1-fg); }
-        .intensity-2 { background: var(--intensity-2-bg); color: var(--intensity-2-fg); }
-        .intensity-3 { background: var(--intensity-3-bg); color: var(--intensity-3-fg); box-shadow: 0 0 8px rgba(129,201,149,0.4); }
-
-        .matrix-cell:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(138,180,248,0.35);
-            z-index: 100;
-        }
-
-        /* Company Cards */
-        .companies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .company-card {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-            transition: all 0.3s ease;
-        }
-
-        .company-card:hover {
-            box-shadow: 0 8px 24px rgba(138,180,248,0.2);
-            border-color: var(--accent-blue);
-            transform: translateY(-4px);
-        }
-
-        .company-card h3 {
-            color: var(--accent-blue);
-            font-size: 1.6em;
-            margin-bottom: 10px;
-        }
-
-        .company-meta {
-            display: flex;
             gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .meta-badge {
-            background: rgba(138,180,248,0.12);
-            color: var(--accent-blue);
-            border: 1px solid rgba(138,180,248,0.3);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.82em;
-            font-weight: 600;
-        }
-
-        .meta-badge.sector {
-            background: rgba(120,217,236,0.1);
-            color: var(--accent-teal);
-            border-color: rgba(120,217,236,0.28);
-        }
-
-        .srm-tags {
-            margin: 15px 0;
-        }
-
-        .srm-tag {
-            display: inline-block;
-            background: rgba(129,201,149,0.12);
-            color: var(--accent-green);
-            padding: 4px 10px;
-            margin: 3px;
-            border-radius: 5px;
-            font-size: 0.82em;
-            border: 1px solid rgba(129,201,149,0.3);
-        }
-
-        .company-summary {
-            color: var(--text-secondary);
-            line-height: 1.75;
-            margin: 15px 0;
-        }
-
-        .quantitative-data {
-            background: rgba(253,214,99,0.08);
-            border-left: 3px solid var(--accent-amber);
-            padding: 10px 15px;
-            margin: 15px 0;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .quantitative-data strong {
-            color: var(--accent-amber);
-        }
-
-        .sources-link {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-        }
-
-        .sources-link a {
-            color: var(--accent-teal);
-            text-decoration: none;
-            font-weight: 600;
-            margin-right: 15px;
-            font-size: 0.9em;
-            transition: color 0.2s;
-        }
-
-        .sources-link a:hover {
-            color: var(--accent-blue);
-            text-decoration: underline;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-top: 3px solid var(--accent-blue);
-            color: var(--text-primary);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            border-top-color: var(--accent-teal);
-            box-shadow: 0 8px 24px rgba(138,180,248,0.15);
-            transform: translateY(-2px);
-        }
-
-        .stat-card h3 {
-            font-size: 3em;
-            margin-bottom: 8px;
-            color: var(--accent-blue);
-            font-weight: 700;
-        }
-
-        .stat-card p {
-            font-size: 1em;
-            color: var(--text-secondary);
-        }
-
-        /* Charts */
-        .chart-container {
-            margin: 30px 0;
-            background: var(--bg-elevated);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .chart-container h3 {
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-
-        .chart-wrapper {
-            position: relative;
-            height: 400px;
-            margin-top: 20px;
-        }
-
-        .chart-wrapper.tall {
-            height: 600px;
-        }
-
-        /* Legend */
-        .legend {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: 0.9em;
-        }
-
-        .legend-color {
-            width: 40px;
-            height: 25px;
-            border-radius: 4px;
-        }
-
-        footer {
-            background: #1a1a1a;
-            color: rgba(232,234,237,0.65);
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        footer h3 {
-            color: #e8eaed;
-        }
-
-        .category-section {
-            background: var(--bg-surface);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid var(--border-soft);
-        }
-
-        .category-title {
-            color: var(--accent-teal);
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-
-        .category-description {
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .srm-list {
-            list-style: none;
-            padding-left: 20px;
-            color: var(--text-secondary);
-        }
-
-        .srm-list li {
-            padding: 5px 0;
-        }
-
-        .srm-list li:before {
-            content: "→ ";
-            color: var(--accent-teal);
-            font-weight: bold;
-        }
-
-        /* ── Theme Toggle Button ── */
-        .theme-toggle {
             position: absolute;
             top: 20px;
             right: 30px;
+            z-index: 10;
+        }
+
+        .nav-link {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            color: #e8eaed;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.88em;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .theme-toggle {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.22);
             color: #e8eaed;
@@ -468,258 +140,289 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            z-index: 10;
         }
         .theme-toggle:hover {
             background: rgba(255,255,255,0.2);
             border-color: rgba(255,255,255,0.4);
         }
 
-        /* ── Light Mode Overrides ── */
+        .section {
+            padding: 50px;
+        }
+        .section.alt {
+            background: var(--bg-elevated);
+        }
+        .section-title {
+            font-size: 2.2em;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--bg-surface);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .stat-card h3 {
+            font-size: 2.8em;
+            color: var(--accent-teal);
+        }
+        .stat-card p {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+
+        .category-section {
+            background: var(--bg-surface);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid var(--border-soft);
+        }
+        .category-title {
+            color: var(--accent-teal);
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .category-description {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .srm-list {
+            list-style: none;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+        .srm-list li { padding: 5px 0; }
+        .srm-list li:before { content: "\2192 "; color: var(--accent-teal); font-weight: bold; }
+
+        /* Matrix */
+        .matrix-container { overflow-x: auto; margin-top: 20px; border-radius: 10px; border: 1px solid var(--border-soft); }
+        .matrix-table { width: 100%; border-collapse: collapse; font-size: 0.82em; }
+        .matrix-table th { background: var(--bg-surface); color: var(--text-secondary); padding: 12px 8px; border-bottom: 2px solid var(--border); text-align: center; font-weight: 600; white-space: nowrap; position: sticky; top: 0; z-index: 2; }
+        .matrix-table th.company-name { text-align: left; min-width: 200px; }
+        .matrix-table td { padding: 4px 6px; border-bottom: 1px solid var(--border-soft); }
+        .matrix-table td.company-cell { white-space: nowrap; padding: 8px 12px; }
+        .matrix-cell { text-align: center; padding: 6px 4px; border-radius: 4px; font-size: 0.85em; font-weight: 600; transition: all 0.2s; cursor: default; }
+        .matrix-cell:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+        .intensity-0 { background: var(--intensity-0-bg); color: var(--intensity-0-fg); }
+        .intensity-1 { background: var(--intensity-1-bg); color: var(--intensity-1-fg); }
+        .intensity-2 { background: var(--intensity-2-bg); color: var(--intensity-2-fg); }
+        .intensity-3 { background: var(--intensity-3-bg); color: var(--intensity-3-fg); }
+        .matrix-filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+        .matrix-filter-bar input { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 14px; border-radius: 8px; font-size: 0.9em; min-width: 250px; }
+        .matrix-filter-bar select { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 14px; border-radius: 8px; font-size: 0.9em; }
+        .matrix-filter-bar .count { color: var(--text-muted); font-size: 0.85em; margin-left: auto; }
+
+        /* Company cards */
+        .companies-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; }
+        .company-card { background: var(--bg-surface); border-radius: 12px; padding: 25px; border: 1px solid var(--border-soft); transition: all 0.3s ease; }
+        .company-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); border-color: var(--accent-blue); }
+        .company-card h3 { color: var(--accent-blue); font-size: 1.15em; margin-bottom: 10px; }
+        .company-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .meta-badge { background: rgba(138,180,248,0.1); border: 1px solid rgba(138,180,248,0.25); color: var(--accent-blue); padding: 3px 10px; border-radius: 15px; font-size: 0.78em; font-weight: 500; }
+        .meta-badge.sector { background: rgba(120,217,236,0.1); border-color: rgba(120,217,236,0.25); color: var(--accent-teal); }
+        .meta-badge.tier { font-weight: 700; }
+        .meta-badge.tier-T3 { background: rgba(52,168,83,0.15); border-color: rgba(52,168,83,0.35); color: var(--accent-green); }
+        .meta-badge.tier-T2 { background: rgba(253,214,99,0.15); border-color: rgba(253,214,99,0.35); color: var(--accent-amber); }
+        .meta-badge.tier-T1 { background: rgba(197,138,249,0.15); border-color: rgba(197,138,249,0.35); color: var(--accent-purple); }
+        .meta-badge.tier-T0 { background: rgba(95,99,104,0.15); border-color: rgba(95,99,104,0.35); color: var(--text-muted); }
+        .srm-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .srm-tag { background: rgba(129,201,149,0.1); border: 1px solid rgba(129,201,149,0.25); color: var(--accent-green); padding: 2px 8px; border-radius: 10px; font-size: 0.74em; }
+        .company-summary { color: var(--text-secondary); font-size: 0.9em; line-height: 1.6; margin-bottom: 10px; }
+        .quantitative-data { background: rgba(253,214,99,0.06); padding: 10px; border-radius: 8px; font-size: 0.85em; color: var(--accent-amber); margin-top: 8px; }
+        .sources-link { margin-top: 12px; }
+        .sources-link a { color: var(--accent-blue); text-decoration: none; font-size: 0.85em; }
+        .sources-link a:hover { text-decoration: underline; }
+
+        /* Charts */
+        .chart-container { background: var(--bg-surface); padding: 25px; border-radius: 12px; margin: 20px 0; border: 1px solid var(--border-soft); }
+        .chart-container h3 { color: var(--text-primary); margin-bottom: 15px; }
+        .chart-wrapper { height: 400px; }
+
+        /* Company filter */
+        .company-filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .company-filter-bar input { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 10px 16px; border-radius: 8px; font-size: 0.95em; min-width: 280px; flex: 1; max-width: 400px; }
+        .company-filter-bar select { background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); padding: 10px 14px; border-radius: 8px; font-size: 0.9em; }
+        .company-filter-bar .count { color: var(--text-muted); font-size: 0.85em; margin-left: auto; }
+
+        /* Legend */
+        .legend { display: flex; gap: 15px; flex-wrap: wrap; margin: 15px 0; }
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.85em; color: var(--text-secondary); }
+        .legend-color { width: 40px; height: 25px; border-radius: 4px; }
+
+        footer {
+            background: #1a1a1a;
+            color: rgba(232,234,237,0.65);
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        footer h3 { color: #e8eaed; }
+
+        /* Light Mode */
         [data-theme="light"] {
-            --bg-body:     #f1f5f9;
-            --bg-main:     #ffffff;
-            --bg-elevated: #f8fafc;
-            --bg-surface:  #f1f5f9;
-            --bg-hover:    #e2e8f0;
-            --border:      #e2e8f0;
-            --border-soft: #f1f5f9;
-            --text-primary:   #0f172a;
-            --text-secondary: #475569;
-            --text-muted:     #94a3b8;
-            --accent-blue:   #2563eb;
-            --accent-teal:   #0891b2;
-            --accent-purple: #7c3aed;
-            --accent-green:  #059669;
-            --accent-amber:  #d97706;
-            --accent-pink:   #db2777;
+            --bg-body: #f1f5f9; --bg-main: #ffffff; --bg-elevated: #f8fafc;
+            --bg-surface: #f1f5f9; --bg-hover: #e2e8f0; --border: #e2e8f0;
+            --border-soft: #f1f5f9; --text-primary: #0f172a; --text-secondary: #475569;
+            --text-muted: #94a3b8; --accent-blue: #2563eb; --accent-teal: #0891b2;
+            --accent-purple: #7c3aed; --accent-green: #059669; --accent-amber: #d97706;
+            --accent-pink: #db2777;
             --intensity-0-bg: #f8fafc; --intensity-0-fg: #94a3b8;
             --intensity-1-bg: #d1fae5; --intensity-1-fg: #065f46;
             --intensity-2-bg: #6ee7b7; --intensity-2-fg: #064e3b;
             --intensity-3-bg: #059669; --intensity-3-fg: #ffffff;
         }
-        [data-theme="light"] .container {
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-        }
-        [data-theme="light"] header {
-            background: linear-gradient(160deg, #003d7a 0%, #00509e 60%, #1a73c8 100%);
-        }
-        [data-theme="light"] header h1   { color: #ffffff; }
-        [data-theme="light"] header p    { color: rgba(255,255,255,0.85); }
-        [data-theme="light"] .subtitle   { color: rgba(255,255,255,0.65); }
-        [data-theme="light"] footer {
-            background: #00509e;
-            color: rgba(255,255,255,0.8);
-        }
+        [data-theme="light"] .container { box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+        [data-theme="light"] header { background: linear-gradient(160deg, #003d7a 0%, #00509e 60%, #1a73c8 100%); }
+        [data-theme="light"] header h1 { color: #ffffff; }
+        [data-theme="light"] header p { color: rgba(255,255,255,0.85); }
+        [data-theme="light"] .subtitle { color: rgba(255,255,255,0.65); }
+        [data-theme="light"] footer { background: #00509e; color: rgba(255,255,255,0.8); }
         [data-theme="light"] footer h3 { color: #ffffff; }
-        [data-theme="light"] .company-card      { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        [data-theme="light"] .company-card { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         [data-theme="light"] .company-card:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.12); }
-        [data-theme="light"] .stat-card          { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        [data-theme="light"] .stat-card:hover    { box-shadow: 0 8px 24px rgba(37,99,235,0.1); }
-        [data-theme="light"] .meta-badge         { background: rgba(37,99,235,0.08);  border-color: rgba(37,99,235,0.22); }
-        [data-theme="light"] .meta-badge.sector  { background: rgba(8,145,178,0.08);  border-color: rgba(8,145,178,0.22); color: var(--accent-teal); }
-        [data-theme="light"] .srm-tag            { background: rgba(5,150,105,0.08);  border-color: rgba(5,150,105,0.22); }
-        [data-theme="light"] .quantitative-data  { background: rgba(217,119,6,0.07); }
-        [data-theme="light"] .intensity-3        { box-shadow: 0 0 8px rgba(5,150,105,0.35); }
-        [data-theme="light"] .matrix-cell:hover  { box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
-        [data-theme="light"] .theme-toggle {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.35);
-            color: #ffffff;
+        [data-theme="light"] .stat-card { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        [data-theme="light"] .stat-card:hover { box-shadow: 0 8px 24px rgba(37,99,235,0.1); }
+        [data-theme="light"] .meta-badge { background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.22); }
+        [data-theme="light"] .meta-badge.sector { background: rgba(8,145,178,0.08); border-color: rgba(8,145,178,0.22); color: var(--accent-teal); }
+        [data-theme="light"] .srm-tag { background: rgba(5,150,105,0.08); border-color: rgba(5,150,105,0.22); }
+        [data-theme="light"] .quantitative-data { background: rgba(217,119,6,0.07); }
+        [data-theme="light"] .intensity-3 { box-shadow: 0 0 8px rgba(5,150,105,0.35); }
+        [data-theme="light"] .matrix-cell:hover { box-shadow: 0 4px 12px rgba(37,99,235,0.25); }
+        [data-theme="light"] .theme-toggle, [data-theme="light"] .nav-link {
+            background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.35); color: #ffffff;
         }
-        [data-theme="light"] .theme-toggle:hover {
+        [data-theme="light"] .theme-toggle:hover, [data-theme="light"] .nav-link:hover {
             background: rgba(255,255,255,0.28);
+        }
+        [data-theme="light"] .matrix-filter-bar input,
+        [data-theme="light"] .matrix-filter-bar select,
+        [data-theme="light"] .company-filter-bar input,
+        [data-theme="light"] .company-filter-bar select {
+            background: #fff; border-color: #e2e8f0; color: #0f172a;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Dark mode</button>
+            <div class="header-actions">
+                <a class="nav-link" href="./viewer.html">Company Viewer</a>
+                <a class="nav-link" href="./analytics.html">SRM Analytics</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Dark mode</button>
+            </div>
             <h1>Secondary Raw Materials Analysis</h1>
             <p>Mapping the Circular Economy in Norwegian Industry</p>
             <p class="subtitle">EiT 2026 Project - Sirk Norge | NTNU Experts in Teams</p>
-            <p class="subtitle">Research Date: February 11, 2026</p>
+            <p class="subtitle" id="generated-date">Research Date: February 25, 2026</p>
         </header>
 
         <div class="section">
             <h2 class="section-title">Executive Summary</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>20</h3>
-                    <p>Companies Analyzed</p>
-                </div>
-                <div class="stat-card">
-                    <h3>7</h3>
-                    <p>SRM Categories</p>
-                </div>
-                <div class="stat-card">
-                    <h3>105</h3>
-                    <p>Total Companies Mapped</p>
-                </div>
-                <div class="stat-card">
-                    <h3>23</h3>
-                    <p>NACE Codes Covered</p>
-                </div>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card"><h3>--</h3><p>Companies Analyzed</p></div>
+                <div class="stat-card"><h3>--</h3><p>SRM Categories</p></div>
+                <div class="stat-card"><h3>--</h3><p>Quantified SRM Inputs</p></div>
+                <div class="stat-card"><h3>--</h3><p>NACE Codes Covered</p></div>
             </div>
 
             <div class="category-section">
                 <h3 class="section-subtitle">Key Findings</h3>
-                <ul style="list-style-position: inside; color: var(--text-secondary);">
-                    <li><strong>Construction sector:</strong> 30-100% recycled aggregate content, pioneering CCS technology</li>
-                    <li><strong>Aluminum sector:</strong> 75-100% recycled content in premium products, 95% energy savings</li>
-                    <li><strong>Steel sector:</strong> 770,000 tonnes/year scrap recycling with 100% renewable energy</li>
-                    <li><strong>Biogas sector:</strong> 350,000+ tonnes organic waste to energy conversion annually</li>
-                    <li><strong>Plastics (EPS):</strong> Closed-loop 100% recyclable systems</li>
-                    <li><strong>Wood sector:</strong> MNOK 250 investment targeting 1M tonnes demolition timber</li>
-                    <li><strong>Most companies:</strong> Published 2024 sustainability reports (CSRD/ESRS compliant)</li>
-                </ul>
+                <ul id="keyFindings" style="list-style-position: inside; color: var(--text-secondary);"></ul>
             </div>
         </div>
 
         <div class="section alt">
-            <h2 class="section-title">Secondary Raw Material Categories</h2>
-            <p class="section-subtitle">7 key categories mapped to Norwegian industrial sectors</p>
-
-            <div class="category-section">
-                <h3 class="category-title">1. Recycled Construction Materials</h3>
-                <p class="category-description">Crushed concrete, brick, asphalt from demolished buildings and roads</p>
-                <ul class="srm-list">
-                    <li>Recycled aggregate</li>
-                    <li>Reclaimed asphalt pavement (RAP)</li>
-                </ul>
-            </div>
-
-            <div class="category-section">
-                <h3 class="category-title">2. Metal Scrap</h3>
-                <p class="category-description">Ferrous and non-ferrous metal waste from manufacturing and end-of-life products</p>
-                <ul class="srm-list">
-                    <li>Steel scrap</li>
-                    <li>Aluminum scrap</li>
-                    <li>Copper scrap</li>
-                    <li>Nickel/Cobalt scrap</li>
-                    <li>General metal scrap</li>
-                </ul>
-            </div>
-
-            <div class="category-section">
-                <h3 class="category-title">3. Recycled Plastics</h3>
-                <p class="category-description">Post-consumer and post-industrial plastic waste processed into pellets or sorted fractions</p>
-                <ul class="srm-list">
-                    <li>Recycled polymer pellets</li>
-                    <li>Sorted plastic waste (especially EPS)</li>
-                </ul>
-            </div>
-
-            <div class="category-section">
-                <h3 class="category-title">4. Wood-based Materials</h3>
-                <p class="category-description">Wood waste from construction, demolition, and manufacturing</p>
-                <ul class="srm-list">
-                    <li>Wood chips / fiber</li>
-                    <li>Recovered timber from demolitions</li>
-                </ul>
-            </div>
-
-            <div class="category-section">
-                <h3 class="category-title">5. Biomass Fuel</h3>
-                <p class="category-description">Wood and organic waste used for energy production</p>
-                <ul class="srm-list">
-                    <li>Biomass pellets</li>
-                    <li>Bio-oils</li>
-                    <li>Biogenic waste fraction</li>
-                </ul>
-            </div>
-
-            <div class="category-section">
-                <h3 class="category-title">6. Biogas</h3>
-                <p class="category-description">Methane-rich gas from anaerobic digestion of organic waste</p>
-                <ul class="srm-list">
-                    <li>Biogas from organic waste</li>
-                    <li>Biogas from manure</li>
-                    <li>Municipal waste biogas</li>
-                </ul>
-            </div>
-
-            <div class="category-section">
-                <h3 class="category-title">7. Digestate & Bio-fertilizers</h3>
-                <p class="category-description">Nutrient-rich residue from biogas production used as fertilizer</p>
-                <ul class="srm-list">
-                    <li>Digestate from biogas plants</li>
-                    <li>Bio-fertilizers</li>
-                </ul>
-            </div>
+            <h2 class="section-title">MECE SRM Categories</h2>
+            <p class="section-subtitle">13 categories mapped across material (A1-A10) and energy (B1-B3) inputs</p>
+            <div id="categoryList"></div>
         </div>
 
         <div class="section">
-            <h2 class="section-title">Company-to-SRM Matrix & Heatmap</h2>
-            <p class="section-subtitle">Which secondary raw materials are used by each company? (Intensity: Low → Medium → High → Very High)</p>
+            <h2 class="section-title">Company-to-SRM Matrix</h2>
+            <p class="section-subtitle">Tier-based heatmap: T0 (no evidence) to T3 (core/significant use)</p>
 
             <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-color intensity-0"></div>
-                    <span>Not Used</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color intensity-1"></div>
-                    <span>Low Use</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color intensity-2"></div>
-                    <span>Medium-High Use</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color intensity-3"></div>
-                    <span>Primary/Core Material</span>
-                </div>
+                <div class="legend-item"><div class="legend-color intensity-0"></div><span>T0 - No evidence</span></div>
+                <div class="legend-item"><div class="legend-color intensity-1"></div><span>T1 - Minor/pilot</span></div>
+                <div class="legend-item"><div class="legend-color intensity-2"></div><span>T2 - Meaningful</span></div>
+                <div class="legend-item"><div class="legend-color intensity-3"></div><span>T3 - Core/significant</span></div>
+            </div>
+
+            <div class="matrix-filter-bar">
+                <input type="search" id="matrixSearch" placeholder="Search companies...">
+                <select id="matrixTierFilter">
+                    <option value="">All tiers</option>
+                    <option value="T3">T3 only</option>
+                    <option value="T2">T2+</option>
+                    <option value="T1">T1+</option>
+                </select>
+                <span class="count" id="matrixCount"></span>
             </div>
 
             <div class="matrix-container">
                 <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th class="company-name">Company</th>
-                            <th>Recycled<br>Construction<br>Materials</th>
-                            <th>Metal<br>Scrap</th>
-                            <th>Recycled<br>Plastics</th>
-                            <th>Wood-based<br>Materials</th>
-                            <th>Biomass<br>Fuel</th>
-                            <th>Biogas</th>
-                            <th>Digestate &<br>Bio-fertilizers</th>
-                        </tr>
-                    </thead>
+                    <thead id="matrixHead"></thead>
                     <tbody id="matrixBody"></tbody>
                 </table>
             </div>
         </div>
 
         <div class="section alt">
-            <h2 class="section-title">Company Profiles: SRM Usage Summaries</h2>
-            <p class="section-subtitle">Detailed analysis of 20 leading Norwegian companies</p>
+            <h2 class="section-title">Company Profiles</h2>
+            <p class="section-subtitle" id="companySubtitle">Detailed SRM usage evidence for Norwegian companies</p>
+
+            <div class="company-filter-bar">
+                <input type="search" id="companySearch" placeholder="Search companies, sectors, SRM types...">
+                <select id="companyTierFilter">
+                    <option value="">All tiers</option>
+                    <option value="T3">T3 - Core</option>
+                    <option value="T2">T2 - Meaningful</option>
+                    <option value="T1">T1 - Minor</option>
+                    <option value="T0">T0 - No evidence</option>
+                </select>
+                <span class="count" id="companyCount"></span>
+            </div>
+
             <div class="companies-grid" id="companiesGrid"></div>
         </div>
 
         <div class="section">
             <h2 class="section-title">Data Visualizations</h2>
-
             <div class="chart-container">
-                <h3>SRM Usage by Sector</h3>
-                <div class="chart-wrapper">
-                    <canvas id="sectorChart"></canvas>
-                </div>
+                <h3>Companies by Overall SRM Tier</h3>
+                <div class="chart-wrapper"><canvas id="tierChart"></canvas></div>
             </div>
-
             <div class="chart-container">
                 <h3>SRM Category Distribution Across Companies</h3>
-                <div class="chart-wrapper">
-                    <canvas id="srmDistributionChart"></canvas>
-                </div>
+                <div class="chart-wrapper"><canvas id="srmDistributionChart"></canvas></div>
             </div>
         </div>
 
         <footer>
             <h3>EiT 2026 Project: Secondary Raw Materials in Norwegian Industry</h3>
-            <p style="margin-top: 15px;">Sirk Norge | NTNU Experts in Teams | Data collected February 11, 2026</p>
-            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Sources: Company annual reports, sustainability reports, Proff.no, Brønnøysundregistrene</p>
+            <p style="margin-top: 15px;">Sirk Norge | NTNU Experts in Teams | Data collected February 2026</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Sources: Company sustainability reports, annual reports, EPDs, Proff.no, Bronnøysundregistrene, Norske Utslipp</p>
         </footer>
     </div>
 
@@ -727,282 +430,335 @@
         // Security helpers
         function escapeHtml(str) {
             const div = document.createElement('div');
-            div.textContent = String(str);
+            div.textContent = String(str ?? '');
             return div.innerHTML;
         }
-
         function isSafeUrl(url) {
-            try {
-                const parsed = new URL(url);
-                return ['http:', 'https:'].includes(parsed.protocol);
-            } catch {
-                return false;
-            }
+            try { return ['http:', 'https:'].includes(new URL(url).protocol); }
+            catch { return false; }
         }
 
-        // Company data with SRM mapping
-        const companies = [
-            {"name":"Heidelberg Materials Sement Norge AS","employees":394,"sector":"Construction Materials","nace":"23.51","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":1,"biogas":0,"digestate":0},"summary":"Heidelberg Materials operates Norway's pioneering CCS facility at Brevik producing net-zero cement. The company requires minimum 30% recycled content in their evoBuild circular product line and aims to offer circular alternatives for 50% of concrete products by 2030.","quantitative":"30% minimum recycled content in evoBuild products; Target: 50% of concrete products to have circular alternatives by 2030","annual_report":"https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf"},
-            {"name":"Ølen Betong AS","employees":241,"sector":"Construction Materials","nace":"23.63","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Ølen Betong is a leader in using recycled aggregates from tunnel excavations, replacing 75-100% of natural sand in shotcrete production with processed rock material. Research partner in RECONC project developing CO2-binding recycled aggregates.","quantitative":"75-100% replacement of natural sand with artificial sand from tunnel excavation rock","annual_report":"https://www.olenbetong.no"},
-            {"name":"Heidelberg Materials Prefab Norge AS","employees":364,"sector":"Construction Materials","nace":"23.61","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Leading supplier of precast concrete structural systems, leveraging parent company's circular economy initiatives including 30% minimum recycled content requirements and evoZero net-zero concrete from Brevik CCS facility.","quantitative":"30% minimum recycled content in circular products; 50% target by 2030","annual_report":"https://www.heidelbergmaterials.com/sites/default/files/2025-03/HM_ASR24_en.pdf"},
-            {"name":"Veidekke Industri AS","employees":1100,"sector":"Road Construction","nace":"08.11","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Pioneer in asphalt recycling with Norway's first plant capable of producing quality asphalt from 100% RAP using parallel drum technology. WAM Foam technology reduces production temperatures to 115°C.","quantitative":"100% RAP capability; WAM Foam production at 115°C","annual_report":"https://mb.cision.com/Main/17348/4122653/3337734.pdf"},
-            {"name":"Skanska Norge AS","employees":2822,"sector":"Road Construction","nace":"42.11","srm_intensity":{"construction":3,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Implements advanced asphalt recycling with products containing up to 70% recycled content. Recycling initiatives reduce CO2 emissions by up to 50% compared to virgin asphalt production.","quantitative":"Up to 70% recycled asphalt content; 50% CO2 reduction","annual_report":"https://group.skanska.com/49490b/siteassets/investors/reports-publications/annual-reports/2024/annual-and-sustainability-report-2024.pdf"},
-            {"name":"Mesta AS","employees":1599,"sector":"Road Construction","nace":"42.11","srm_intensity":{"construction":2,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Participates in Norway's sustainable road construction initiatives, leveraging new N200 regulatory framework enabling increased use of recycled materials and industrial by-products.","quantitative":"National target: 50% reduction in road construction emissions by 2030","annual_report":"https://www.mesta.no"},
-            {"name":"Elkem ASA","employees":1556,"sector":"Steel & Ferroalloys","nace":"24.45","srm_intensity":{"construction":0,"metal":2,"plastic":0,"wood":0,"biomass":2,"biogas":0,"digestate":0},"summary":"Produces BRIQSIL enabling increased steel scrap recycling, transitioning to bio-based carbon (targeting 50% from current 20%) in silicon smelting. Received NOK 33 million from Innovation Norway for recycled materials development.","quantitative":"Bio-based carbon target: 20% → 50%; Silicone recycling rates >50%","annual_report":"https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/25/642121_Elkem_ASA_Integrated_Annual_Report_2024.pdf"},
-            {"name":"Eramet Norway AS","employees":665,"sector":"Steel & Ferroalloys","nace":"24.45","srm_intensity":{"construction":0,"metal":2,"plastic":0,"wood":0,"biomass":2,"biogas":0,"digestate":0},"summary":"Operates ferroalloy plants in Porsgrunn and Kvinesdal with strong focus on biocarbon adoption. In 2024, recovered 700 GWh of energy from furnace gases, targeting 43% CO2 reduction by 2030.","quantitative":"700 GWh energy recovery in 2024; Target: 43% CO2 reduction by 2030","annual_report":"https://www.eramet.com/wp-content/uploads/2025/06/2025-04-25-Eramet-2024-Integrated-Report-EN.pdf"},
-            {"name":"7 Steel Nordic Manufacturing AS","employees":402,"sector":"Steel Production","nace":"24.10","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates Norway's leading electric arc furnace at Mo i Rana, recycling 770,000 tonnes of steel scrap annually using 100% renewable hydropower. Second-largest Nordic recycler producing reinforcing steel entirely from recycled scrap.","quantitative":"770,000 tonnes steel scrap/year; 100% EAF with renewable hydropower","annual_report":"https://7-steelnordic.com"},
-            {"name":"Hydro Aluminium AS","employees":3944,"sector":"Aluminum Production","nace":"24.42","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Global leader in aluminum recycling, processing 451,000 tonnes of post-consumer scrap in 2024 with ambitious targets to reach 850,000-1.2 million tonnes by 2030. Norwegian facilities at Årdal and Høyanger integrate recycling with primary production.","quantitative":"451,000 tonnes post-consumer scrap (2024); Target: 850k-1.2M tonnes by 2030; Årdal: 25,000 t/year capacity","annual_report":"https://www.hydro.com/en/global/media/news/2025/annual-report-2024-accelerating-the-green-aluminium-transition/"},
-            {"name":"Alcoa Norway AS","employees":1251,"sector":"Aluminum Production","nace":"24.42","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates pioneering renewable-powered aluminum recycling facility at Mosjøen, processing 20,000 tonnes annually of scrap using 100% renewable electricity. Avoids 4,400 tonnes CO2 annually.","quantitative":"20,000 tonnes/year capacity; 4,400 tonnes CO2 avoided annually; EcoDura: 50%+ recycled content","annual_report":"https://www.alcoa.com"},
-            {"name":"Speira AS","employees":754,"sector":"Aluminum Production","nace":"24.42","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates aluminum recycling facilities at Eidsvåg and Raudsand, part of 650,000-tonne annual recycling capacity. Invested in new slag press technology at Karmøy, achieving 95% energy savings versus primary aluminum.","quantitative":"650,000 tonnes recycled annually (group); 95% energy savings vs primary production","annual_report":"https://speira.foleon.com/recycling-services/recycling-services-sustainability-report/"},
-            {"name":"Glencore Nikkelverk AS","employees":580,"sector":"Non-ferrous Metals","nace":"24.45","srm_intensity":{"construction":0,"metal":3,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Western world's largest nickel refinery and major recycler of secondary nickel, cobalt, and copper materials. With 30+ years recycling experience, processes battery materials and scrap producing 4,600 tonnes recycled nickel annually.","quantitative":"20,000 tonnes recyclables: 4,600t nickel, 2,000t cobalt, 800t copper; 30+ years history","annual_report":"https://www.nikkelverk.no/en/sustainability"},
-            {"name":"BEWI Packaging Norway AS","employees":207,"sector":"Plastics","nace":"22.22","srm_intensity":{"construction":0,"metal":0,"plastic":3,"wood":0,"biomass":0,"biogas":0,"digestate":0},"summary":"Operates 13 facilities significantly expanding recycled content in 2024. Fredrikstad recycling facility enables closed-loop EPS recycling, collecting and reprocessing 100% recyclable expanded polystyrene into new insulation products.","quantitative":"13 facilities in Norway; 100% recyclable EPS; Closed-loop recycling","annual_report":"https://live.euronext.com/sites/default/files/company_press_releases/attachments_oslo/2025/03/27/642352_BEWI_Annual_report_2024.pdf"},
-            {"name":"Norsk Gjenvinning AS","employees":737,"sector":"Waste Management","nace":"38.32","srm_intensity":{"construction":1,"metal":1,"plastic":2,"wood":1,"biomass":0,"biogas":0,"digestate":0},"summary":"Major waste management company handling approximately 2 million tonnes annually with 57% recovery rate. 77% EU Taxonomy-aligned, provides critical circular raw materials to 40,000+ customers supporting Norway's circular economy transition.","quantitative":"~2 million tonnes/year; 57% recovery rate; 77% EU Taxonomy-aligned","annual_report":"https://media.crystallize.com/ng-nordic/25/6/17/4/ngnordic_ar2024_060625-1.pdf"},
-            {"name":"Forestia AS","employees":215,"sector":"Wood Products","nace":"16.21","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":3,"biomass":0,"biogas":0,"digestate":0},"summary":"Pioneering circular economy for wood with MNOK 250 investment in technologies to transform demolition timber into industrial chipboard feedstock. Addresses Norway's 1 million tonnes annual demolition timber waste enabling 246,000 tonnes CO2eq sequestration.","quantitative":"MNOK 250 investment; Target: 1M tonnes demolition timber; 246,000t CO2eq sequestration","annual_report":"https://forestia.com/sustainability/"},
-            {"name":"Hafslund Celsio AS","employees":256,"sector":"District Heating","nace":"35.30","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":3,"biogas":0,"digestate":0},"summary":"Operates Norway's largest waste-to-energy plant at Klemetsrud, converting 350,000 tonnes of municipal waste annually into 1.9 TWh district heating for 200,000 Oslo residents. 50% biogenic emissions, implementing CCS for climate-positive operation.","quantitative":"1.9 TWh heating; 350,000 tonnes waste/year; 50% biogenic CO2; 200,000 residents served","annual_report":"https://aarsrapport2023.hafslund.no/en/"},
-            {"name":"BIR Ressurs AS","employees":52,"sector":"Biogas Production","nace":"35.21","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":3,"digestate":2},"summary":"Developing Bergen biogas plant (operational 2026) processing 15,000 tonnes biowaste and 40,000 tonnes cattle slurry annually into biomethane. Serves 400,000 inhabitants, pursuing circular vision of upcycling food waste with carbon capture.","quantitative":"15,000 t/year biowaste; 40,000 t/year slurry; Service: 400,000 inhabitants","annual_report":"https://bir.no/om-bir/about-bir-english/"},
-            {"name":"ST1 Biokraft AS","employees":16,"sector":"Biogas Production","nace":"35.21","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":3,"digestate":2},"summary":"Operates five biogas production facilities across Norway and Sweden, targeting 3 TWh biomethane production by 2030 for heavy-duty transport and industry. Using manure and organic waste, achieves over 100% emissions reduction.","quantitative":"5 facilities; Target: 3 TWh production, 6 TWh sales by 2030; >100% emissions reduction","annual_report":"https://st1biokraft.com"},
-            {"name":"Yara Norge AS","employees":794,"sector":"Fertilizers","nace":"20.15","srm_intensity":{"construction":0,"metal":0,"plastic":0,"wood":0,"biomass":0,"biogas":0,"digestate":1},"summary":"Focuses on sustainable fertilizer production with emphasis on low-emission ammonia and verified carbon footprint reduction. 2024 strategy prioritizes green solutions, precision farming, and circular approaches to crop nutrition.","quantitative":"Focus on low-emission ammonia; Verified carbon footprint reduction","annual_report":"https://www.yara.com/investor-relations/latest-annual-report/"}
-        ];
-
-        // SRM Categories
-        const srmCategories = [
-            "Recycled Construction Materials",
-            "Metal Scrap",
-            "Recycled Plastics",
-            "Wood-based Materials",
-            "Biomass Fuel",
-            "Biogas",
-            "Digestate & Bio-fertilizers"
-        ];
-
-        // Populate Matrix
-        const matrixBody = document.getElementById('matrixBody');
-        companies.forEach(company => {
-            const row = document.createElement('tr');
-
-            // Company name cell
-            const nameCell = document.createElement('td');
-            nameCell.className = 'company-cell';
-            nameCell.innerHTML = `<strong>${escapeHtml(company.name)}</strong><br><small style="color:var(--text-secondary)">${escapeHtml(company.sector)}</small>`;
-            row.appendChild(nameCell);
-
-            // SRM intensity cells
-            const intensities = [
-                company.srm_intensity.construction,
-                company.srm_intensity.metal,
-                company.srm_intensity.plastic,
-                company.srm_intensity.wood,
-                company.srm_intensity.biomass,
-                company.srm_intensity.biogas,
-                company.srm_intensity.digestate
-            ];
-
-            intensities.forEach((intensity, idx) => {
-                const cell = document.createElement('td');
-                const cellDiv = document.createElement('div');
-                cellDiv.className = `matrix-cell intensity-${intensity}`;
-
-                if (intensity === 0) {
-                    cellDiv.textContent = '—';
-                } else if (intensity === 1) {
-                    cellDiv.textContent = 'Low';
-                } else if (intensity === 2) {
-                    cellDiv.textContent = 'Med-High';
-                } else if (intensity === 3) {
-                    cellDiv.textContent = 'Core';
-                }
-
-                cellDiv.title = `${company.name} - ${srmCategories[idx]}: ${cellDiv.textContent}`;
-                cell.appendChild(cellDiv);
-                row.appendChild(cell);
-            });
-
-            matrixBody.appendChild(row);
-        });
-
-        // Populate Company Cards
-        const companiesGrid = document.getElementById('companiesGrid');
-        companies.forEach(company => {
-            const card = document.createElement('div');
-            card.className = 'company-card';
-
-            // Determine which SRM types are used
-            const usedSRM = [];
-            const srmKeys = ['construction', 'metal', 'plastic', 'wood', 'biomass', 'biogas', 'digestate'];
-            const srmNames = srmCategories;
-
-            srmKeys.forEach((key, idx) => {
-                if (company.srm_intensity[key] > 0) {
-                    usedSRM.push(srmNames[idx]);
-                }
-            });
-
-            card.innerHTML = `
-                <h3>${escapeHtml(company.name)}</h3>
-                <div class="company-meta">
-                    <span class="meta-badge">${escapeHtml(company.employees)} employees</span>
-                    <span class="meta-badge sector">${escapeHtml(company.sector)}</span>
-                    <span class="meta-badge">NACE ${escapeHtml(company.nace)}</span>
-                </div>
-                <div class="srm-tags">
-                    ${usedSRM.map(srm => `<span class="srm-tag">${escapeHtml(srm)}</span>`).join('')}
-                </div>
-                <div class="company-summary">
-                    ${escapeHtml(company.summary)}
-                </div>
-                ${company.quantitative ? `
-                <div class="quantitative-data">
-                    <strong>Quantitative Data:</strong> ${escapeHtml(company.quantitative)}
-                </div>
-                ` : ''}
-                <div class="sources-link">
-                    ${company.annual_report && isSafeUrl(company.annual_report) ? `<a href="${escapeHtml(company.annual_report)}" target="_blank" rel="noopener noreferrer">📄 Annual Report</a>` : ''}
-                </div>
-            `;
-
-            companiesGrid.appendChild(card);
-        });
-
-        // Chart.js global dark mode defaults
-        Chart.defaults.color = '#718096';
-        Chart.defaults.borderColor = '#2d3748';
-
-        // Chart 1: SRM Usage by Sector
-        const sectorData = {};
-        companies.forEach(c => {
-            if (!sectorData[c.sector]) {
-                sectorData[c.sector] = { count: 0, avgIntensity: 0 };
-            }
-            sectorData[c.sector].count++;
-
-            // Calculate average SRM usage intensity
-            const total = Object.values(c.srm_intensity).reduce((a, b) => a + b, 0);
-            sectorData[c.sector].avgIntensity += total;
-        });
-
-        Object.keys(sectorData).forEach(sector => {
-            sectorData[sector].avgIntensity /= sectorData[sector].count;
-        });
-
-        const ctx1 = document.getElementById('sectorChart').getContext('2d');
-        const sectorChart = new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: Object.keys(sectorData),
-                datasets: [{
-                    label: 'Average SRM Usage Intensity',
-                    data: Object.values(sectorData).map(d => d.avgIntensity),
-                    backgroundColor: 'rgba(138,180,248,0.75)',
-                    borderColor: '#8ab4f8',
-                    borderWidth: 2,
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Average SRM Usage Intensity'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Chart 2: SRM Distribution
-        const srmCounts = [0, 0, 0, 0, 0, 0, 0];
-        companies.forEach(c => {
-            const keys = ['construction', 'metal', 'plastic', 'wood', 'biomass', 'biogas', 'digestate'];
-            keys.forEach((key, idx) => {
-                if (c.srm_intensity[key] > 0) {
-                    srmCounts[idx]++;
-                }
-            });
-        });
-
-        const ctx2 = document.getElementById('srmDistributionChart').getContext('2d');
-        const srmDistChart = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: srmCategories,
-                datasets: [{
-                    data: srmCounts,
-                    backgroundColor: [
-                        '#8ab4f8', '#78d9ec', '#81c995', '#fdd663',
-                        '#c58af9', '#f28b82', '#f29900'
-                    ],
-                    borderColor: '#292a2d',
-                    borderWidth: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: {
-                            font: { size: 12 },
-                            padding: 15
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Number of Companies Using Each SRM Category',
-                        font: { size: 14 }
-                    }
-                }
-            }
-        });
-
-        // ── Theme Toggle ──────────────────────────────────────────────────────
-        const chartThemes = {
-            dark: {
-                bar:   { bg: 'rgba(138,180,248,0.75)', border: '#8ab4f8' },
-                donut: { colors: ['#8ab4f8','#78d9ec','#81c995','#fdd663','#c58af9','#f28b82','#f29900'], border: '#292a2d' }
-            },
-            light: {
-                bar:   { bg: 'rgba(37,99,235,0.75)', border: '#2563eb' },
-                donut: { colors: ['#2563eb','#0891b2','#059669','#d97706','#7c3aed','#db2777','#0f766e'], border: '#ffffff' }
-            }
+        const MECE = {
+            A1:  { name: 'Mineral & Construction Materials', desc: 'Recycled aggregates, reclaimed asphalt, mineral construction inputs' },
+            A2:  { name: 'Industrial Mineral By-Products', desc: 'Slag, fly ash, silica fume, gypsum and similar by-products' },
+            A3:  { name: 'Metals Scrap', desc: 'Ferrous and non-ferrous scrap used as metal input' },
+            A4:  { name: 'Reprocessed Plastics', desc: 'Recycled polymer pellets, regranulate, PCR/PIR plastics' },
+            A5:  { name: 'Glass & Ceramics', desc: 'Cullet and recycled ceramic/refractory material' },
+            A6:  { name: 'Paper & Cardboard Fibres', desc: 'Recovered paper and recycled fibre inputs' },
+            A7:  { name: 'Textiles & Fibres', desc: 'Recovered textile fibres and recycled yarn/fabric inputs' },
+            A8:  { name: 'Rubber & Tyres', desc: 'Crumb rubber, recovered tyre material, devulcanised rubber' },
+            A9:  { name: 'Bio-Based Residues (Material)', desc: 'Non-energy organic residues used as material inputs' },
+            A10: { name: 'Chemical & Liquid Feedstocks', desc: 'Recovered solvents, oils and chemical feedstock' },
+            B1:  { name: 'SRF / RDF', desc: 'Solid recovered fuel / refuse-derived fuel' },
+            B2:  { name: 'Biomass Fuels', desc: 'Recovered biomass used as energy input' },
+            B3:  { name: 'Biogas', desc: 'Biogas/biomethane used as process or energy input' },
         };
+        const MECE_CODES = Object.keys(MECE);
+        const TIER_NUM = { T0: 0, T1: 1, T2: 2, T3: 3 };
 
-        function updateChartColors(theme) {
-            const c = chartThemes[theme];
-            sectorChart.data.datasets[0].backgroundColor = c.bar.bg;
-            sectorChart.data.datasets[0].borderColor     = c.bar.border;
-            sectorChart.update();
-            srmDistChart.data.datasets[0].backgroundColor = c.donut.colors;
-            srmDistChart.data.datasets[0].borderColor     = c.donut.border;
-            srmDistChart.update();
-        }
+        (async () => {
+            let data;
+            try {
+                const resp = await fetch('./aggregated.json');
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                data = await resp.json();
+            } catch (e) {
+                document.getElementById('statsGrid').innerHTML =
+                    '<p style="color:var(--accent-pink);padding:20px">Failed to load data: ' + escapeHtml(e.message) + '</p>';
+                return;
+            }
 
-        function updateToggleLabel(theme) {
-            document.getElementById('themeToggle').textContent =
-                theme === 'dark' ? 'Light mode' : 'Dark mode';
-        }
+            const companies = (data.companies || []).map(entry => {
+                const co = entry.company || {};
+                const assess = entry.srm_assessment || {};
+                const inputs = assess.srm_inputs || [];
 
-        // Apply saved preference on load
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        updateToggleLabel(savedTheme);
-        if (savedTheme !== 'dark') updateChartColors(savedTheme);
+                // Build tier map per MECE category (take max tier per category)
+                const catTiers = {};
+                const catLabels = {};
+                for (const inp of inputs) {
+                    const code = inp.mece_category_code || '';
+                    const t = TIER_NUM[inp.tier] ?? 0;
+                    if (!catTiers[code] || t > catTiers[code]) catTiers[code] = t;
+                    if (!catLabels[code]) catLabels[code] = [];
+                    catLabels[code].push(inp.label || '');
+                }
 
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next    = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            updateToggleLabel(next);
-            updateChartColors(next);
-        });
+                const naces = (co.nace_codes || []).map(n => String(n).replace(/\.0+$/, ''));
+                const employees = co.employees?.value ?? null;
+                const revenue = co.revenue?.value ?? null;
+
+                return {
+                    name: co.canonical_name || co.input_name || co.legal_name || 'Unknown',
+                    legalName: co.legal_name || '',
+                    orgNumber: co.org_number || '',
+                    naces,
+                    employees,
+                    revenue,
+                    homepage: co.homepage_url || '',
+                    proff: co.proff_url || '',
+                    overallTier: assess.overall_tier || 'T0',
+                    overallSummary: assess.overall_summary || '',
+                    catTiers,
+                    catLabels,
+                    inputs,
+                    gaps: assess.gaps_and_uncertainties || [],
+                    evidence: entry.evidence || [],
+                    sources: entry.sources || [],
+                };
+            });
+
+            // Sort by tier descending, then name
+            companies.sort((a, b) => (TIER_NUM[b.overallTier] ?? 0) - (TIER_NUM[a.overallTier] ?? 0) || a.name.localeCompare(b.name));
+
+            // ── Stats ──
+            const totalCompanies = companies.length;
+            const allNaces = new Set();
+            companies.forEach(c => c.naces.forEach(n => allNaces.add(n)));
+            const activeCats = new Set();
+            companies.forEach(c => { for (const code of Object.keys(c.catTiers)) if (c.catTiers[code] > 0) activeCats.add(code); });
+            let quantifiedInputs = 0;
+            companies.forEach(c => c.inputs.forEach(inp => {
+                if (inp.main_quantity && typeof inp.main_quantity.value === 'number') quantifiedInputs++;
+            }));
+
+            document.getElementById('statsGrid').innerHTML = [
+                [totalCompanies, 'Companies Analyzed'],
+                [activeCats.size, 'Active SRM Categories'],
+                [quantifiedInputs, 'Quantified SRM Inputs'],
+                [allNaces.size, 'NACE Codes Covered'],
+            ].map(([v, l]) => `<div class="stat-card"><h3>${v}</h3><p>${escapeHtml(l)}</p></div>`).join('');
+
+            // ── Key findings (auto-generated) ──
+            const tierCounts = { T0: 0, T1: 0, T2: 0, T3: 0 };
+            companies.forEach(c => tierCounts[c.overallTier]++);
+            const topInputs = {};
+            companies.forEach(c => c.inputs.forEach(inp => {
+                const code = inp.mece_category_code;
+                if (code && (TIER_NUM[inp.tier] ?? 0) >= 2) topInputs[code] = (topInputs[code] || 0) + 1;
+            }));
+            const sortedCats = Object.entries(topInputs).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+            const findings = [
+                `<strong>${tierCounts.T3} companies</strong> have core/significant SRM usage (T3), <strong>${tierCounts.T2}</strong> have meaningful usage (T2)`,
+                `<strong>${totalCompanies} companies</strong> analyzed across <strong>${allNaces.size} NACE codes</strong> in Norwegian industry`,
+                ...sortedCats.map(([code, cnt]) => `<strong>${MECE[code]?.name || code}:</strong> ${cnt} companies with meaningful+ usage`),
+            ];
+            document.getElementById('keyFindings').innerHTML = findings.map(f => `<li>${f}</li>`).join('');
+
+            // ── Category list ──
+            const catCompanyCounts = {};
+            MECE_CODES.forEach(code => {
+                catCompanyCounts[code] = companies.filter(c => (c.catTiers[code] || 0) > 0).length;
+            });
+            document.getElementById('categoryList').innerHTML = MECE_CODES.map(code => {
+                const m = MECE[code];
+                const cnt = catCompanyCounts[code];
+                const isEnergy = code.startsWith('B');
+                return `<div class="category-section">
+                    <h3 class="category-title">${escapeHtml(code)}. ${escapeHtml(m.name)} ${isEnergy ? '(Energy)' : '(Material)'}</h3>
+                    <p class="category-description">${escapeHtml(m.desc)}</p>
+                    <p style="color:var(--accent-green);font-size:0.9em">${cnt} ${cnt === 1 ? 'company' : 'companies'} with evidence of use</p>
+                </div>`;
+            }).join('');
+
+            // ── Matrix ──
+            function renderMatrix() {
+                const searchVal = document.getElementById('matrixSearch').value.toLowerCase().trim();
+                const tierFilter = document.getElementById('matrixTierFilter').value;
+
+                let filtered = companies;
+                if (searchVal) filtered = filtered.filter(c => c.name.toLowerCase().includes(searchVal) || c.legalName.toLowerCase().includes(searchVal));
+                if (tierFilter === 'T3') filtered = filtered.filter(c => c.overallTier === 'T3');
+                else if (tierFilter === 'T2') filtered = filtered.filter(c => TIER_NUM[c.overallTier] >= 2);
+                else if (tierFilter === 'T1') filtered = filtered.filter(c => TIER_NUM[c.overallTier] >= 1);
+
+                document.getElementById('matrixCount').textContent = `${filtered.length} / ${companies.length} companies`;
+
+                // Only show categories that have at least one non-zero entry in filtered set
+                const visibleCats = MECE_CODES.filter(code => filtered.some(c => (c.catTiers[code] || 0) > 0));
+
+                document.getElementById('matrixHead').innerHTML = `<tr>
+                    <th class="company-name">Company</th>
+                    <th>Tier</th>
+                    ${visibleCats.map(code => `<th title="${escapeHtml(MECE[code]?.name || '')}">${escapeHtml(code)}</th>`).join('')}
+                </tr>`;
+
+                const tierLabel = { 0: '\u2014', 1: 'T1', 2: 'T2', 3: 'T3' };
+                document.getElementById('matrixBody').innerHTML = filtered.map(c => {
+                    const cells = visibleCats.map(code => {
+                        const t = c.catTiers[code] || 0;
+                        const labels = (c.catLabels[code] || []).join(', ');
+                        return `<td><div class="matrix-cell intensity-${t}" title="${escapeHtml(c.name)} - ${escapeHtml(MECE[code]?.name || code)}: ${tierLabel[t]}${labels ? '\n' + labels : ''}">${tierLabel[t]}</div></td>`;
+                    }).join('');
+                    const naceStr = c.naces.slice(0, 2).join(', ');
+                    return `<tr>
+                        <td class="company-cell"><strong>${escapeHtml(c.name)}</strong><br><small style="color:var(--text-secondary)">${escapeHtml(naceStr)}</small></td>
+                        <td><div class="matrix-cell intensity-${TIER_NUM[c.overallTier] || 0}" style="font-weight:700">${escapeHtml(c.overallTier)}</div></td>
+                        ${cells}
+                    </tr>`;
+                }).join('');
+            }
+
+            document.getElementById('matrixSearch').addEventListener('input', renderMatrix);
+            document.getElementById('matrixTierFilter').addEventListener('change', renderMatrix);
+            renderMatrix();
+
+            // ── Company Cards ──
+            function renderCompanyCards() {
+                const searchVal = document.getElementById('companySearch').value.toLowerCase().trim();
+                const tierFilter = document.getElementById('companyTierFilter').value;
+
+                let filtered = companies;
+                if (searchVal) {
+                    filtered = filtered.filter(c =>
+                        c.name.toLowerCase().includes(searchVal) ||
+                        c.legalName.toLowerCase().includes(searchVal) ||
+                        c.overallSummary.toLowerCase().includes(searchVal) ||
+                        c.naces.some(n => n.includes(searchVal)) ||
+                        Object.keys(c.catTiers).some(code => (MECE[code]?.name || '').toLowerCase().includes(searchVal))
+                    );
+                }
+                if (tierFilter) filtered = filtered.filter(c => c.overallTier === tierFilter);
+
+                document.getElementById('companyCount').textContent = `${filtered.length} / ${companies.length} companies`;
+
+                const grid = document.getElementById('companiesGrid');
+                grid.innerHTML = filtered.map(c => {
+                    const usedSRM = Object.entries(c.catTiers)
+                        .filter(([, t]) => t > 0)
+                        .sort((a, b) => b[1] - a[1])
+                        .map(([code]) => MECE[code]?.name || code);
+
+                    const empStr = c.employees ? c.employees.toLocaleString() + ' employees' : '';
+                    const naceStr = c.naces.length ? 'NACE ' + c.naces.join(', ') : '';
+
+                    // Get quantitative highlights
+                    const quantData = [];
+                    for (const inp of c.inputs) {
+                        if (inp.main_quantity && typeof inp.main_quantity.value === 'number') {
+                            const q = inp.main_quantity;
+                            quantData.push(`${inp.label}: ${Number(q.value).toLocaleString()} ${q.unit || ''}${q.period ? ' (' + q.period.replace(/_/g, ' ') + ')' : ''}`);
+                        }
+                    }
+
+                    const links = [];
+                    if (c.homepage && isSafeUrl(c.homepage)) links.push(`<a href="${escapeHtml(c.homepage)}" target="_blank" rel="noopener noreferrer">Website</a>`);
+                    if (c.proff && isSafeUrl(c.proff)) links.push(`<a href="${escapeHtml(c.proff)}" target="_blank" rel="noopener noreferrer">Proff.no</a>`);
+
+                    return `<div class="company-card">
+                        <h3>${escapeHtml(c.name)}</h3>
+                        <div class="company-meta">
+                            <span class="meta-badge tier tier-${escapeHtml(c.overallTier)}">${escapeHtml(c.overallTier)}</span>
+                            ${empStr ? `<span class="meta-badge">${escapeHtml(empStr)}</span>` : ''}
+                            ${naceStr ? `<span class="meta-badge sector">${escapeHtml(naceStr)}</span>` : ''}
+                        </div>
+                        <div class="srm-tags">
+                            ${usedSRM.map(s => `<span class="srm-tag">${escapeHtml(s)}</span>`).join('')}
+                        </div>
+                        <div class="company-summary">${escapeHtml(c.overallSummary)}</div>
+                        ${quantData.length ? `<div class="quantitative-data"><strong>Quantitative Data:</strong><br>${quantData.map(q => escapeHtml(q)).join('<br>')}</div>` : ''}
+                        ${links.length ? `<div class="sources-link">${links.join(' | ')}</div>` : ''}
+                    </div>`;
+                }).join('');
+            }
+
+            document.getElementById('companySearch').addEventListener('input', renderCompanyCards);
+            document.getElementById('companyTierFilter').addEventListener('change', renderCompanyCards);
+            renderCompanyCards();
+
+            // ── Charts ──
+            Chart.defaults.color = '#718096';
+            Chart.defaults.borderColor = '#2d3748';
+
+            // Tier distribution bar chart
+            const ctx1 = document.getElementById('tierChart').getContext('2d');
+            const tierChart = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['T3 - Core', 'T2 - Meaningful', 'T1 - Minor', 'T0 - No evidence'],
+                    datasets: [{
+                        label: 'Companies',
+                        data: [tierCounts.T3, tierCounts.T2, tierCounts.T1, tierCounts.T0],
+                        backgroundColor: ['rgba(52,168,83,0.75)', 'rgba(138,180,248,0.75)', 'rgba(197,138,249,0.75)', 'rgba(95,99,104,0.5)'],
+                        borderColor: ['#34a853', '#8ab4f8', '#c58af9', '#5f6368'],
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Number of Companies' } } }
+                }
+            });
+
+            // SRM category distribution
+            const catCounts = MECE_CODES.map(code => companies.filter(c => (c.catTiers[code] || 0) > 0).length);
+            const catColors = ['#8ab4f8','#78d9ec','#81c995','#fdd663','#c58af9','#f28b82','#f29900','#78d9ec','#a8d5b5','#e8eaed','#ff7043','#66bb6a','#42a5f5'];
+
+            const ctx2 = document.getElementById('srmDistributionChart').getContext('2d');
+            const srmDistChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: MECE_CODES.map(code => code + ' ' + (MECE[code]?.name || '').substring(0, 20)),
+                    datasets: [{
+                        label: 'Companies using category',
+                        data: catCounts,
+                        backgroundColor: catColors.map(c => c + 'cc'),
+                        borderColor: catColors,
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: { x: { beginAtZero: true, title: { display: true, text: 'Number of Companies' } } }
+                }
+            });
+
+            // ── Theme toggle ──
+            function updateChartColors(theme) {
+                if (theme === 'light') {
+                    tierChart.data.datasets[0].backgroundColor = ['rgba(5,150,105,0.75)', 'rgba(37,99,235,0.75)', 'rgba(124,58,237,0.75)', 'rgba(148,163,184,0.5)'];
+                    tierChart.data.datasets[0].borderColor = ['#059669', '#2563eb', '#7c3aed', '#94a3b8'];
+                    srmDistChart.data.datasets[0].borderColor = ['#2563eb','#0891b2','#059669','#d97706','#7c3aed','#db2777','#0f766e','#0891b2','#059669','#334155','#c2410c','#15803d','#1d4ed8'];
+                } else {
+                    tierChart.data.datasets[0].backgroundColor = ['rgba(52,168,83,0.75)', 'rgba(138,180,248,0.75)', 'rgba(197,138,249,0.75)', 'rgba(95,99,104,0.5)'];
+                    tierChart.data.datasets[0].borderColor = ['#34a853', '#8ab4f8', '#c58af9', '#5f6368'];
+                    srmDistChart.data.datasets[0].borderColor = catColors;
+                }
+                tierChart.update();
+                srmDistChart.update();
+            }
+
+            function updateToggleLabel(theme) {
+                document.getElementById('themeToggle').textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+            }
+
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateToggleLabel(savedTheme);
+            if (savedTheme !== 'dark') updateChartColors(savedTheme);
+
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                updateToggleLabel(next);
+                updateChartColors(next);
+            });
+
+            // Update generated date
+            if (data.generated_at) {
+                document.getElementById('generated-date').textContent = 'Data generated: ' + new Date(data.generated_at).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+            }
+        })();
     </script>
 </body>
 </html>
