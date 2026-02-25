@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRM Inputs Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/lokijs@1.5.12/build/lokijs.min.js"></script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f5f7fa;
+        color: #1a1a2e;
+        min-height: 100vh;
+      }
+      header {
+        background: #1a1a2e;
+        color: #fff;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      header h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      header span {
+        font-size: 0.85rem;
+        opacity: 0.6;
+      }
+      .header-nav {
+        margin-left: auto;
+      }
+      .header-nav a {
+        display: inline-block;
+        color: #e2e8f0;
+        text-decoration: none;
+        border: 1px solid rgba(226, 232, 240, 0.35);
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+      .header-nav a:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .stats-wrap {
+        padding: 16px 24px;
+        border-bottom: 1px solid #e2e8f0;
+        background: #fff;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+      }
+      .stat-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        background: #f8fafc;
+        padding: 10px 12px;
+      }
+      .stat-label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #94a3b8;
+        margin-bottom: 6px;
+      }
+      .stat-value {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1a1a2e;
+      }
+
+      .toolbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 24px;
+        background: #fff;
+        border-bottom: 1px solid #e2e8f0;
+        flex-wrap: wrap;
+      }
+      .toolbar input[type="search"],
+      .toolbar select {
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 7px 10px;
+        font-size: 0.88rem;
+        background: #fff;
+      }
+      .toolbar input[type="search"] {
+        min-width: 250px;
+        flex: 1;
+      }
+      .toolbar .count {
+        margin-left: auto;
+        font-size: 0.8rem;
+        color: #64748b;
+      }
+
+      .category-section {
+        background: #fff;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 12px 24px;
+      }
+      .category-title {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #94a3b8;
+        margin-bottom: 10px;
+      }
+      .category-grid {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .cat-chip {
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        background: #f8fafc;
+        padding: 4px 10px;
+        font-size: 0.78rem;
+        cursor: pointer;
+        text-align: left;
+      }
+      .cat-chip.active {
+        border-color: #6366f1;
+        background: #e0e7ff;
+        color: #3730a3;
+        font-weight: 600;
+      }
+      .cat-chip .cat-code {
+        font-family: monospace;
+        font-weight: 700;
+      }
+      .cat-chip .cat-name {
+        margin-left: 5px;
+      }
+
+      .panels {
+        padding: 16px 24px;
+        display: grid;
+        gap: 16px;
+      }
+      .panel {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .panel h2 {
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #64748b;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 10px 12px;
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.84rem;
+      }
+      th,
+      td {
+        padding: 9px 11px;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+        color: #475569;
+        background: #fff;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      td.num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .code {
+        font-family: monospace;
+        background: #e0e7ff;
+        color: #3730a3;
+        border-radius: 4px;
+        padding: 1px 5px;
+        font-size: 0.75rem;
+      }
+      .muted {
+        color: #94a3b8;
+      }
+      .empty {
+        padding: 18px 12px;
+        font-size: 0.86rem;
+        color: #94a3b8;
+      }
+      .chips {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        background: #f1f5f9;
+        color: #475569;
+        border-radius: 12px;
+        padding: 2px 7px;
+        font-size: 0.74rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>SRM Inputs Analytics</h1>
+        <span id="meta-info">Loading…</span>
+      </div>
+      <div class="header-nav">
+        <a href="./index.html">Company View</a>
+      </div>
+    </header>
+
+    <section class="stats-wrap">
+      <div class="stats-grid" id="stats-grid"></div>
+    </section>
+
+    <section class="toolbar">
+      <input
+        id="search"
+        type="search"
+        placeholder="Search input labels, companies, categories…"
+      />
+      <select id="tier-filter">
+        <option value="">All tiers</option>
+        <option value="T0">T0</option>
+        <option value="T1">T1</option>
+        <option value="T2">T2</option>
+        <option value="T3">T3</option>
+      </select>
+      <select id="quantified-filter">
+        <option value="">All quantities</option>
+        <option value="yes">Quantified only</option>
+        <option value="no">Not quantified</option>
+      </select>
+      <select id="unit-filter">
+        <option value="">All units</option>
+      </select>
+      <span class="count" id="row-count"></span>
+    </section>
+
+    <section class="category-section">
+      <div class="category-title">MECE categories (click to filter)</div>
+      <div class="category-grid" id="category-grid"></div>
+    </section>
+
+    <main class="panels">
+      <section class="panel">
+        <h2>Quantity Rollups (main_quantity)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Unit</th>
+                <th>Period</th>
+                <th class="num">Total value</th>
+                <th class="num">Records</th>
+              </tr>
+            </thead>
+            <tbody id="qty-rollup-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Identified SRM Inputs (record-level)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Input label</th>
+                <th>Company</th>
+                <th>Tier</th>
+                <th>Main quantity</th>
+                <th>Unit</th>
+                <th>Period</th>
+              </tr>
+            </thead>
+            <tbody id="inputs-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (async () => {
+        let data;
+        try {
+          const resp = await fetch("./aggregated.json");
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          data = await resp.json();
+        } catch (e) {
+          document.getElementById("meta-info").textContent =
+            `Failed to load aggregated.json: ${e.message}`;
+          return;
+        }
+
+        const generated = data.generated_at
+          ? new Date(data.generated_at).toLocaleString()
+          : "unknown";
+        document.getElementById("meta-info").textContent =
+          `${data.total} companies · generated ${generated}`;
+
+        const CATEGORY_META = {
+          A1: {
+            name: "Mineral & Construction Materials",
+            desc: "Recycled aggregates, reclaimed asphalt, mineral construction inputs.",
+          },
+          A2: {
+            name: "Industrial Mineral By-Products",
+            desc: "Slag, fly ash, silica fume, gypsum and similar by-products.",
+          },
+          A3: {
+            name: "Metals Scrap",
+            desc: "Ferrous and non-ferrous scrap used as metal input.",
+          },
+          A4: {
+            name: "Reprocessed Plastics",
+            desc: "Recycled polymer pellets, regranulate, PCR/PIR plastics.",
+          },
+          A5: {
+            name: "Glass & Ceramics",
+            desc: "Cullet and recycled ceramic/refractory material.",
+          },
+          A6: {
+            name: "Paper & Cardboard Fibres",
+            desc: "Recovered paper and recycled fibre inputs.",
+          },
+          A7: {
+            name: "Textiles & Fibres",
+            desc: "Recovered textile fibres and recycled yarn/fabric inputs.",
+          },
+          A8: {
+            name: "Rubber & Tyres",
+            desc: "Crumb rubber, recovered tyre material, devulcanised rubber.",
+          },
+          A9: {
+            name: "Bio-Based Residues (Material)",
+            desc: "Non-energy organic residues used as material inputs.",
+          },
+          A10: {
+            name: "Chemical & Liquid Feedstocks",
+            desc: "Recovered solvents, oils and chemical feedstock.",
+          },
+          B1: {
+            name: "SRF / RDF",
+            desc: "Solid recovered fuel / refuse-derived fuel.",
+          },
+          B2: {
+            name: "Biomass Fuels",
+            desc: "Recovered biomass used as energy input.",
+          },
+          B3: {
+            name: "Biogas",
+            desc: "Biogas/biomethane used as process or energy input.",
+          },
+        };
+
+        const flat = [];
+        for (const entry of data.companies || []) {
+          const company = entry.company || {};
+          const assessment = entry.srm_assessment || {};
+          const inputs = assessment.srm_inputs || [];
+          for (const input of inputs) {
+            const mainUnit =
+              input.main_quantity &&
+              typeof input.main_quantity.value === "number"
+                ? input.main_quantity.unit || ""
+                : "";
+            flat.push({
+              company_name: company.input_name || "",
+              org_number: company.org_number || "",
+              category: input.mece_category_code || "",
+              label: (input.label || "").trim(),
+              tier: input.tier || "",
+              main_quantity: input.main_quantity || null,
+              has_quantity: !!(
+                input.main_quantity &&
+                typeof input.main_quantity.value === "number"
+              ),
+              main_unit: mainUnit,
+            });
+          }
+        }
+
+        const categories = [
+          ...new Set(flat.map((r) => r.category).filter(Boolean)),
+        ].sort();
+        const units = [
+          ...new Set(flat.map((r) => r.main_unit).filter(Boolean)),
+        ].sort();
+
+        const unitSelect = document.getElementById("unit-filter");
+        unitSelect.innerHTML = `<option value="">All units</option>${units
+          .map((u) => `<option value="${esc(u)}">${esc(u)}</option>`)
+          .join("")}`;
+
+        let filterText = "";
+        let filterTier = "";
+        let filterCategory = "";
+        let filterQuantified = "";
+        let filterUnit = "";
+
+        function esc(s) {
+          return String(s ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;");
+        }
+
+        function fmtNum(v, decimals = 0) {
+          return Number(v).toLocaleString("en-NO", {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals,
+          });
+        }
+
+        function getFilteredFlat() {
+          let rows = flat.slice();
+
+          if (filterText) {
+            const q = filterText.toLowerCase();
+            rows = rows.filter(
+              (r) =>
+                r.label.toLowerCase().includes(q) ||
+                r.company_name.toLowerCase().includes(q) ||
+                r.category.toLowerCase().includes(q) ||
+                (CATEGORY_META[r.category]?.name || "")
+                  .toLowerCase()
+                  .includes(q),
+            );
+          }
+          if (filterTier) rows = rows.filter((r) => r.tier === filterTier);
+          if (filterCategory)
+            rows = rows.filter((r) => r.category === filterCategory);
+          if (filterQuantified === "yes")
+            rows = rows.filter((r) => r.has_quantity);
+          if (filterQuantified === "no")
+            rows = rows.filter((r) => !r.has_quantity);
+          if (filterUnit) rows = rows.filter((r) => r.main_unit === filterUnit);
+
+          return rows;
+        }
+
+        function buildGroups(rows) {
+          const map = new Map();
+          for (const r of rows) {
+            const key = `${r.category}||${r.label.toLowerCase()}`;
+            if (!map.has(key)) {
+              map.set(key, {
+                category: r.category,
+                label: r.label,
+                records: 0,
+                companies: new Set(),
+                tier_counts: { T0: 0, T1: 0, T2: 0, T3: 0 },
+                qty_rollup: new Map(),
+              });
+            }
+            const g = map.get(key);
+            g.records += 1;
+            if (r.company_name) g.companies.add(r.company_name);
+            if (g.tier_counts[r.tier] !== undefined) g.tier_counts[r.tier] += 1;
+
+            if (r.main_quantity && typeof r.main_quantity.value === "number") {
+              const unit = r.main_quantity.unit || "?";
+              const period = r.main_quantity.period || "unknown";
+              const qKey = `${unit}|${period}`;
+              const curr = g.qty_rollup.get(qKey) || {
+                unit,
+                period,
+                value: 0,
+                count: 0,
+              };
+              curr.value += Number(r.main_quantity.value);
+              curr.count += 1;
+              g.qty_rollup.set(qKey, curr);
+            }
+          }
+          return [...map.values()];
+        }
+
+        function renderStats(rows) {
+          const companiesWithInput = new Set(
+            rows.map((r) => r.company_name).filter(Boolean),
+          );
+          const quantified = rows.filter((r) => r.has_quantity).length;
+
+          const cards = [
+            ["Input records", rows.length],
+            ["Companies with inputs", companiesWithInput.size],
+            ["Quantified records", quantified],
+          ];
+
+          document.getElementById("stats-grid").innerHTML = cards
+            .map(
+              ([label, val]) => `
+            <div class="stat-card">
+              <div class="stat-label">${esc(label)}</div>
+              <div class="stat-value">${fmtNum(val)}</div>
+            </div>
+          `,
+            )
+            .join("");
+        }
+
+        function renderCategories(rows) {
+          const counts = new Map();
+          for (const r of rows)
+            counts.set(r.category, (counts.get(r.category) || 0) + 1);
+          const grid = document.getElementById("category-grid");
+          grid.innerHTML = categories
+            .map((code) => {
+              const count = counts.get(code) || 0;
+              const active = filterCategory === code ? " active" : "";
+              const meta = CATEGORY_META[code] || { name: "", desc: "" };
+              return `<button class="cat-chip${active}" data-code="${esc(code)}" title="${esc(meta.desc)}"><span class="cat-code">${esc(code)}</span><span class="cat-name">${esc(meta.name || "Unknown")}</span> (${count})</button>`;
+            })
+            .join("");
+
+          grid.querySelectorAll(".cat-chip").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              filterCategory =
+                filterCategory === btn.dataset.code ? "" : btn.dataset.code;
+              renderAll();
+            });
+          });
+        }
+
+        function renderQtyRollup(rows) {
+          const roll = new Map();
+          for (const r of rows) {
+            const q = r.main_quantity;
+            if (!q || typeof q.value !== "number") continue;
+            const unit = q.unit || "?";
+            const period = q.period || "unknown";
+            const key = `${unit}|${period}`;
+            const curr = roll.get(key) || { unit, period, value: 0, count: 0 };
+            curr.value += Number(q.value);
+            curr.count += 1;
+            roll.set(key, curr);
+          }
+
+          const items = [...roll.values()].sort(
+            (a, b) => b.count - a.count || a.unit.localeCompare(b.unit),
+          );
+          const tbody = document.getElementById("qty-rollup-body");
+          if (!items.length) {
+            tbody.innerHTML = `<tr><td colspan="4" class="empty">No quantified main_quantity values in current filter.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = items
+            .map(
+              (x) => `
+            <tr>
+              <td><span class="code">${esc(x.unit)}</span></td>
+              <td>${esc(x.period)}</td>
+              <td class="num">${fmtNum(x.value, x.value % 1 ? 2 : 0)}</td>
+              <td class="num">${fmtNum(x.count)}</td>
+            </tr>
+          `,
+            )
+            .join("");
+        }
+
+        function renderGroups(rows) {
+          const records = rows
+            .slice()
+            .sort(
+              (a, b) =>
+                a.category.localeCompare(b.category) ||
+                a.label.localeCompare(b.label) ||
+                a.company_name.localeCompare(b.company_name),
+            );
+          const tbody = document.getElementById("inputs-body");
+          if (!records.length) {
+            tbody.innerHTML = `<tr><td colspan="7" class="empty">No SRM inputs match the current filters.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = records
+            .map((r) => {
+              const q = r.main_quantity;
+              const qVal =
+                q && typeof q.value === "number"
+                  ? fmtNum(q.value, q.value % 1 ? 2 : 0)
+                  : "—";
+              const qUnit = q && q.unit ? q.unit : "—";
+              const qPeriod = q && q.period ? q.period : "—";
+              return `
+              <tr>
+                <td><span class="code">${esc(r.category)}</span></td>
+                <td>${esc(r.label || "(unlabeled input)")}</td>
+                <td>${esc(r.company_name || "—")}</td>
+                <td>${esc(r.tier || "—")}</td>
+                <td class="num">${esc(qVal)}</td>
+                <td><span class="code">${esc(qUnit)}</span></td>
+                <td>${esc(qPeriod)}</td>
+              </tr>
+            `;
+            })
+            .join("");
+        }
+
+        function renderAll() {
+          const rows = getFilteredFlat();
+          document.getElementById("row-count").textContent =
+            `${rows.length} / ${flat.length} input records`;
+          renderStats(rows);
+          renderCategories(rows);
+          renderQtyRollup(rows);
+          renderGroups(rows);
+        }
+
+        document.getElementById("search").addEventListener("input", (e) => {
+          filterText = e.target.value.trim();
+          renderAll();
+        });
+        document
+          .getElementById("tier-filter")
+          .addEventListener("change", (e) => {
+            filterTier = e.target.value;
+            renderAll();
+          });
+        document
+          .getElementById("quantified-filter")
+          .addEventListener("change", (e) => {
+            filterQuantified = e.target.value;
+            renderAll();
+          });
+        document
+          .getElementById("unit-filter")
+          .addEventListener("change", (e) => {
+            filterUnit = e.target.value;
+            renderAll();
+          });
+
+        renderAll();
+      })();
+    </script>
+  </body>
+</html>

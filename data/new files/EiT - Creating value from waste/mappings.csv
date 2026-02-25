@@ -1,0 +1,26 @@
+waste_stream,secondary_raw_material,receiving_industry,nace_code,nace_description
+Construction & Demolition,Recycled aggregate,Cement production,23.51,Manufacture of cement
+Construction & Demolition,Recycled aggregate,Ready-mix concrete production,23.63,Manufacture of ready-mixed concrete
+Construction & Demolition,Recycled aggregate,Precast concrete manufacturing,23.61,Manufacture of concrete products for construction purposes
+Construction & Demolition,Reclaimed asphalt pavement (RAP),Asphalt production,23.99,Manufacture of other non-metallic mineral products n.e.c.
+Construction & Demolition,Recycled aggregate,Road and motorway construction,42.11,Construction of roads and motorways
+Construction & Demolition,Recycled aggregate,Civil engineering projects,42.99,Construction of other civil engineering projects n.e.c.
+Construction & Demolition,Recycled steel scrap,Steel production (EAF),24.10,Manufacture of basic iron and steel and of ferro-alloys
+Metal Waste,Steel scrap,Steel production (EAF),24.10,Manufacture of basic iron and steel and of ferro-alloys
+Metal Waste,Aluminum scrap,Aluminum production,24.42,Aluminium production
+Metal Waste,Copper scrap,Other non-ferrous metal production,24.45,Other non-ferrous metal production
+Metal Waste,Metal scrap,Iron casting foundries,24.51,Casting of iron
+Metal Waste,Metal scrap,Steel casting foundries,24.52,Casting of steel
+Metal Waste,Metal scrap,Light metal casting foundries,24.53,Casting of light metals
+Metal Waste,Metal scrap,Non-ferrous casting foundries,24.54,Casting of other non-ferrous metals
+Plastic Waste,Recycled polymer pellets,Plastic packaging manufacturing,22.22,Manufacture of plastic packing goods
+Plastic Waste,Recycled polymer pellets,Other plastic product manufacturing,22.29,Manufacture of other plastic products
+Plastic Waste,Sorted plastic waste,Material recovery (recycling plants),38.32,Recovery of sorted materials
+Wood Waste,Wood chips / fiber,Wood-based panel manufacturing,16.21,Manufacture of veneer sheets and wood-based panels
+Wood Waste,Recovered timber,Sawmilling and wood processing,16.10,Sawmilling and planing of wood
+Wood Waste,Biomass fuel,Electricity production (bioenergy),35.11,Production of electricity
+Wood Waste,Biomass fuel,District heating / steam supply,35.30,Steam and air conditioning supply
+Sludge / Organic Waste,Biogas,Electricity production (biogas plants),35.11,Production of electricity
+Sludge / Organic Waste,Biogas,Gas production,35.21,Manufacture of gas
+Sludge / Organic Waste,Digestate (biofertilizer),Fertilizer production,20.15,Manufacture of fertilizers and nitrogen compounds
+Sludge / Organic Waste,Digestate,Agriculture (crop production),01.11,Crop and animal production
